@@ -11,7 +11,7 @@ CREATE TABLE user_relationship
 (
     user_first_id INT,
     user_second_id INT,
-    type enum('pending_first_second', 'pending_second_first','friends','block_first_second', 'block_second_first','block_both'),
+    type ENUM('pending_first_second', 'pending_second_first','friends','block_first_second', 'block_second_first','block_both'),
     PRIMARY KEY(user_first_id, user_second_id)
 );
 
