@@ -1,4 +1,4 @@
-# LargeProject
+# Guilds
 Social Media Application
 
 **We need a name for this thing**
