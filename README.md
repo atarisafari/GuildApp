@@ -1,7 +1,5 @@
 # Guilds
-Social Media Application
-
-**We need a name for this thing**
+An Intimate Social Media Application
 ___
 
 # Stages
