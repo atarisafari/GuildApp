@@ -15,6 +15,17 @@ CREATE TABLE user_relationship
     PRIMARY KEY(user_first_id, user_second_id)
 );
 
---Create table for Posts and Messages
+--Create table for Posts
+CREATE TABLE post
+(
+    post_id INT AUTO_INCREMENT,
+    user_id INT,
+    content VARCHAR(2000) DEFAULT NULL,
+    image_url VARCHAR(255) DEFAULT NULL,
+    date_created DATE,
+    time_created TIMESTAMP,
+    PRIMARY KEY(post_id),
+    FOREIGN KEY(user_id) REFERENCES user_info(user_id) ON DELETE CASCADE
+);
 
 --Create table for Comments
