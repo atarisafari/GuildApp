@@ -40,7 +40,8 @@ function returnWithInfo($id, $username, $password)
 }
 
 
-
+$sql->close();
+$conn->close();
 
 
 
