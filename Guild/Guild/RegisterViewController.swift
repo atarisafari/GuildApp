@@ -14,13 +14,14 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
-
-    @IBOutlet weak var labelMessage: UILabel!
     
     @IBAction func signUp(_ sender: UIButton) {
+        
+        let newUser = NewUser(email: email.text!, password: password.text!)
+        
         let parameters: Parameters=[
-            "username":email.text!,
-            "password":password.text!
+            "username": newUser.email!,
+            "password": newUser.password!
         ]
         
         print(email.text!)
