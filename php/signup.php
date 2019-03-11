@@ -2,7 +2,7 @@
 
 include("establishConn.php");
 
-//Prepare sql statements
+//Prepare and bind for insertion
 $sql = $conn->prepare("INSERT INTO user_info (username, password) VALUES(?, ?)");
 $test = $conn->prepare("SELECT user_id  FROM user_info WHERE username = ?");
 
@@ -12,26 +12,38 @@ $sql->bind_param("ss", $username, $password);
 //Get data from the JSON post
 $input = json_decode(file_get_contents('php://input'), true);
 
-//Assign user info to variables for binding
 $username = $input["username"];
 $password = $input["password"];
+
+if($username == "" || $password == "")
+{
+        $payload = '{"error": "Username/Password cannot be blank"}';
+        sendJson($payload);
+        exit();
+}
 
 $test->execute();
 $result = $test->get_result();
 
-//If num_rows > 0 then the username is taken so we return an error
 if($result->num_rows > 0)
 {
         $payload = '{"error": "Username taken"}';
+        sendJson($payload);
 }
 
 else
 {
         $sql->execute();
         $payload = '{"error": ""}';
+        sendJson($payload);
 }
 
+function sendJson($obj)
+{
+        header('Content-type: application/json');
+        echo $obj;
+}
 
-header('Content-type: application/json');
-echo $payload;
-                    
+$sql->close();
+$test->close();
+$conn->close();
