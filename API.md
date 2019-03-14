@@ -35,7 +35,7 @@ Otherwise, returns some error message
 On Success:
   {
     "token": (  
-                Will return a Json Web Token which you will use for further API requests. 
+                A Json Web Token which you will use for further API requests. 
                 When decoded the body of the token will contain the following:                
                 {
                   "username" : $username,
