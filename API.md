@@ -48,3 +48,5 @@ On Success:
   }
   
 Otherwise, returns some error message and no token
+
+To test JWT on your own, https://jwt.io/ is great. 
