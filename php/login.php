@@ -1,6 +1,9 @@
+
 <?php
 
 include("establishConn.php");
+require_once 'vendor/autoload.php';
+use \Firebase\JWT\JWT;
 
 $sql = $conn->prepare("SELECT * FROM user_info WHERE username=? and password=?");
 $sql->bind_param("ss", $username, $password);
@@ -16,14 +19,28 @@ $response = $sql->get_result();
 //Username or Password Incorrect
 if($response->num_rows == 0)
 {
-        $payload = '{"error": "login failed"}';
-        sendJson($payload);
+        $error = "Incorrect Username or Password";
+        $token = "";
+        returnWithInfo($token,$error);
 }
 
 else
 {
         $data = $response->fetch_all();
-        returnWithInfo($data[0][0], $data[0][1], $data[0][2]);  
+        $username = $data[0][1];
+        $displayname = $data[0][3];
+        $id = $data[0][0];
+        $key = "asahh bromeegs";
+
+        $token = array(
+        "username" => $username,
+        "displayname" => $displayName,
+        "user_id" => $id
+        );
+
+        $jwt = JWT::encode($token, $key);
+        $error = "";
+        returnWithInfo($jwt,$error);
 }
 
 
@@ -33,15 +50,13 @@ function sendJson($obj)
         echo $obj;
 }
 
-function returnWithInfo($id, $username, $password)
+function returnWithInfo($token, $error)
 {
-        $payload = '{"user_id":' . $id . ',"username":"' . $username . '","password":"' . $password . '"}';
-        sendJson($payload);
+        $payload = array('token' => $token, 'error' => $error);
+        sendJson(json_encode($payload));
 }
 
 
-$sql->close();
-$conn->close();
 
 
 
