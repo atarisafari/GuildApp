@@ -34,7 +34,7 @@ Otherwise, returns some error message
 
 On Success:
   {
-    "token": "",
+    "token": (some JWT),
     "error": ""
   }
 
