@@ -1,8 +1,8 @@
-#API WRITEUP
+# API WRITEUP
 
 In Progress
 
-#Signup.php
+# Signup.php
 
 *Expects*
 
@@ -21,7 +21,7 @@ On Success:
  
 Otherwise, returns some error message
 
-#Login.php
+# Login.php
 
 *Expects*
 
