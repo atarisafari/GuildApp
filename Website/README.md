@@ -52,3 +52,6 @@ When decoded the body of the token will contain the following:
 Otherwise, returns some error message and no token
 
 To test JWT on your own, https://jwt.io/ is great. 
+
+*From this point on, all API requests mentioned will require a valid JSON Web Token which will be validated. 
+Therefore all further JSON packages sent to the API must include a "token": (some token) field. *
