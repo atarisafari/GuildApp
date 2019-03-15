@@ -2,7 +2,8 @@
 
 In Progress
 
-### Signup.php
+### Signup
+##### /php/signup.php
 
 *Expects*
 
@@ -21,8 +22,8 @@ On Success:
  
 Otherwise, returns some error message
 
-### Login.php
-
+### Login
+##### /php/login.php
 *Expects*
 
   {
