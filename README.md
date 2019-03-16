@@ -3,7 +3,7 @@ An Intimate Social Media Application
 
 ### LINKS
 1. [API WRITEUP](Website/README.md)
-2. [JWT.IO](JWT.IO)
+2. JWT.IO
 ___
 
 # Stages
