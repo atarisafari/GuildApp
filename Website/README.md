@@ -1,7 +1,10 @@
 # API WRITEUP
 
-In Progress
+### Table of Contents
+1. [ Signup. ](#signup)
 
+
+<a name="signup"></a>
 ### Signup
 ##### /php/signup.php
 
