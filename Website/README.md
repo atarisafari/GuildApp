@@ -6,12 +6,12 @@ In Progress
 ##### /php/signup.php
 
 *Expects*
-
+  ```
   {
     "username": "example",
     "password": "example"
   }
-
+  ```
 *Returns*
 
 On Success: 
