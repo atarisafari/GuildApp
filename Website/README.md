@@ -5,6 +5,7 @@ In Progress
 ### Table of Contents
 1. [ Signup ](#signup)
 2. [ Login ](#login)
+3. [ Add Post ](#addpost)
 
 
 <a name="signup"></a>
@@ -63,3 +64,7 @@ Otherwise, returns some error message and no token
 To test JWT on your own, https://jwt.io/ is great. 
 
 *From this point on, all API requests mentioned will require a valid JSON Web Token which will be validated. Therefore all further JSON packages sent to the API must include a "token": (some token) field.*
+
+<a name="addpost"></a>
+### Add Post
+##### /php/addPost.php
