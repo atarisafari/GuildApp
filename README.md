@@ -2,7 +2,7 @@
 An Intimate Social Media Application
 
 #LINKS
-1. [API WRITEUP](website/README.md)
+1. [API WRITEUP](Website/README.md)
 ___
 
 # Stages
