@@ -1,7 +1,10 @@
 # API WRITEUP
 
+In Progress
+
 ### Table of Contents
-1. [ Signup. ](#signup)
+1. [ Signup ](#signup)
+2. [ Login ] (#login)
 
 
 <a name="signup"></a>
@@ -26,6 +29,7 @@ On Success:
   ```
 Otherwise, returns some error message
 
+<a name="login"></a>
 ### Login
 ##### /php/login.php
 *Expects*
