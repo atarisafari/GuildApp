@@ -1,7 +1,7 @@
 # Guilds
 An Intimate Social Media Application
 
-# LINKS
+### LINKS
 1. [API WRITEUP](Website/README.md)
 ___
 
