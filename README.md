@@ -1,5 +1,8 @@
 # Guilds
 An Intimate Social Media Application
+
+#LINKS
+1. [API WRITEUP](website/README.md)
 ___
 
 # Stages
