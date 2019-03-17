@@ -20,8 +20,19 @@ VALUES( ?, ?, ?, ?, ?, LEFT( ?, 32) );
 DELETE FROM posts
 WHERE posts.post_id = ?;
 
---Like Post
+--Check if post has been liked by user
+  --If no time is finded then post not liked
+SELECT time_created 
+FROM likes
+WHERE likes.post_id = ? AND likes.user_id = ?;
 
+--Like Post
+INSERT INTO likes 
+VALUES(post_id, user_id, time_created);
+
+--Unlike Post
+DELETE FROM likes
+WHERE likes.post_id = ? AND likes.user_id = ?;
 
 --Add Comment to Post
 
