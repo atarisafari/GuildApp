@@ -24,7 +24,6 @@ CREATE TABLE posts
     user_id INT NOT NULL,
     content VARCHAR(2000) DEFAULT NULL,
     image_url VARCHAR(255) DEFAULT NULL,
-    date_created DATE NOT NULL,
     time_created TIMESTAMP NOT NULL,
     num_likes INT NOT NULL DEFAULT '0',
     num_comments INT NOT NULL DEFAULT '0',
@@ -38,7 +37,6 @@ CREATE TABLE comments
     user_id INT NOT NULL,
     post_id INT NOT NULL,
     content VARCHAR(1000),
-    date_created DATE NOT NULL,
     time_created TIMESTAMP NOT NULL,
     PRIMARY KEY(comment_id),
     FOREIGN KEY(user_id) REFERENCES user_info(user_id) ON DELETE CASCADE,
@@ -50,7 +48,6 @@ CREATE TABLE comments
     like_id INT AUTO_INCREMENT
     post_id INT NOT NULL,
     user_id INT NOT NULL,
-    date_created DATE NOT NULL,
     time_created TIMESTAMP NOT NULL,
     PRIMARY KEY(like_id),
     FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
