@@ -68,3 +68,20 @@ To test JWT on your own, https://jwt.io/ is great.
 <a name="addpost"></a>
 ### Add Post
 ##### /php/addPost.php
+
+*Expects*
+  ```
+  {  
+    "token": "example",
+    "content": "example",
+    "image_url": "example",
+    "timestamp": "example"
+  }
+  ```
+  *Returns*
+  ```
+  {  
+    "error": "example",
+    "post_id": "example"
+  }
+  ```
