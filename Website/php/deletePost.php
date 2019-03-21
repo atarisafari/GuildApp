@@ -1,5 +1,4 @@
-  GNU nano 2.9.3                                                                                                      deletePost.php                                                                                                                
-
+                                                                                                         
 <?php
 
 include("establishConn.php");
