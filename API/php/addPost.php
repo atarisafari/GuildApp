@@ -6,7 +6,7 @@ include("validateToken.php");
 $sql = $conn->prepare("INSERT INTO posts (user_id,content,image_url,date_created,time_created,preview) VALUES(?,?,?,?,?,LEFT(?,32))");
 $sql->bind_param("isssss", $userID, $content, $imageURL, $date, $time, $preview);
 
-$input = json_decode(file_get_contents('php://input'), true);
+$input = getRequestInfo();
 
 //Assigning key variables
 $token = $input["token"];
@@ -17,18 +17,8 @@ $imageURL = decodeImage($input["image_url"]);
 $preview = $content;
 
 //Grab return value from token validation function
-$retVal = validateToken($token, $key);
-
-//If validation fails, exit and return an error
-if(!$retVal)
-{
-        echo '{"error": "Invalid token"}';
-        exit(); 
-}
-
-//Else proceed
-$data = json_decode($retVal, true);
-$userID = $data["user_id"];
+$userInfo = processToken($input, $key);
+$userID = $userInfo["user_id"];
 
 $sql->execute();
 
