@@ -121,7 +121,7 @@ To test JWT on your own, https://jwt.io/ is great.
 On Success:
 ```
 {
-  "user_id": "example"
+  "error": ""
 }
 ```
 
