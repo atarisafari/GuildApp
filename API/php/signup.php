@@ -1,6 +1,7 @@
 <?php
 
 include("establishConn.php");
+include("helpers.php");
 
 //Prepare and bind for insertion
 $sql = $conn->prepare("INSERT INTO user_info (username, password) VALUES(?, ?)");
@@ -10,7 +11,7 @@ $test->bind_param("s",$username);
 $sql->bind_param("ss", $username, $password);
 
 //Get data from the JSON post
-$input = json_decode(file_get_contents('php://input'), true);
+$input = getRequestInfo();
 
 $username = $input["username"];
 $password = $input["password"];
