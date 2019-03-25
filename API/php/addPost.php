@@ -2,6 +2,7 @@
 
 include("establishConn.php");
 include("validateToken.php");
+include("helpers.php");
 
 $sql = $conn->prepare("INSERT INTO posts (user_id,content,image_url,date_created,time_created,preview) VALUES(?,?,?,?,?,LEFT(?,32))");
 $sql->bind_param("isssss", $userID, $content, $imageURL, $date, $time, $preview);
