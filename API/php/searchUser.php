@@ -3,11 +3,9 @@
 
 include("establishConn.php");
 include("validateToken.php");
+include("helpers.php");
 
-$inout = json_decode(file_get_contents('php://input'), true);
+$inout = getRequestInfo();
+//Exits if token validation fails 
+$userInfo = processToken($input, $key);
 
-function processToken()
-{
-        $token = $input["token"];
-        $retVal = validateToken($token, $key);
-}
