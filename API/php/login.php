@@ -2,13 +2,14 @@
 <?php
 
 include("establishConn.php");
+include("helpers.php");
 require_once 'vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 $sql = $conn->prepare("SELECT * FROM user_info WHERE username=? and password=?");
 $sql->bind_param("ss", $username, $password);
 
-$input = json_decode(file_get_contents('php://input'), true);
+$input = getRequestInfo();
 
 $username = $input["username"];
 $password = $input["password"];
