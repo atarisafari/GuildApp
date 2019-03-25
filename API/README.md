@@ -112,7 +112,7 @@ To test JWT on your own, https://jwt.io/ is great.
 ```
 {
   "token": "example",
-  "post_id": "example
+  "post_id": "example"
 }
 ```
 
