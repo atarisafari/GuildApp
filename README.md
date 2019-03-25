@@ -2,7 +2,7 @@
 An Intimate Social Media Application
 
 ### LINKS
-1. [API WRITEUP](Website/README.md)
+1. [API WRITEUP](API/README.md)
 2. http://jwt.io
 ___
 
