@@ -1,6 +1,6 @@
 <?php
 
-function sendJson($obj)
+function sendJSON($obj)
 {
         header('Content-type: application/json');
         echo $obj;
