@@ -51,7 +51,7 @@ let baseURL = "/php";
 //NEED: both user_id
 
 //TODO Like/Unlike Post
-//NEED:
+//NEED: post_id and user_id (own)
 /*--Check if post has been liked by user
   --If no time is finded, then post not liked
 */
