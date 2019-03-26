@@ -18,13 +18,13 @@ let baseURL = "/php";
 //NEED: user_id
 
 //TODO AddPost
-//NEED: user_id,content,image_url,date_created,time_created
+//NEED: user_id,content,image_url,time_created
 
 //TODO DeletePost
 //NEED: post_id and user_id
 
 //TODO FetchXPosts from a friend
-//NEED: username (friend)
+//NEED: username (friend), user_id too to check if you have permission to read it (blocked etc.)
 
 //TODO AddComment
 //NEED: comment_id , user_id , post_id, content, time_created
@@ -33,7 +33,7 @@ let baseURL = "/php";
 //NEED: user_id, post_id, comment_id 
 
 //TODO EditComment
-//NEED: user_id, post_id, comment_id 
+//NEED: user_id, post_id, comment_id, content 
 
 //TODO FetchXComments from a post
 //NEED: post_id
@@ -42,13 +42,13 @@ let baseURL = "/php";
 //NEED: user_id (own) , username (friend)
 
 //TODO DeleteFriend
-//NEED: both user_id 
+//NEED: user_id (own) , username (friend) 
 
 //TODO BlockFriend
-//NEED: both user_id
+//NEED: user_id (own) , username (friend)
 
 //TODO FetchAllFriends
-//NEED: both user_id
+//NEED: user_id (own)
 
 //TODO Like/Unlike Post
 //NEED: post_id and user_id (own)
