@@ -79,7 +79,7 @@ WHERE user_id = ?; --This user id is the friends id
 --Fetch 1 Post from a Friend // But it can be any number of posts
 SELECT *
 FROM posts
-WHERE user_id = ? 
+WHERE post_id = ? 
 ORDER  BY time_created DESC
 LIMIT 1;
 
