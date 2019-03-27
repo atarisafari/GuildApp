@@ -4,7 +4,7 @@ include("establishConn.php");
 include("helpers.php");
 
 //Prepare and bind for insertion
-$sql = $conn->prepare("INSERT INTO user_info (username, password) VALUES(?, ?)");
+$sql = $conn->prepare("INSERT INTO user_info (username, password) VALUES(LEFT(?,20), ?)");
 $test = $conn->prepare("SELECT user_id  FROM user_info WHERE username = ?");
 
 $test->bind_param("s",$username);
@@ -18,8 +18,8 @@ $password = $input["password"];
 
 if($username == "" || $password == "")
 {
-        $payload = '{"error": "Username/Password cannot be blank"}';
-        sendJson($payload);
+        $payload = returnError("Username/Password cannot be blank");
+        sendJSON($payload);
         exit();
 }
 
@@ -28,21 +28,15 @@ $result = $test->get_result();
 
 if($result->num_rows > 0)
 {
-        $payload = '{"error": "Username taken"}';
-        sendJson($payload);
+        $payload = returnError("Username taken");
+        sendJSON($payload);
 }
 
 else
 {
         $sql->execute();
-        $payload = '{"error": ""}';
-        sendJson($payload);
-}
-
-function sendJson($obj)
-{
-        header('Content-type: application/json');
-        echo $obj;
+        $payload = returnError("");
+        sendJSON($payload);
 }
 
 $sql->close();
