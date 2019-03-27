@@ -1,3 +1,4 @@
+
 <?php
 
 include("establishConn.php");
@@ -24,12 +25,21 @@ $data = $result->fetch_all();
 if($userID != $data[0][0])
 {
         //You don't have access to delete this
-        $payload = '{"error": "Invalid user"}';
+        $payload = returnError("Invalid user");
         sendJSON($payload);
         exit();
 }
 
 $sql->execute();
 
+//Check if post was deleted
+$test->execute();
+$result = $test->get_result();
+
+if($result->num_rows > 0)
+        returnError("Couldn't delete post. Try again");
+
+else
+        returnError("");
 
 
