@@ -1,24 +1,25 @@
+
 <?php
 
 include("establishConn.php");
 include("validateToken.php");
 include("helpers.php");
 
-$sql = $conn->prepare("INSERT INTO posts (user_id,content,image_url,date_created,time_created,preview) VALUES(?,?,?,?,?,LEFT(?,32))");
-$sql->bind_param("isssss", $userID, $content, $imageURL, $date, $time, $preview);
+$sql = $conn->prepare("INSERT INTO posts (user_id,content,image_url,time_created,preview) VALUES(?,?,?,?,LEFT(?,32))");
+$sql->bind_param("issss", $userID, $content, $imageURL, $timestamp, $preview);
 
 $input = getRequestInfo();
 
 //Assigning key variables
 $token = $input["token"];
 $content = $input["content"];
-$date = $input["date_created"];
-$time = $input["time_created"];
+$timestamp = $input["timestamp"];
 $imageURL = decodeImage($input["image_url"]);
 $preview = $content;
 
 //Grab return value from token validation function
 $userInfo = processToken($input, $key);
+
 $userID = $userInfo["user_id"];
 
 $sql->execute();
