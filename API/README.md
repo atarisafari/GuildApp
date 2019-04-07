@@ -6,6 +6,7 @@ In Progress
 1. [ Signup ](#signup)
 2. [ Login ](#login)
 3. [ Add Post ](#addpost)
+4. [ Delete Post ](#deletepost)
 
 
 <a name="signup"></a>
@@ -79,9 +80,62 @@ To test JWT on your own, https://jwt.io/ is great.
   }
   ```
   *Returns*
+  
+  On Success:
   ```
   {  
-    "error": "example",
+    "error": "",
     "post_id": "example"
+  }
+  ```
+  
+  Errors:
+  
+   ```
+  {  
+    "error": "Invalid User"
+  }
+  ```
+  
+   ```
+  {  
+    "error": "Invalid token"
+  }
+  ```
+  
+<a name="deletepost"></a>
+### Delete Post
+##### /php/deletePost.php
+
+*Expects* 
+
+```
+{
+  "token": "example",
+  "post_id": "example"
+}
+```
+
+*Returns*
+
+On Success:
+```
+{
+  "error": ""
+}
+```
+
+
+Errors:
+  
+   ```
+  {  
+    "error": "Invalid User"
+  }
+  ```
+  
+   ```
+  {  
+    "error": "Invalid token"
   }
   ```

@@ -1,8 +1,9 @@
-                                                                                                         
+
 <?php
 
 include("establishConn.php");
 include("validateToken.php");
+include("helpers.php");
 
 $sql = $conn->prepare("DELETE FROM posts WHERE post_id = ?");
 $test = $conn->prepare("SELECT user_id FROM posts WHERE post_id = ?");
@@ -10,22 +11,11 @@ $test = $conn->prepare("SELECT user_id FROM posts WHERE post_id = ?");
 $sql->bind_param("i", $postID);
 $test->bind_param("i", $postID);
 
-$input = json_decode(file_get_contents('php://input'), true);
+$input = getRequestInfo();
 
-$token = $input["token"];
 $postID = $input["post_id"];
 
-$retVal = validateToken($token, $key);
-
-//If validation fails, exit and return an error
-if(!$retVal)
-{
-        $payload = '{"error": "Invalid token"}';
-        sendJSON($payload);
-        exit();
-}
-
-$userInfo = json_decode($retVal, true);
+$userInfo = processToken($input, $key);
 $userID = $userInfo["user_id"];
 
 $test->execute();
@@ -34,20 +24,22 @@ $data = $result->fetch_all();
 
 if($userID != $data[0][0])
 {
-        echo $userID;
         //You don't have access to delete this
-        $payload = '{"error": "Invalid user"}';
-        //sendJSON($payload);
+        $payload = returnError("Invalid user");
+        sendJSON($payload);
         exit();
 }
 
 $sql->execute();
 
-function sendJSON($obj)
-{
-        header('Content-type: application/json');
-        echo $obj;
-}
+//Check if post was deleted
+$test->execute();
+$result = $test->get_result();
 
+if($result->num_rows > 0)
+        returnError("Couldn't delete post. Try again");
+
+else
+        returnError("");
 
 

@@ -1,14 +1,14 @@
-
 <?php
 
 include("establishConn.php");
+include("helpers.php");
 require_once 'vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 $sql = $conn->prepare("SELECT * FROM user_info WHERE username=? and password=?");
 $sql->bind_param("ss", $username, $password);
 
-$input = json_decode(file_get_contents('php://input'), true);
+$input = getRequestInfo();
 
 $username = $input["username"];
 $password = $input["password"];
@@ -30,12 +30,13 @@ else
         $username = $data[0][1];
         $displayname = $data[0][3];
         $id = $data[0][0];
-        $key = "asahh bromeegs";
+        $url = $data[0][4];
 
         $token = array(
-        "username" => $username,
-        "displayname" => $displayName,
-        "user_id" => $id
+                "username" => $username,
+                "displayname" => $displayName,
+                "user_id" => $id,
+                "profile_pic_url" => $url
         );
 
         $jwt = JWT::encode($token, $key);
@@ -43,21 +44,11 @@ else
         returnWithInfo($jwt,$error);
 }
 
-
-function sendJson($obj)
-{
-        header('Content-type: application/json');
-        echo $obj;
-}
-
 function returnWithInfo($token, $error)
 {
         $payload = array('token' => $token, 'error' => $error);
         sendJson(json_encode($payload));
 }
-
-
-
 
 
 

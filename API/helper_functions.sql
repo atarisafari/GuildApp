@@ -79,7 +79,7 @@ WHERE user_id = ?; --This user id is the friends id
 --Fetch 1 Post from a Friend // But it can be any number of posts
 SELECT *
 FROM posts
-WHERE user_id = ? 
+WHERE post_id = ? 
 ORDER  BY time_created DESC
 LIMIT 1;
 
@@ -89,6 +89,12 @@ FROM comments
 WHERE user_id = ? 
 ORDER  BY time_created DESC
 LIMIT 10;
+
+--Check for Friend requests. After that do a query to find username of friends and send that back
+SELECT user_first_id, user_second_id 
+FROM user_relationship
+WHERE (type=pending_first_second OR type=pending_second_first) AND (user_first_id=? OR user_second_id=?)
+
 
 --We might add groups or blocks for specific posts
 
