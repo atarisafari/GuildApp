@@ -15,8 +15,13 @@ export const signUp = async (username,password,display_name='',profile_pic_url='
         })
         }).then(response => response.json())
         .then(res => {
+        //this.props.history.push("/");
+        //alert(res);
         console.log('response:');
         console.log(res);
         })
-        .catch( e => console.log(e));
+        .catch( e => {
+            console.log(e);
+            alert(e);
+        })
     }
