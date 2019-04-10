@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {signUp} from './utils/testAPI';
+import {login} from './utils/testAPI';
 import HomeButton from './components/buttons/homeButton';
 
 
@@ -12,12 +12,24 @@ class App extends Component {
       loggedIn: 'False',
       username: '',
       password:'',
-      display_name: '',
-      profile_pic_url: '',
     }
   }
   render() {
     const {username,password} = this.state;
+
+    const loginHandler = async() =>{
+        let data = await login(username,password);
+        console.log("Result" , data);
+        if(data.error === ""){
+            console.log("Login was successful");
+            localStorage.setItem('token', data.token);
+            this.props.history.push("/home");
+        }
+        else{
+            alert(data.error);
+        }      
+  }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -30,7 +42,7 @@ class App extends Component {
             Password: 
             <input type='password' value={password} onChange= { e => this.setState({...this.state, password: e.target.value})}/>
           </div>
-          <button onClick={()=>signUp(username,password)}> LOGIN </button>
+          <button onClick={()=>loginHandler()}> LOGIN </button>
           <HomeButton path='/signUp' {...this.props}>SIGN UP</HomeButton>
         </header>
       </div>
