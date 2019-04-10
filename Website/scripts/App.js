@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {login} from './utils/testAPI';
+import {login} from './utils/apiCalls';
 import HomeButton from './components/buttons/homeButton';
 
 
