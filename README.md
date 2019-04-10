@@ -1,7 +1,9 @@
-# LargeProject
-Social Media Application
+# Guilds
+An Intimate Social Media Application
 
-**We need a name for this thing**
+### LINKS
+1. [API WRITEUP](API/README.md)
+2. http://jwt.io
 ___
 
 # Stages
