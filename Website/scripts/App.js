@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {login} from './utils/apiCalls';
 import HomeButton from './components/buttons/homeButton';
@@ -33,7 +32,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <div id="username_login">
             Username:
             <input value={username} onChange= { e => this.setState({...this.state, username: e.target.value})}/>
