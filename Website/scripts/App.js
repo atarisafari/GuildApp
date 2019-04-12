@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {login} from './utils/apiCalls';
 import HomeButton from './components/buttons/homeButton';
-//Testing git from vscode
+
 
 class App extends Component {
   constructor(props){

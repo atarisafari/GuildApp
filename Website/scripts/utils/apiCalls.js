@@ -11,7 +11,7 @@ export const signUp = async (username,password,display_name='',profile_pic_url='
         body: JSON.stringify({
             username: username,
             password: password,
-            //display_name: display_name,
+            display_name: display_name,
             //profile_pic_url: profile_pic_url,
         })
         })
