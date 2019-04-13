@@ -1,8 +1,3 @@
-
-body{
-	font-family: 'Roboto Condensed', sans-serif;
-}
-
 .right {
     position: fixed;
     top: 0;
@@ -18,7 +13,7 @@ body{
     left: 0;
     width: 50%;
     height: 100%;
-    background-image: url("Purple-Abstract.jpg");
+    background-image: url('./Purple-Abstract.jpg');
 }
 
 #logo_header{
