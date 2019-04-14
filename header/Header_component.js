@@ -20,11 +20,17 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import styles from "./header_style"
 import SearchFriendForm from "./header_form"
 import ProfileAvatar from "./SmallProfileAvatar"
+import HomeButton from './buttons/homeButton';
 
 class Header_component extends React.Component {
+  constructor() {
+    super();
+  }
+  
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    notificationsModalAnchorEl:null,
   };
 
   handleProfileMenuOpen = event => {
@@ -44,13 +50,50 @@ class Header_component extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  handleNotificationsModalOpen = event => {
+    this.setState({ notificationsModalAnchorEl: event.currentTarget });
+  }
+
+  handleNotifcationsModalClose = () => {
+    this.setState({ notificationsModalAnchorEl: null });
+  };
+
   render() {
+    console.log(this.props.data)
     const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const {  notificationsModalAnchorEl} = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isNotificationsModalOpen = Boolean(notificationsModalAnchorEl);
 
-    let notifications_amount = 4;
+    let notifications_amount = this.props.data.length
+
+   let notifications_markup = this.props.data.map((notification, index) => {
+
+     return(
+        <MenuItem onClick={this.handleNotifcationsModalClose}>             
+          <ProfileAvatar/>
+          <p className={classes.notificationsModalText}> {notification.user}  {notification.message}</p>
+        </MenuItem>
+
+      )
+   })
+
+    const renderNotificationsModal = (
+    
+      <Menu 
+        className={classes.notificationsModal}
+        anchorEl={notificationsModalAnchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isNotificationsModalOpen}
+        onClose={this.handleNotifcationsModalClose}
+      >
+        {notifications_markup}
+      </Menu>
+    );
+    
 
     const renderMenu = (
       <Menu
@@ -85,13 +128,13 @@ class Header_component extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMobileMenuClose}>
+        <MenuItem onclick={()=>{ this.handleMobileMenuClose(); }}>
           <Badge className={classes.popMenuIcons} badgeContent={notifications_amount} color="secondary">
             <NotificationsIcon />
           </Badge>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>
+        <MenuItem onclick={this.handleMenuClose}>
             <AccountCircle className={classes.popMenuIcons} />
           <p>Profile</p>
         </MenuItem>
@@ -105,7 +148,6 @@ class Header_component extends React.Component {
         </MenuItem>
       </Menu>
     );
-
     let profileImageLink = '';
   
     return (
@@ -113,12 +155,12 @@ class Header_component extends React.Component {
         <div className={classes.mainBar} position="static">
           <Toolbar>
               <IconButton className={classes.logoButton}>
-                <a className={classes.logo} href="Home"></a>
+              <a  className={classes.logo} onClick={()=>this.props.props.history.push('/')}>{this.props.props.children}></a>
               </IconButton>
               <SearchFriendForm/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" onClick={this.handleMenuClose}>
+              <IconButton color="inherit" onClick={this.handleNotificationsModalOpen}>
                 <Badge badgeContent={notifications_amount} color="secondary">
                   <NotificationsIcon />
                 </Badge>
@@ -141,6 +183,7 @@ class Header_component extends React.Component {
         </div>
         {renderMenu}
         {renderMobileMenu}
+        {renderNotificationsModal}
       </div>
     );
   }
@@ -149,5 +192,15 @@ class Header_component extends React.Component {
 Header_component.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
+Header_component.defaultProps = {
+  data:[
+    { "user": "justiscezager1234", "message":"Liked your post"},
+    {"user": "justiscezager1234","message":"Commented on your post"},
+    {"user": "justiscezager1234", "message":"Send you a friend request"},
+    {"user": "justiscezager1234", "message":"Accepted your friend request"},
+  ],
+}
+
 
 export default withStyles(styles)(Header_component);

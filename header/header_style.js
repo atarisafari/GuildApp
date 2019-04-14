@@ -132,13 +132,24 @@ const styles = theme => ({
       },
     },
     desktopMenu: {
-      marginTop:'50px',
+      position:'fixed',
+      marginTop:'55px',
+      marginLeft:'30px',
     },
     mobileMenu: {
-      marginTop:'50px',
+      position:'fixed',
+      marginTop:'55px',
+      marginLeft:'20px',
+    },
+    notificationsModal:{
+      marginTop:'55px',
     },
     popMenuIcons:{
       marginRight:'10px',
+    },
+    notificationsModalText:{
+      margin:'10px',
+      textAllign:'center',
     },
   });
 

@@ -1,15 +1,14 @@
 import React from 'react';
 
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from "./header_style"
 
 
 class SearchFriendForm extends React.Component {
+  
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
