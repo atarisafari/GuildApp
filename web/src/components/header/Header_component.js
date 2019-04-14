@@ -199,6 +199,7 @@ Header_component.defaultProps = {
     {"user": "justiscezager1234", "message":"Accepted your friend request"},
   ],
 }
+
 /*
 Header_component.defaultProps = {
   data: 

@@ -10,7 +10,7 @@ const Friend = (props) => {
             <CardBody>
             <CardTitle tag="h1"> {props.name}</CardTitle>
             <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-            <CardText tag="p">Place Holder for latest poster</CardText>
+            <CardText tag="p">Place Holder for latest post</CardText>
             <Button variant="primary">Button</Button>
             </CardBody>
         </Card>
