@@ -1,12 +1,21 @@
 
 import React, { useContext, useState, useEffect  } from 'react'
 import Friend from '../components/Friend';
+import Post from '../components/Post';
 
 export default props => {
     const token = localStorage.getItem('token');
     const [username,setusername] = useState('');
     //const friends = grabAllFriends(token);
     const friends = [{
+        name: 'Jon',
+        username: 'DogMan',
+    },
+    {
+        name: 'Doe',
+        username: 'DogWoman',
+    }];
+    const posts = [{
         name: 'Jon',
         username: 'DogMan',
     },
@@ -59,6 +68,11 @@ export default props => {
             {
                 friends.map((value, index) => {
                     return <Friend key={index} name={value.name} username={value.username}  /*{...props}*/></Friend>
+                })
+            }
+            {
+                posts.map((value, index) => {
+                    return <Post key={index} username={value.username}  /*{...props}*/></Post>
                 })
             }
             
