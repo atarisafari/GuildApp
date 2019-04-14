@@ -5,15 +5,14 @@ import Friend from '../components/Friend';
 export default props => {
     const token = localStorage.getItem('token');
     const [username,setusername] = useState('');
-    const name1 = "ok";
-    //const friends = ['one', 'two', 'three'];
+    //const friends = grabAllFriends(token);
     const friends = [{
-        name: 'user1',
-        username: 'Username1',
+        name: 'Jon',
+        username: 'DogMan',
     },
     {
-        name: 'user2',
-        username: 'Username2',
+        name: 'Doe',
+        username: 'DogWoman',
     }];
 
     useEffect(()=>{//This will run once and then only if token changes
