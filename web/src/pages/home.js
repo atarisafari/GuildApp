@@ -1,9 +1,20 @@
 
 import React, { useContext, useState, useEffect  } from 'react'
-import HomeButton from '../components/buttons/homeButton';
+import Friend from '../components/Friend';
 
 export default props => {
     const token = localStorage.getItem('token');
+    const [username,setusername] = useState('');
+    const name1 = "ok";
+    //const friends = ['one', 'two', 'three'];
+    const friends = [{
+        name: 'user1',
+        username: 'Username1',
+    },
+    {
+        name: 'user2',
+        username: 'Username2',
+    }];
 
     useEffect(()=>{//This will run once and then only if token changes
         if(token === null){ //If token is lost 
@@ -25,15 +36,34 @@ export default props => {
         }
     }, [] );
     
+    const LoadingIndicator = isLoading =>{
+        if (isLoading) {
+            return (
+            <div>
+                <p>Loading...</p>
+            </div>
+            );
+        } else {
+            return null;
+        }
+    }
+
     const logout = async() =>{
         localStorage.clear();
         props.history.push("/");
     }
+
     return (
-    <div className="App">
-        <h1> Home Page </h1> 
-        {/* <Home />  */}
-        <button onClick={()=>logout()}> LOG OUT </button>
-    </div>
+        <div className="App">
+            <h1> Home Page </h1> 
+            {/* <Home />  */}
+            {
+                friends.map((value, index) => {
+                    return <Friend key={index} name={value.name} username={value.username}  /*{...props}*/></Friend>
+                })
+            }
+            
+            <button onClick={()=>logout()}> LOG OUT </button>
+        </div>
     )
 }
