@@ -75,3 +75,27 @@ export const addPost = async (token,content,image_url,timestamp) => {
         console.log(e);
     } 
 }
+
+export const grabAllFriends = async (token) => { 
+    try{
+        let response = await fetch('http://157.230.66.35/php/grabAllFriends.php', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token,
+        })
+        })
+        return response.text().then(function(text) {
+            console.log(text);
+            return text ? JSON.parse(text) : {}
+        })
+        //return data;        
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
