@@ -67,16 +67,16 @@ class Header_component extends React.Component {
 
     let notifications_amount = this.props.data.length
 
-   let notifications_markup = this.props.data.map((notification, index) => {
+    let notifications_markup = this.props.data.map((notification, index) => {
 
-     return(
+      return(
         <MenuItem onClick={this.handleNotifcationsModalClose}>             
           <ProfileAvatar/>
           <p className={classes.notificationsModalText}> {notification.user}  {notification.message}</p>
         </MenuItem>
 
       )
-   })
+    })
 
     const renderNotificationsModal = (
     
@@ -169,7 +169,7 @@ class Header_component extends React.Component {
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
-               <ProfileAvatar profileImageLink={profileImageLink}/>
+              <ProfileAvatar profileImageLink={profileImageLink}/>
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -199,6 +199,10 @@ Header_component.defaultProps = {
     {"user": "justiscezager1234", "message":"Accepted your friend request"},
   ],
 }
-
+/*
+Header_component.defaultProps = {
+  data: 
+}
+*/
 
 export default withStyles(styles)(Header_component);
