@@ -2,7 +2,7 @@ body {
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-// GLOBAL
+/* GLOBAL*/
 html,
 body {
 	font: 16px/1.5 Arial, Helvetica, sans-serif;
@@ -10,7 +10,7 @@ body {
 	padding: 0;
 	height: 100vh;
 	width: 100%;
-	//background-color: #f4f4f4;
+	/*background-color: #f4f4f4;*/
 }
 
 .container {
@@ -30,7 +30,7 @@ body {
 #logo_header {
 	border: solid 2px black;
 	display: inline-block;
-	float: left;
+	/*float: left;*/
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -38,18 +38,18 @@ body {
 #login {
 	float: right;
 	line-height: 60px;
-	//border:solid 1px black;
+	/*border:solid 1px black;*/
 }
 
 #username_login {
 	display: inline-block;
-	//border:solid 1px black;
+	/*border:solid 1px black;*/
 }
 
 #password_login {
 	display: inline-block;
-	//border:solid 1px black;
+	/*border:solid 1px black;*/
 }
 
-// Media Rules
+/* Media Rules*/
 @media only screen and(max-width:900px) {}
