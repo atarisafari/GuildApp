@@ -2,6 +2,7 @@
 import React, { useContext, useState, useEffect  } from 'react'
 import Friend from '../components/Friend';
 import Post from '../components/Post';
+import Header_component from '../components/header/Header_component';
 
 export default props => {
     const token = localStorage.getItem('token');
@@ -63,6 +64,7 @@ export default props => {
 
     return (
         <div className="App">
+            <Header_component props={props}/>
             <h1> Home Page </h1> 
             {/* <Home />  */}
             {
