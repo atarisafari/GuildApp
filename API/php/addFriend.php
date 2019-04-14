@@ -1,5 +1,3 @@
-  GNU nano 2.9.3                                                                                                                                                                                                                                                                 addFriend.php                                                                                                                                                                                                                                                                            
-
 <?php
 include("establishConn.php");
 include("validateToken.php");
