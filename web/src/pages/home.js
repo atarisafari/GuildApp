@@ -8,7 +8,7 @@ import Header_component from '../components/header/Header_component';
 export default props => {
     const token = localStorage.getItem('token');
     const [friends,setFriends] = useState([]);
-    const [posts,setPosts] = useState([]);
+    //const [posts,setPosts] = useState([]);
 
     const friendsHandler = async() => {
         let result =  await grabAllFriends(token).then(bleh => bleh) 
@@ -44,7 +44,7 @@ export default props => {
 
     useEffect(()=>{//This will be executed always after the components have been rendered
         friendsHandler();
-        postsHandler();
+        //postsHandler();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
     
     useEffect(()=>{ 
