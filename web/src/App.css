@@ -1,0 +1,45 @@
+.right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: white; 
+}
+
+#left{
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-image: url('./Purple-Abstract.jpg');
+}
+
+#logo_header{
+	font-size: 70px;
+	margin-left: 30%;
+	margin-top: 50%;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#login{
+	margin-left: 30%;
+	font-size: 30px;
+}
+
+#password_login{
+	margin-top: 5%;
+}
+
+button{
+	border-radius: 20px;
+}
+
+input{
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: black;
+	background-color: white;
+	height: 25px;
+} 
