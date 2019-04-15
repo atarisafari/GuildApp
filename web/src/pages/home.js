@@ -1,29 +1,26 @@
 
 import React, { useContext, useState, useEffect  } from 'react';
-import {grabAllFriends} from '../utils/apiCalls';
+import {grabAllFriends, grabAllPosts} from '../utils/apiCalls';
 import Friend from '../components/Friend';
 import Post from '../components/Post';
 import Header_component from '../components/header/Header_component';
 
 export default props => {
     const token = localStorage.getItem('token');
-    const [friendsD,setfriendsD] = useState([]);
-    // const friends = grabAllFriends(token).then(()=>{});
-    // console.log("Fetching frriends" , friends);
-    // const friends = [{
-    //     display_name: 'Jon',
-    //     username: 'DogMan',
-    // },
-    // {
-    //     display_name: 'Doe',
-    //     username: 'DogWoman',
-    // }];
+    const [friends,setFriends] = useState([]);
+    const [posts,setPosts] = useState([]);
 
-    const friends = async() => {
+    const friendsHandler = async() => {
         let result =  await grabAllFriends(token).then(bleh => bleh) 
         console.log('fetching friends', result);
-        setfriendsD(result);
+        setFriends(result);
     }
+
+    // const postsHandler = async() => {
+    //     let result =  await grabAllPosts(token).then(bleh => bleh) 
+    //     console.log('fetching friends', result);
+    //     setPosts(result);
+    // }
 
     const posts = [{
         name: 'Jon',
@@ -46,7 +43,8 @@ export default props => {
     }, [token]); //If this variable changes, this code will be run again
 
     useEffect(()=>{//This will be executed always after the components have been rendered
-        friends();
+        friendsHandler();
+        postsHandler();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
     
     useEffect(()=>{ 
@@ -79,13 +77,13 @@ export default props => {
             <h1> Home Page </h1> 
             {/* <Home />  */}
             { 
-                friendsD.map((values, index) => {
-                    return <Friend key={index} name={values.display_name} username={values.username}></Friend>
+                friends.map((values) => {
+                    return <Friend id={values.username}name={values.display_name} username={values.username}></Friend>
                 })
             }
             {
                 posts.map((value, index) => {
-                    return <Post key={index} username={value.username}  /*{...props}*/></Post>
+                    return <Post id={index} username={value.username}></Post>
                 })
             }
             

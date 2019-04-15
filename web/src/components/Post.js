@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody,
 
 const Post = (props) => {
     return (
-        <div>
+        <div id={props.id}>
         <Card style={{ width: '30rem' }}>
             <CardBody>
             <input></input>

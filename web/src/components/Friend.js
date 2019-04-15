@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody,
 
 const Friend = (props) => {
     return (
-        <div>
+        <div key={props.id} id={props.id}>
         <Card style={{ width: '18rem' }}>
             <CardImg top width="100%" src="holder.js/100px180" alt="Card image cap" />
             <CardBody>
