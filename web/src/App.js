@@ -31,17 +31,24 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <div id="username_login">
-            Username:
-            <input value={username} onChange= { e => this.setState({...this.state, username: e.target.value})}/>
+        <header id="sign_in_header" className="App-header">
+          <div className="container">
+            <div id="logo_header">
+                <p>LOGO</p>
+            </div>
+            <div id="login">
+              <div id="username_login">
+                Username:
+                <input placeholder="Username" value={username} onChange= { e => this.setState({...this.state, username: e.target.value})}/>
+              </div>
+              <div id="password_login">
+                Password: 
+                <input placeholder="Password" type='password' value={password} onChange= { e => this.setState({...this.state, password: e.target.value})}/>
+              </div>
+              <button onClick={()=>loginHandler()}> LOGIN </button>
+              <HomeButton path='/signUp' {...this.props}>SIGN UP</HomeButton>
+            </div>
           </div>
-          <div id="password_login">
-            Password: 
-            <input type='password' value={password} onChange= { e => this.setState({...this.state, password: e.target.value})}/>
-          </div>
-          <button onClick={()=>loginHandler()}> LOGIN </button>
-          <HomeButton path='/signUp' {...this.props}>SIGN UP</HomeButton>
         </header>
       </div>
     );
