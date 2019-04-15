@@ -56,6 +56,15 @@ class Header_component extends React.Component {
     this.setState({ notificationsModalAnchorEl: null });
   };
 
+  handleLogout = async() =>{
+    localStorage.clear();
+    this.props.props.history.push("/");
+  }
+
+  handleProfile = async() =>{
+    this.props.props.history.push("/profile");
+  }
+
   render() {
     console.log(this.props.data)
     const { anchorEl, mobileMoreAnchorEl } = this.state;
@@ -103,7 +112,7 @@ class Header_component extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>
-            <AccountCircle className={classes.popMenuIcons} />
+            <AccountCircle onClick={this.handleProfile} className={classes.popMenuIcons} />
           <p>Profile</p>
         </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>
@@ -111,7 +120,7 @@ class Header_component extends React.Component {
           <p>Settings</p>
         </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>
-                <LogOutIcon className={classes.popMenuIcons}/>
+                <LogOutIcon onClick={this.handleLogout} className={classes.popMenuIcons}/>
           <p>Logout</p>
         </MenuItem>
       </Menu>
@@ -126,13 +135,13 @@ class Header_component extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onclick={()=>{ this.handleMobileMenuClose(); }}>
+        <MenuItem onClick={()=>{ this.handleMobileMenuClose(); }}>
           <Badge className={classes.popMenuIcons} badgeContent={notifications_amount} color="secondary">
             <NotificationsIcon />
           </Badge>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onclick={this.handleMenuClose}>
+        <MenuItem onClick={this.handleMenuClose}>
             <AccountCircle className={classes.popMenuIcons} />
           <p>Profile</p>
         </MenuItem>
@@ -153,7 +162,7 @@ class Header_component extends React.Component {
         <div className={classes.mainBar} position="static">
           <Toolbar>
               <IconButton className={classes.logoButton}>
-              <a  className={classes.logo} onClick={()=>this.props.props.history.push('/')}>{this.props.props.children}></a>
+              <a  className={classes.logo} onClick={this.handleLogout}>{this.props.props.children}></a>
               </IconButton>
               <SearchFriendForm/>
             <div className={classes.grow} />

@@ -20,7 +20,7 @@ class SearchFriendForm extends React.Component {
     const data = new FormData(form);
 
     console.log(event.target.elements.search.value)
-   
+    
     /*
     fetch('/api/form-submit-url', {
       method: 'POST',

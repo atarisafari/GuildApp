@@ -1,21 +1,30 @@
 
-import React, { useContext, useState, useEffect  } from 'react'
+import React, { useContext, useState, useEffect  } from 'react';
+import {grabAllFriends} from '../utils/apiCalls';
 import Friend from '../components/Friend';
 import Post from '../components/Post';
 import Header_component from '../components/header/Header_component';
 
 export default props => {
     const token = localStorage.getItem('token');
-    const [username,setusername] = useState('');
-    //const friends = grabAllFriends(token);
-    const friends = [{
-        name: 'Jon',
-        username: 'DogMan',
-    },
-    {
-        name: 'Doe',
-        username: 'DogWoman',
-    }];
+    const [friendsD,setfriendsD] = useState([]);
+    // const friends = grabAllFriends(token).then(()=>{});
+    // console.log("Fetching frriends" , friends);
+    // const friends = [{
+    //     display_name: 'Jon',
+    //     username: 'DogMan',
+    // },
+    // {
+    //     display_name: 'Doe',
+    //     username: 'DogWoman',
+    // }];
+
+    const friends = async() => {
+        let result =  await grabAllFriends(token).then(bleh => bleh) 
+        console.log('fetching friends', result);
+        setfriendsD(result);
+    }
+
     const posts = [{
         name: 'Jon',
         username: 'DogMan',
@@ -24,6 +33,8 @@ export default props => {
         name: 'Doe',
         username: 'DogWoman',
     }];
+
+
 
     useEffect(()=>{//This will run once and then only if token changes
         if(token === null){ //If token is lost 
@@ -35,7 +46,7 @@ export default props => {
     }, [token]); //If this variable changes, this code will be run again
 
     useEffect(()=>{//This will be executed always after the components have been rendered
-        //
+        friends();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
     
     useEffect(()=>{ 
@@ -67,9 +78,9 @@ export default props => {
             <Header_component props={props}/>
             <h1> Home Page </h1> 
             {/* <Home />  */}
-            {
-                friends.map((value, index) => {
-                    return <Friend key={index} name={value.name} username={value.username}  /*{...props}*/></Friend>
+            { 
+                friendsD.map((values, index) => {
+                    return <Friend key={index} name={values.display_name} username={values.username}></Friend>
                 })
             }
             {

@@ -86,14 +86,13 @@ export const grabAllFriends = async (token) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            token: token,
+            token: token
         })
         })
-        return response.text().then(function(text) {
+        return await response.text().then(function(text) {
             console.log(text);
             return text ? JSON.parse(text) : {}
-        })
-        //return data;        
+        })   
     }
     catch(e){
         console.log(e);
