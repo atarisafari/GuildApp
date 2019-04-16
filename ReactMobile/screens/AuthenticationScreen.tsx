@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		flex: 1,
-		width: "100%",
+		width: "90%",
 		resizeMode: "contain",
 		alignSelf: "center"
 	},
