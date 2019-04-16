@@ -10,6 +10,7 @@ import FormTextInput from "../components/FormTextInput";
 import imageLogo from "../assets/images/logo.png";
 import colors from "../config/colors";
 import strings from "../config/strings";
+import login from "../config/calls";
 
 interface State {
 	email: string;
@@ -22,44 +23,72 @@ interface State {
 
 class LoginScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
-	
+
 	readonly state: State = {
 		email: "",
 		password: "",
 		emailTouched: false,
 		passwordTouched: false
 	};
-	
+
 	handleEmailChange = (email: string) => {
 		this.setState({ email: email });
 	};
-	
+
 	handlePasswordChange = (password: string) => {
 		this.setState({ password: password });
 	};
-	
+
 	handleEmailSubmitPress = () => {
 		if (this.passwordInputRef.current) {
 			this.passwordInputRef.current.focus();
 		}
 	};
-	
+
 	// ...and we update them in the input onBlur callback
 	handleEmailBlur = () => {
 		this.setState({ emailTouched: true });
 	};
-	
+
 	handlePasswordBlur = () => {
 		this.setState({ passwordTouched: true });
 	};
-	
+
 	handleLoginPress = () => {
 		//
 		//Need to add API calls here for validation n shit
-		//
+		//in meantime, just go to the app
+
+//     try{
+//         let response = await fetch('http://157.230.66.35/php/signup.php', {
+//         mode: 'cors',
+//         method: 'POST',
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             username: username,
+//             password: password,
+//             display_name: display_name,
+//             //profile_pic_url: profile_pic_url,
+//         })
+//         })
+//         return response.text().then(function(text) {
+//             console.log(text);
+//             return text ? JSON.parse(text) : {}
+//         })
+//         //return data;
+//     }
+//     catch(e){
+//         console.log(e);
+//     }
+
+		console.log(this.state.email);
+		console.log(this.state.password)
 		this.props.navigation.navigate('Main');
 	};
-	
+
 	render() {
 		const {
 			email,
