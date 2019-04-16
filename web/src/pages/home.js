@@ -108,6 +108,7 @@ export default props => {
             
             <h1> Home Page </h1> 
             {/* <Home />  */}
+            {/*<AddPost id="add_post"/>*/}
             { 
                 friends.map((values) => {
                     return (

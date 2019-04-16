@@ -31,6 +31,7 @@ class Header_component extends React.Component {
     notificationsModalAnchorEl:null,
   };
 
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
