@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react'
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
+import axios from 'axios';
 
 export default props => {
     // const {message} = useContext(FBContext); 
@@ -11,7 +12,6 @@ export default props => {
     const [confpassword,setconfpassword] = useState('');
     const [display_name,setdisplay_name] = useState('');
     const [profile_pic_url,setprofile_pic_url] = useState('');
-
 
     const usernameHandler = username=>{
         setusername(username);
