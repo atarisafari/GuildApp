@@ -1,12 +1,25 @@
-
 import React, { useContext, useState, useEffect  } from 'react';
-import {grabAllFriends, grabAllPosts} from '../utils/apiCalls';
+import {grabAllFriends, grabAllPosts, addPost} from '../utils/apiCalls';
 import Friend from '../components/Friend';
 import Post from '../components/Post';
 import Header_component from '../components/header/Header_component';
+import axios from 'axios';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
+import Popup from "reactjs-popup";
+import Camera from '@material-ui/icons/CameraAlt';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 export default props => {
+    console.log('props: ', props); 
     const token = localStorage.getItem('token');
+    //const friends = grabAllFriends(token);
+    const [content,setContent] = useState('');
     const [friends,setFriends] = useState([]);
     //const [posts,setPosts] = useState([]);
 
@@ -15,7 +28,8 @@ export default props => {
         console.log('fetching friends', result);
         setFriends(result);
     }
-
+    
+    // Waiting for API
     // const postsHandler = async() => {
     //     let result =  await grabAllPosts(token).then(bleh => bleh) 
     //     console.log('fetching friends', result);
@@ -71,9 +85,27 @@ export default props => {
         props.history.push("/");
     }
 
+    const contentHandler = content=>{
+        setContent(content);
+        console.log(content);
+    }
+
+    const addPostHandler = async() =>{
+        
+        let data = await addPost(token, content);
+        console.log("Result" , data);
+        if(data.error === ""){
+            console.log("Add post was successful");
+        }
+        else{
+            alert(data.error);
+        }
+    }
+
     return (
         <div className="App">
             <Header_component props={props}/>
+            
             <h1> Home Page </h1> 
             {/* <Home />  */}
             { 
@@ -82,17 +114,58 @@ export default props => {
                         <Friend id={values.username}
                                 name={values.display_name} 
                                 username={values.username} 
-                                history={props.history}>
-                        </Friend>
+                                history={props.history}/>
                     );
                 })
             }
+            
             {
                 posts.map((value, index) => {
-                    return <Post id={index} username={value.username}></Post>
+                    return <Post key={index} username={value.username}  content={value.content}/>
+
                 })
             }
-            
+            <div id="content_post">
+            <Card style={{ width: '25rem' }}>
+            <Popup trigger={
+                <button>
+                    <TextField 
+                        id="textPopUp" 
+                        fullWidth 
+                        placeholder="Add a post..." 
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end"> <Camera /></InputAdornment>,
+                        }}
+                    /> 
+                < /button>
+                } position="bottom center" modal > 
+
+            {cancel => (
+                <div id="cancel">
+                    <CardTitle tag="h1"> User Display Name</CardTitle>
+                    <CardBody>
+                        <div id="postContent">
+                            <form autoComplete="off">
+                            <TextField id="textArea" placeholder="Add a post..." fullWidth margin="none" multiline rows="2" onBlur= {e => contentHandler(e.target.value)}/>
+                            </form>
+                        </div>
+                        
+                        <div id="postImage">
+                            <IconButton><Camera /> </IconButton>
+                        </div>
+                       
+                        <div id="buttons">
+                        <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                        <a href="#" className="cancel" onClick={cancel}> Cancel </a>
+                        </div>
+                   
+                    </CardBody>
+                </div>
+                )}
+            </Popup>
+                
+                </Card>
+            </div>
             <button onClick={()=>logout()}> LOG OUT </button>
         </div>
     )
