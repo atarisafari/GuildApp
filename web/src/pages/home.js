@@ -4,17 +4,9 @@ import Friend from '../components/Friend';
 import Post from '../components/Post';
 import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
-import axios from 'axios';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
-import Popup from "reactjs-popup";
-import Camera from '@material-ui/icons/CameraAlt';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
-import InputAdornment from '@material-ui/core/InputAdornment';
+
 
 export default props => {
     console.log('props: ', props); 
@@ -44,7 +36,6 @@ export default props => {
         name: 'Doe',
         username: 'DogWoman',
     }];
-
 
 
     useEffect(()=>{//This will run once and then only if token changes
@@ -89,7 +80,7 @@ export default props => {
         setContent(content);
         console.log(content);
     }
-
+    /*
     const addPostHandler = async() =>{
         
         let data = await addPost(token, content);
@@ -100,7 +91,7 @@ export default props => {
         else{
             alert(data.error);
         }
-    }
+    }*/
 
     return (
         <div className="App">
@@ -108,6 +99,7 @@ export default props => {
             
             <h1> Home Page </h1> 
             {/* <Home />  */}
+            <AddPost id="add_post"/>
             { 
                 friends.map((values) => {
                     return (
@@ -125,6 +117,7 @@ export default props => {
 
                 })
             }
+            {/*
             <div id="content_post">
             <Card style={{ width: '25rem' }}>
             <Popup trigger={
@@ -166,6 +159,7 @@ export default props => {
                 
                 </Card>
             </div>
+            */}
             <button onClick={()=>logout()}> LOG OUT </button>
         </div>
     )

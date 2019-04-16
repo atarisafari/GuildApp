@@ -1,88 +1,87 @@
 
 import React, { Component, useState } from 'react';
+import {addPost} from '../utils/apiCalls';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
-import LikeButton from '@material-ui/icons/FavoriteBorder';
-import CommentButton from '@material-ui/icons/Comment';
+import Popup from "reactjs-popup";
+import Camera from '@material-ui/icons/CameraAlt';
 import ToggleIcon from 'material-ui-toggle-icon'
-import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import axios from 'axios';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 
-const Post = (props) => {
-    const [comment,setComment] = useState('');
+const AddPost = (props) => {
+    console.log('props: ', props); 
+    const [content,setContent] = useState('');
+    const token = localStorage.getItem('token');
 
-    const commentHandler = comment=>{
-        setComment(comment);
+    const contentHandler = content=>{
+        setContent(content);
+        console.log(content);
     }
 
-    const addComment = async() =>{
-        if(comment === ''){ //If passwords don't match then dont make the api call
-            alert("Can't add an empty comment");
-        }
-        // else{
-        //     let data = await signUp(username,password,display_name,profile_pic_url);
-        //     console.log("Result" , data);
-        //     if(data.error === ""){
-        //         //TODO
-        //         console.log("Sign up was successful");
-        //         props.history.push("/");
-        //     }
-        //     else{
-        //         alert(data.error);
-        //     }
-        // }
+
+    const addPostHandler = async() =>{
         
+        let data = await addPost(token, content);
+        console.log("Result" , data);
+        if(data.error === ""){
+            console.log("Add post was successful");
+        }
+        else{
+            alert(data.error);
+        }
     }
 
     return (
         <div id={props.id}>
-            
-        <Card style={{ width: '30rem' }}>
-            <CardBody>
-            <CardTitle tag="h1"> {props.username}</CardTitle>
-        {/*<CardText tag="p">{props.content}</CardText>*/}
-            <CardText tag="p">Place Holder for post content:
-    As I unzipped my tent flap I did hear a few howls, but they were distant and not worrying. 
-    What stunned me into stillness was a very loud howl from the direction of the lake, about 
-    a yard from my tent at most.This howl was different though. It had the feel of a Coyote howl,
-    but it was deeper… and it lasted longer.
-    I simply sat there petrified at what I heard. I wouldn’t be able to guess at how long I sat 
-    there breathing hard with my fingers still grasping the zipper. But however long it may have been
-    was just long enough for the… thing… that made that howl to come up the trail next to my tent. 
-    Suddenly I heard the crunching of claws on dirt and after that, claws on the rocks that made our 
-    camping plots. Then I saw the largest shadow made by a living creature that little kid me had 
-    ever seen. It lumbered heavily in the direction of the sparse tree line where I assume the other 
-    howling had come from. But before it got past the tree I urinated on it stopped.
-            </CardText>
-            
-            {/*Like Button*/}
-            <IconButton>
-                
-                <LikeButton />
-                
-            </IconButton>
+            <Card style={{ width: '25rem' }}>
+            <Popup trigger={
+                <button>
+                    <TextField 
+                        id="textPopUp" 
+                        fullWidth 
+                        placeholder="Add a post..." 
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end"> <Camera /></InputAdornment>,
+                        }}
+                    /> 
+                </button>
+                } position="bottom center" modal > 
 
-            {/*Comment Button*/}
+            {cancel => (
+                <div id="cancel">
+                    <CardTitle tag="h1"> User Display Name</CardTitle>
+                    <CardBody>
+                        <div id="postContent">
+                            <form autoComplete="off">
+                            <TextField id="textArea" placeholder="Add a post..." fullWidth margin="none" multiline rows="2" onBlur= {e => contentHandler(e.target.value)}/>
+                            </form>
+                        </div>
+                        
+                        <div id="postImage">
+                            <IconButton><Camera /> </IconButton>
+                        </div>
 
-            <IconButton >
-            
-                <CommentButton />
+                        <div id="buttons">
+                        <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                        <a href="#" className="cancel" onClick={cancel}> Cancel </a>
+                        </div>
+
+                    </CardBody>
+                </div>
+                )}
+            </Popup>
                 
-            </IconButton>
-        
-        
-            <input onBlur= { e => commentHandler(e.target.value)} placeholder="Make a comment..."/>
-            <Button variant="primary" onClick={()=>addComment()}>Comment</Button>
-
-            </CardBody>
-        </Card>
+                </Card>
         </div>
     );
 };
 
 
-export default Post;
+export default AddPost;
 
