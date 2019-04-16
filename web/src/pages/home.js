@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect  } from 'react';
 import {grabAllFriends, grabAllPosts, addPost} from '../utils/apiCalls';
 import Friend from '../components/Friend';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
@@ -18,7 +19,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 export default props => {
     console.log('props: ', props); 
     const token = localStorage.getItem('token');
-    //const friends = grabAllFriends(token);
     const [content,setContent] = useState('');
     const [friends,setFriends] = useState([]);
     //const [posts,setPosts] = useState([]);
@@ -137,7 +137,7 @@ export default props => {
                             endAdornment: <InputAdornment position="end"> <Camera /></InputAdornment>,
                         }}
                     /> 
-                < /button>
+                </button>
                 } position="bottom center" modal > 
 
             {cancel => (
@@ -153,12 +153,12 @@ export default props => {
                         <div id="postImage">
                             <IconButton><Camera /> </IconButton>
                         </div>
-                       
+
                         <div id="buttons">
                         <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
                         <a href="#" className="cancel" onClick={cancel}> Cancel </a>
                         </div>
-                   
+
                     </CardBody>
                 </div>
                 )}
