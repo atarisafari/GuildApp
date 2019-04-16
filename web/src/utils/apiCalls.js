@@ -50,7 +50,7 @@ export const login = async (username,password) => {
     } 
 }
 
-export const addPost = async (token,content,image_url,timestamp) => { 
+export const addPost = async (token,content,image_url) => { 
     try{
         let response = await fetch('http://157.230.66.35/php/addPost.php', {
         mode: 'cors',
@@ -63,7 +63,6 @@ export const addPost = async (token,content,image_url,timestamp) => {
             token: token,
             content: content,
             image_url: image_url,
-            timestamp: timestamp,
         })
         })
         return response.text().then(function(text) {
@@ -86,14 +85,108 @@ export const grabAllFriends = async (token) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            token: token,
+            token: token
         })
         })
-        return response.text().then(function(text) {
+        return await response.text().then(function(text) {
             console.log(text);
             return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const grabAllPosts = async (token, username) => { 
+    try{
+        let response = await fetch('http://157.230.66.35/php/grabAllPosts.php', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token,
+            username: username
         })
-        //return data;        
+        })
+        return await response.text().then(function(text) {
+            console.log(text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const addFriend = async (token, username ) => { 
+    try{
+        let response = await fetch('http://157.230.66.35/php/addFriend.php', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token,
+            username: username 
+        })
+        })
+        return await response.text().then(function(text) {
+            console.log(text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const deletePost = async (token, post_id) => { 
+    try{
+        let response = await fetch('http://157.230.66.35/php/deletePost.php', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token,
+            post_id: post_id
+        })
+        })
+        return await response.text().then(function(text) {
+            console.log(text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const searchFriends = async (token) => { 
+    try{
+        let response = await fetch('http://157.230.66.35/php/searchFriends.php', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token
+        })
+        })
+        return await response.text().then(function(text) {
+            console.log(text);
+            return text ? JSON.parse(text) : {}
+        })   
     }
     catch(e){
         console.log(e);
