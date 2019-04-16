@@ -206,7 +206,7 @@ Header_component.propTypes = {
 
 Header_component.defaultProps = {
   data:[
-    { "user": "justiscezager1234", "message":"Liked your post"},
+    {"user": "justiscezager1234", "message":"Liked your post"},
     {"user": "justiscezager1234","message":"Commented on your post"},
     {"user": "justiscezager1234", "message":"Send you a friend request"},
     {"user": "justiscezager1234", "message":"Accepted your friend request"},

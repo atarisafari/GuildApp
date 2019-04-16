@@ -1,5 +1,15 @@
+
 import React, { Component, useState } from 'react';
-import { Card, CardTitle, CardBody, CardText, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import LikeButton from '@material-ui/icons/FavoriteBorder';
+import CommentButton from '@material-ui/icons/Comment';
+import ToggleIcon from 'material-ui-toggle-icon'
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+
 
 const Post = (props) => {
     const [comment,setComment] = useState('');
@@ -28,10 +38,12 @@ const Post = (props) => {
     }
 
     return (
-        <div id={props.id}>
+         <div id={props.id}>
+            
         <Card style={{ width: '30rem' }}>
             <CardBody>
-            <CardTitle tag="h1">{props.username}</CardTitle>
+            <CardTitle tag="h1"> {props.username}</CardTitle>
+      {/*<CardText tag="p">{props.content}</CardText>*/}
             <CardText tag="p">Place Holder for post content:
     As I unzipped my tent flap I did hear a few howls, but they were distant and not worrying. 
     What stunned me into stillness was a very loud howl from the direction of the lake, about 
@@ -45,12 +57,32 @@ const Post = (props) => {
     ever seen. It lumbered heavily in the direction of the sparse tree line where I assume the other 
     howling had come from. But before it got past the tree I urinated on it stopped.
             </CardText>
+            
+            {/*Like Button*/}
+            <IconButton>
+                
+                <LikeButton />
+                
+            </IconButton>
+
+            {/*Comment Button*/}
+
+            <IconButton >
+            
+                <CommentButton />
+                
+            </IconButton>
+       
+        
             <input onBlur= { e => commentHandler(e.target.value)} placeholder="Make a comment..."/>
             <Button variant="primary" onClick={()=>addComment()}>Comment</Button>
+
             </CardBody>
         </Card>
         </div>
     );
 };
 
+
 export default Post;
+

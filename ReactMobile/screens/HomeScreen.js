@@ -26,6 +26,9 @@ export default class HomeScreen extends React.Component {
               Perkele!!
             </Text>
           </View>
+          
+          <Text style={styles.getStartedText}>hi</Text>
+          
         </ScrollView>
       </View>
     );
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedText: {
-    fontSize: 17,
+    fontSize: 24,
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
     textAlign: 'center',
