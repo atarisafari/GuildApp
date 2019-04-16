@@ -12,18 +12,30 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import {useDropzone} from 'react-dropzone';
 
 
 const AddPost = (props) => {
     console.log('props: ', props); 
     const [content,setContent] = useState('');
+    const [imageUpload,setImageUpload] = useState('');
     const token = localStorage.getItem('token');
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
     const contentHandler = content=>{
         setContent(content);
         console.log(content);
     }
 
+    const imageUploadHandler = imageUpload=>{
+        const reader = new FileReader();
+        reader.onload = () => {
+            const binaryStr = reader.result
+            console.log(binaryStr)
+          }
+        setImageUpload(imageUpload);
+        console.log(imageUpload);
+    }
 
     const addPostHandler = async() =>{
         
@@ -36,6 +48,14 @@ const AddPost = (props) => {
             alert(data.error);
         }
     }
+
+    const files = acceptedFiles.map(file => (
+        <li key={file.path}>
+          {file.path} - {file.size} bytes
+        </li>
+      ));
+    
+    
 
     return (
         <div id={props.id}>
@@ -52,29 +72,40 @@ const AddPost = (props) => {
                     /> 
                 </button>
                 } position="bottom center" modal > 
+                {cancel => (
+                    <div id="cancel">
+                        <CardTitle tag="h1"> User Display Name</CardTitle>
+                        <CardBody>
+                            <div id="postContent">
+                                <form autoComplete="off">
+                                    <TextField id="textArea" placeholder="Add a post..." fullWidth margin="none" multiline rows="5" onBlur= {e => contentHandler(e.target.value)}/>
+                                </form>
+                            </div>
+                            
+                            <div id="postImage"> 
+                                <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                                    {({getRootProps, getInputProps}) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                            <input {...getInputProps()} />
 
-            {cancel => (
-                <div id="cancel">
-                    <CardTitle tag="h1"> User Display Name</CardTitle>
-                    <CardBody>
-                        <div id="postContent">
-                            <form autoComplete="off">
-                            <TextField id="textArea" placeholder="Add a post..." fullWidth margin="none" multiline rows="2" onBlur= {e => contentHandler(e.target.value)}/>
-                            </form>
-                        </div>
-                        
-                        <div id="postImage">
-                            <IconButton><Camera /> </IconButton>
-                        </div>
+                                            <Camera />
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
+                            </div>
 
-                        <div id="buttons">
-                        <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
-                        <a href="#" className="cancel" onClick={cancel}> Cancel </a>
-                        </div>
+                            <div id="buttons">
+                            <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                            <a href="#" className="cancel" onClick={cancel}> Cancel </a>
+                            </div>
 
-                    </CardBody>
-                </div>
+                        </CardBody>
+                    </div>
                 )}
+        
+               
             </Popup>
                 
                 </Card>
