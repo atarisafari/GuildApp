@@ -61,8 +61,12 @@ class Header_component extends React.Component {
     this.props.props.history.push("/");
   }
 
-  handleProfile = async() =>{
+  goProfile = async() =>{
     this.props.props.history.push("/profile");
+  }
+
+  goHome = async() =>{
+    this.props.props.history.push("/home");
   }
 
   render() {
@@ -112,8 +116,8 @@ class Header_component extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>
-            <AccountCircle onClick={this.handleProfile} className={classes.popMenuIcons} />
-          <p>Profile</p>
+            <AccountCircle onClick={this.goProfile} className={classes.popMenuIcons} />
+          <p onClick={this.goProfile}>Profile</p>
         </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>
               <SettingsIcon className={classes.popMenuIcons}/>
@@ -121,7 +125,7 @@ class Header_component extends React.Component {
         </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>
                 <LogOutIcon onClick={this.handleLogout} className={classes.popMenuIcons}/>
-          <p>Logout</p>
+          <p onClick={this.handleLogout}>Logout</p>
         </MenuItem>
       </Menu>
     );
@@ -162,7 +166,7 @@ class Header_component extends React.Component {
         <div className={classes.mainBar} position="static">
           <Toolbar>
               <IconButton className={classes.logoButton}>
-              <a  className={classes.logo} onClick={this.handleLogout}>{this.props.props.children}></a>
+              <a  className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
               </IconButton>
               <SearchFriendForm/>
             <div className={classes.grow} />

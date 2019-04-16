@@ -3,6 +3,11 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 const Friend = (props) => {
+
+    const goProfile = async() =>{
+        props.history.push("/profile");
+    }
+
     return (
         <div key={props.id} id={props.id}>
         <Card style={{ width: '18rem' }}>
@@ -11,7 +16,7 @@ const Friend = (props) => {
             <CardTitle tag="h1"> {props.name}</CardTitle>
             <CardSubtitle tag="h5">{props.username}</CardSubtitle>
             <CardText tag="p">Place Holder for latest post</CardText>
-            <Button variant="primary">Profile</Button>
+            <Button variant="primary" onClick={()=>goProfile()}>Profile</Button>
             </CardBody>
         </Card>
         </div>

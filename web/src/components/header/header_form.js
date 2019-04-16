@@ -18,8 +18,9 @@ class SearchFriendForm extends React.Component {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
-
+    
     console.log(event.target.elements.search.value)
+    
     
     /*
     fetch('/api/form-submit-url', {
@@ -28,15 +29,24 @@ class SearchFriendForm extends React.Component {
     });
     */
   }
+  
+  searchFriend = async() =>{
+    console.log("Searching");
+  }
+
+  addFriend = async() =>{
+    console.log("Adding");
+  }
 
   render() {
     const { classes } = this.props;
+
     return (
         <form className={classes.searchForm} onSubmit={this.handleSubmit}>
         <div className={classes.inputWrap}>
             <InputBase  className={classes.searchInput}
                 name="search"
-                placeholder="Add a friend..."
+                placeholder="Search or Add a friend..."
                 classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -44,9 +54,12 @@ class SearchFriendForm extends React.Component {
             />
         </div>
         <div className={classes.buttonWrap}>
-            <Button type="submit" className={classes.searchButton} >
+            <Button type="submit" onClick={this.searchFriend} className={classes.searchButton} >
             <SearchIcon />
             </Button>
+        </div>
+        <div className={classes.buttonWrap}>
+            <Button type="submit" onClick={this.addFriend} className={classes.searchButton}>Add</Button>
         </div>
       </form>
     );

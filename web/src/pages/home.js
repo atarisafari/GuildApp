@@ -65,7 +65,7 @@ export default props => {
             return null;
         }
     }
-
+    
     const logout = async() =>{
         localStorage.clear();
         props.history.push("/");
@@ -78,7 +78,13 @@ export default props => {
             {/* <Home />  */}
             { 
                 friends.map((values) => {
-                    return <Friend id={values.username}name={values.display_name} username={values.username}></Friend>
+                    return (
+                        <Friend id={values.username}
+                                name={values.display_name} 
+                                username={values.username} 
+                                history={props.history}>
+                        </Friend>
+                    );
                 })
             }
             {

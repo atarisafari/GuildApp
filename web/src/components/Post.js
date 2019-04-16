@@ -1,7 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Card, CardTitle, CardBody, CardText, Button } from 'reactstrap';
 
 const Post = (props) => {
+    const [comment,setComment] = useState('');
+
+    const commentHandler = comment=>{
+        setComment(comment);
+    }
+
+    const addComment = async() =>{
+        if(comment === ''){ //If passwords don't match then dont make the api call
+            alert("Can't add an empty comment");
+        }
+        // else{
+        //     let data = await signUp(username,password,display_name,profile_pic_url);
+        //     console.log("Result" , data);
+        //     if(data.error === ""){
+        //         //TODO
+        //         console.log("Sign up was successful");
+        //         props.history.push("/");
+        //     }
+        //     else{
+        //         alert(data.error);
+        //     }
+        // }
+        
+    }
+
     return (
         <div id={props.id}>
         <Card style={{ width: '30rem' }}>
@@ -20,7 +45,8 @@ const Post = (props) => {
     ever seen. It lumbered heavily in the direction of the sparse tree line where I assume the other 
     howling had come from. But before it got past the tree I urinated on it stopped.
             </CardText>
-            <Button variant="primary">Comment</Button>
+            <input onBlur= { e => commentHandler(e.target.value)} placeholder="Make a comment..."/>
+            <Button variant="primary" onClick={()=>addComment()}>Comment</Button>
             </CardBody>
         </Card>
         </div>
