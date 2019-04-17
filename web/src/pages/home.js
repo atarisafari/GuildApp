@@ -1,12 +1,17 @@
-
 import React, { useContext, useState, useEffect  } from 'react';
-import {grabAllFriends, grabAllPosts} from '../utils/apiCalls';
+import {grabAllFriends, grabAllPosts, addPost} from '../utils/apiCalls';
 import Friend from '../components/Friend';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap';
+
 
 export default props => {
+    console.log('props: ', props); 
     const token = localStorage.getItem('token');
+    const [content,setContent] = useState('');
     const [friends,setFriends] = useState([]);
     //const [posts,setPosts] = useState([]);
 
@@ -15,7 +20,8 @@ export default props => {
         console.log('fetching friends', result);
         setFriends(result);
     }
-
+    
+    // Waiting for API
     // const postsHandler = async() => {
     //     let result =  await grabAllPosts(token).then(bleh => bleh) 
     //     console.log('fetching friends', result);
@@ -30,7 +36,6 @@ export default props => {
         name: 'Doe',
         username: 'DogWoman',
     }];
-
 
 
     useEffect(()=>{//This will run once and then only if token changes
@@ -71,25 +76,45 @@ export default props => {
         props.history.push("/");
     }
 
+    const contentHandler = content=>{
+        setContent(content);
+        console.log(content);
+    }
+    /*
+    const addPostHandler = async() =>{
+        
+        let data = await addPost(token, content);
+        console.log("Result" , data);
+        if(data.error === ""){
+            console.log("Add post was successful");
+        }
+        else{
+            alert(data.error);
+        }
+    }*/
+
     return (
         <div className="App">
             <Header_component props={props}/>
+            
             <h1> Home Page </h1> 
             {/* <Home />  */}
+            <AddPost id="add_post"/>
             { 
                 friends.map((values) => {
                     return (
                         <Friend id={values.username}
                                 name={values.display_name} 
                                 username={values.username} 
-                                history={props.history}>
-                        </Friend>
+                                history={props.history}/>
                     );
                 })
             }
+            
             {
                 posts.map((value, index) => {
-                    return <Post id={index} username={value.username}></Post>
+                    return <Post key={index} username={value.username}  content={value.content}/>
+
                 })
             }
             

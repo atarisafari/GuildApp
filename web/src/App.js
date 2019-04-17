@@ -27,7 +27,7 @@ class App extends Component {
         else{
             alert(data.error);
         }      
-  }
+    }
 
     return (
       <div className="App">
