@@ -125,7 +125,7 @@ export default props => {
                                 </GridListTile>
                                 ))}
                             </GridList>
-                            /IconButton>
+                           
                         </div>
                         
                     )}
