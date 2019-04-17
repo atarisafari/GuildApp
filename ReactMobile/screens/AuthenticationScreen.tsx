@@ -84,9 +84,8 @@ class LoginScreen extends React.Component<{}, State> {
 			console.log(e);
 		}
 		
-		//check to see if we get a toke back
+		//check to see if we get a token back
 		async function checkToken() {
-			console.log("yeet")
 			let result = await SecureStore.getItemAsync('secure_token');
 			if(result !== null){
 				return true;
@@ -96,7 +95,7 @@ class LoginScreen extends React.Component<{}, State> {
 		}
 		
 		//if we get a token, login in
-		if(getToken){
+		if(checkToken()){
 			this.props.navigation.navigate('Main');
 		}
 	};
