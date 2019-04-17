@@ -103,7 +103,7 @@ export default props => {
                 })
             }
             
-            <button onClick={()=>logout()}> LOG OUT </button>
+           
         </div>
     )
 }
