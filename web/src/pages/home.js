@@ -4,9 +4,6 @@ import Friend from '../components/Friend';
 import Post from '../components/Post';
 import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
-
 
 export default props => {
     console.log('props: ', props); 
@@ -81,18 +78,6 @@ export default props => {
         setContent(content);
         console.log("Content:", content);
     }
-    /*
-    const addPostHandler = async() =>{
-        
-        let data = await addPost(token, content);
-        console.log("Result" , data);
-        if(data.error === ""){
-            console.log("Add post was successful");
-        }
-        else{
-            alert(data.error);
-        }
-    }*/
 
     return (
         <div className="App">
@@ -127,7 +112,7 @@ export default props => {
                 })
             }
             
-            <button onClick={()=>logout()}> LOG OUT </button>
+           
         </div>
     )
 }

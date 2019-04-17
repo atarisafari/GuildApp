@@ -2,7 +2,22 @@
 import React, { useContext, useState } from 'react'
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
-import axios from 'axios';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import AddIcon from '@material-ui/icons/Add';
+import { Card, CardBody, CardTitle, Button } from 'reactstrap';
+import Popup from "reactjs-popup";
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import GuildSword from './0_GuildSword_Icon.png';
+import Sword from './1_Sword_Icon.png';
+import BowArrow from './2_BowArrow_Icon.png';
+import Staff from './3_Staff_Icon.png';
+import Shield from './4_Shield_Icon.png';
 
 export default props => {
     // const {message} = useContext(FBContext); 
@@ -12,6 +27,29 @@ export default props => {
     const [confpassword,setconfpassword] = useState('');
     const [display_name,setdisplay_name] = useState('');
     const [profile_pic_url,setprofile_pic_url] = useState('');
+    
+    const tileData = [
+        {
+            img: GuildSword,
+            title: 'Guild Sword',
+        },
+        {
+            img: Sword,
+            title: 'Sword',
+        },
+        {
+            img: BowArrow,
+            title: 'Bow Arrow',
+        },
+        {
+            img: Staff,
+            title: 'Staff',
+        },
+        {
+            img: Shield,
+            title: 'Shield',
+        }
+    ];
 
     const usernameHandler = username=>{
         setusername(username);
@@ -27,6 +65,7 @@ export default props => {
     }
     const profile_pic_urlHandler = profile_pic_url=>{
         setprofile_pic_url(profile_pic_url);
+        console.log('src', profile_pic_url);
     }
     const signUpHandler = async() =>{
         if(password !== confpassword){ //If passwords don't match then dont make the api call
@@ -56,6 +95,44 @@ export default props => {
         <h1> SignUp </h1> 
         {/* <SamplePage2 />  */}
         <div id="signUp">
+            <div id="profile_pic">
+                <Popup trigger={
+                    <IconButton>
+                        <Badge badgeContent={<AddIcon />} color="secondary" >
+                            <Grid container justify="center" alignItems="center">
+                                <Avatar alt="" src={require('./profilePicPlaceholder.png')}  />
+                            </Grid>
+                        </Badge>
+                    </IconButton>
+                    } position="bottom center" modal > 
+                    {cancel => (
+                        <div id="cancel">
+                            <GridList cellHeight={180}>
+                                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                                    <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
+                                </GridListTile>
+                                {tileData.map(tile => (
+                                        
+                                        <GridListTile key={tile.img}>
+                                        {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
+                                            <img src={tile.img} alt={tile.title} />
+                                            <GridListTileBar title={tile.title}/>
+                                            {/* </a>*/}
+                                        </GridListTile>
+                                    
+                                   
+                                ))}
+                            </GridList>
+                           
+                        </div>
+                        
+                    )}
+            
+                
+                </Popup>
+                    
+            
+            </div>
             <div id="display_name_signUp">
                 Display Name: 
                 <input onBlur= { e => display_nameHandler(e.target.value)}/>
