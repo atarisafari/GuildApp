@@ -12,6 +12,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 const Post = (props) => {
     const [comment,setComment] = useState('');
+    const [expanded, setExpanded] = useState(false);
 
     const commentHandler = comment=>{
         setComment(comment);
@@ -59,6 +60,7 @@ const Post = (props) => {
                         <Box textAlign="justify" m={3} fontWeight="fontWeightMedium">
                             {props.username}
                         </Box>
+            
                     </Typography>
                      {/*<CardText tag="p">{props.content}</CardText>*/}
                      <Typography component="p" >
@@ -77,16 +79,12 @@ const Post = (props) => {
                             howling had come from. But before it got past the tree I urinated on it stopped.
                         </Box>
                     </Typography>
-            
-                {/*Like Button*/}
-                <IconButton>
-                    
-                    <LikeButton />
-                    
+                <IconButton >
+                            <LikeButton />
                 </IconButton>
-
+            
                 <ToggleContent
-                    toggle={show => <button onClick={show}><CommentButton/></button>}
+                    toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
                     content={hide => (
                         <div>
                             <TextField 
@@ -109,6 +107,7 @@ const Post = (props) => {
                     )}
                 />
                 </Box>
+                
             </Paper>
         </div>
     );

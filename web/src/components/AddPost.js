@@ -95,60 +95,60 @@ const AddPost = (props) => {
     return (
         <div id={props.id}>
             <Card style={{ width: '25rem' }}>
-            <Popup trigger={
-                <button>
-                    <TextField 
-                        id="textPopUp" 
-                        fullWidth 
-                        placeholder="Add a post..." 
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end"> <Camera /></InputAdornment>,
-                        }}
-                    /> 
-                </button>
-                } position="bottom center" modal > 
-                {cancel => (
-                    <div id="cancel">
-                        <CardTitle tag="h1"> User Display Name</CardTitle>
-                        <CardBody>
-                            <div id="postContent">
-                                <form autoComplete="off">
-                                    <TextField 
-                                        id="textArea" 
-                                        placeholder="Add a post..." 
-                                        fullWidth margin="none" 
-                                        multiline rows="5" 
-                                        onBlur= {e => contentHandler(e.target.value)}
-                                    />
-                                </form>
-                            </div>
-                            
-                            <div id="postImage"> 
-                                <section className="container">
-                                    <div {...getRootProps({className: 'dropzone'})}>
-                                        <input {...getInputProps()} />
-                                        <Camera/ >
-                                    </div>
-                                    <aside style={thumbsContainer}>
-                                        {imageUpload}
-                                    </aside>
-                                </section>
+                <Popup trigger={
+                    <button>
+                        <TextField 
+                            id="textPopUp" 
+                            fullWidth 
+                            placeholder="Add a post..." 
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end"> <Camera /></InputAdornment>,
+                            }}
+                        /> 
+                    </button>
+                    } position="bottom center" modal > 
+                    {cancel => (
+                        <div id="cancel">
+                            <CardTitle tag="h1"> User Display Name</CardTitle>
+                            <CardBody>
+                                <div id="postContent">
+                                    <form autoComplete="off">
+                                        <TextField 
+                                            id="textArea" 
+                                            placeholder="Add a post..." 
+                                            fullWidth margin="none" 
+                                            multiline rows="5" 
+                                            onBlur= {e => contentHandler(e.target.value)}
+                                        />
+                                    </form>
+                                </div>
                                 
-                            </div>
+                                <div id="postImage"> 
+                                    <section className="container">
+                                        <div {...getRootProps({className: 'dropzone'})}>
+                                            <input {...getInputProps()} />
+                                            <Camera/ >
+                                        </div>
+                                        <aside style={thumbsContainer}>
+                                            {imageUpload}
+                                        </aside>
+                                    </section>
+                                    
+                                </div>
 
-                            <div id="buttons">
-                            <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
-                            <a href="#" className="cancel" onClick={cancel}> Cancel </a>
-                            </div>
+                                <div id="buttons">
+                                    <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                                    <a href="#" className="cancel" onClick={cancel}> Cancel </a>
+                                </div>
 
-                        </CardBody>
-                    </div>
-                )}
-        
-               
-            </Popup>
+                            </CardBody>
+                        </div>
+                    )}
+            
                 
-                </Card>
+                </Popup>
+                    
+            </Card>
         </div>
     );
 };
