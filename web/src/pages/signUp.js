@@ -2,7 +2,6 @@
 import React, { useContext, useState } from 'react'
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
-import axios from 'axios';
 
 export default props => {
     // const {message} = useContext(FBContext); 

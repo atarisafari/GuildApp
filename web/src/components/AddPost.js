@@ -1,8 +1,7 @@
 
 import React, { Component, useState , useEffect } from 'react';
 import {addPost} from '../utils/apiCalls';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import Popup from "reactjs-popup";
 import Camera from '@material-ui/icons/CameraAlt';
 import axios from 'axios';
@@ -57,14 +56,17 @@ const AddPost = (props) => {
         }
     });
 
-    const thumbs = files.map(file => (
+    const imageUpload = files.map(file => (
         <div style={thumb} key={file.name}>
           <div style={thumbInner}>
+                
             <img
-              src={file.preview}
-              style={img}
+            src={file.preview}
+            style={img}
             />
+            
           </div>
+          <Button close size="sm" position='absolute'/>
         </div>
     ));
     
@@ -111,7 +113,13 @@ const AddPost = (props) => {
                         <CardBody>
                             <div id="postContent">
                                 <form autoComplete="off">
-                                    <TextField id="textArea" placeholder="Add a post..." fullWidth margin="none" multiline rows="5" onBlur= {e => contentHandler(e.target.value)}/>
+                                    <TextField 
+                                        id="textArea" 
+                                        placeholder="Add a post..." 
+                                        fullWidth margin="none" 
+                                        multiline rows="5" 
+                                        onBlur= {e => contentHandler(e.target.value)}
+                                    />
                                 </form>
                             </div>
                             
@@ -122,7 +130,7 @@ const AddPost = (props) => {
                                         <Camera/ >
                                     </div>
                                     <aside style={thumbsContainer}>
-                                        {thumbs}
+                                        {imageUpload}
                                     </aside>
                                 </section>
                                 
