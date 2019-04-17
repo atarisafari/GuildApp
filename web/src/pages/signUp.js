@@ -65,6 +65,7 @@ export default props => {
     }
     const profile_pic_urlHandler = profile_pic_url=>{
         setprofile_pic_url(profile_pic_url);
+        console.log('src', profile_pic_url);
     }
     const signUpHandler = async() =>{
         if(password !== confpassword){ //If passwords don't match then dont make the api call
@@ -106,23 +107,20 @@ export default props => {
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            
                             <GridList cellHeight={180}>
                                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                                     <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
                                 </GridListTile>
                                 {tileData.map(tile => (
-                                <GridListTile key={tile.img}>
-                                    <img src={tile.img} alt={tile.title} />
-                                    <GridListTileBar
-                                    title={tile.title}
-                                    actionIcon={
-                                        <IconButton >
-                                        
-                                        </IconButton>
-                                    }
-                                    />
-                                </GridListTile>
+                                   
+                                        <GridListTile key={tile.img}>
+                                        {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
+                                            <img src={tile.img} alt={tile.title} />
+                                            <GridListTileBar title={tile.title}/>
+                                            {/* </a>*/}
+                                        </GridListTile>
+                                    
+                                   
                                 ))}
                             </GridList>
                            

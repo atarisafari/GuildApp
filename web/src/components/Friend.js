@@ -26,8 +26,8 @@ const Friend = (props) => {
             </CardBody>
         </Card>
         */}
-        <List id="friendList" >
-            <ListItem alignItems="flex-start">
+        <List id="friendList" style={{ width: '25rem' }}>
+            <ListItem alignItems="flex-start" >
                
                 <ListItemAvatar>
                     <Avatar alt="Card image cap" src="/static/images/avatar/2.jpg" onClick={()=>goProfile()}/>
