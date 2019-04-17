@@ -14,24 +14,39 @@ const Friend = (props) => {
         props.history.push("/profile");
     }
 
+    const tileData = [
+        {
+            img: GuildSword,
+            title: 'Guild Sword',
+        },
+        {
+            img: Sword,
+            title: 'Sword',
+        },
+        {
+            img: BowArrow,
+            title: 'Bow Arrow',
+        },
+        {
+            img: Staff,
+            title: 'Staff',
+        },
+        {
+            img: Shield,
+            title: 'Shield',
+        }
+    ];
+
     return (
         <div key={props.id} id={props.id}>
-            {/*
-        <Card style={{ width: '18rem' }}>
-            <CardImg top width="100%" src="holder.js/100px180" alt="Card image cap" />
-            <CardBody>
-            <CardTitle tag="h1"> {props.name}</CardTitle>
-            <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-            <CardText tag="p">Place Holder for latest post</CardText>
-            <Button variant="primary" onClick={()=>goProfile()}>Profile</Button>
-            </CardBody>
-        </Card>
-        */}
         <List id="friendList" style={{ width: '25rem' }}>
             <ListItem alignItems="flex-start" >
                
                 <ListItemAvatar>
-                    <Avatar alt="Card image cap" src="/static/images/avatar/2.jpg" onClick={()=>goProfile()}/>
+                    {/*<Avatar alt="Card image cap" src="/static/images/avatar/2.jpg" onClick={()=>goProfile()}/>*/}
+                    {tileData.map(tile => (
+                        <Avatar alt="/static/images/avatar/2.jpg" src={tile.img} key={tile.img} onClick={()=>goProfile()}/>     
+                    ))}
                 </ListItemAvatar>
         
                 <ListItemText
