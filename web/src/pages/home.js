@@ -17,27 +17,16 @@ export default props => {
     const [posts,setPosts] = useState([]);
 
     const friendsHandler = async() => {
-        let result =  await grabAllFriends(token).then(bleh => bleh) 
+        let result =  await grabAllFriends(token).then(ble => ble) 
         console.log('fetching friends', result);
         setFriends(result);
     }
     
-    // Waiting for API
     const postsHandler = async() => {
-        let result =  await grabAllPosts(token, username).then(bleh => bleh) 
+        let result =  await grabAllPosts(token, username).then(ble => ble) 
         console.log('fetching posts', result);
         setPosts(result);
     }
-
-    // const posts = [{
-    //     name: 'Jon',
-    //     username: 'DogMan',
-    // },
-    // {
-    //     name: 'Doe',
-    //     username: 'DogWoman',
-    // }];
-
 
     useEffect(()=>{//This will run once and then only if token changes
         if(token === null){ //If token is lost 

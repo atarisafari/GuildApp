@@ -5,6 +5,7 @@ import { Card, CardImg, CardText, CardBody,
 const Friend = (props) => {
 
     const goProfile = async() =>{
+        //change username?
         props.history.push("/profile");
     }
 

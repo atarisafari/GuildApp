@@ -12,7 +12,7 @@ export const signUp = async (username,password,display_name='',profile_pic_url='
             username: username,
             password: password,
             display_name: display_name,
-            //profile_pic_url: profile_pic_url,
+            profile_pic_url: profile_pic_url,
         })
         })
         return response.text().then(function(text) {

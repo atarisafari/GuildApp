@@ -7,29 +7,29 @@ import axios from 'axios';
 export default props => {
     // const {message} = useContext(FBContext); 
     console.log('props: ', props); 
-    const [username,setusername] = useState('');
-    const [password,setpassword] = useState('');
-    const [confpassword,setconfpassword] = useState('');
-    const [display_name,setdisplay_name] = useState('');
-    const [profile_pic_url,setprofile_pic_url] = useState('');
+    const [username,setUsername] = useState('');
+    const [password,setPassword] = useState('');
+    const [confPassword,setConfPassword] = useState('');
+    const [display_name,setDisplay_name] = useState('');
+    const [profile_pic_url,setProfile_pic_url] = useState('');
 
     const usernameHandler = username=>{
-        setusername(username);
+        setUsername(username);
     }
     const passwordHandler = password=>{
-        setpassword(password);
+        setPassword(password);
     }
-    const confpasswordHandler = confpassword=>{
-        setconfpassword(confpassword);
+    const confPasswordHandler = confPassword=>{
+        setConfPassword(confPassword);
     }
     const display_nameHandler = display_name=>{
-        setdisplay_name(display_name);
+        setDisplay_name(display_name);
     }
     const profile_pic_urlHandler = profile_pic_url=>{
-        setprofile_pic_url(profile_pic_url);
+        setProfile_pic_url(profile_pic_url);
     }
     const signUpHandler = async() =>{
-        if(password !== confpassword){ //If passwords don't match then dont make the api call
+        if(password !== confPassword){ //If passwords don't match then dont make the api call
             alert("Your passwords don't match, please try again.");
         }
         else{
@@ -70,7 +70,7 @@ export default props => {
             </div>
             <div id="confirm_password_signUp">
                 Retype Password: 
-                <input type='password' onBlur= { e => confpasswordHandler(e.target.value)}/>
+                <input type='password' onBlur= { e => confPasswordHandler(e.target.value)}/>
             </div>
             <button onClick={()=>signUpHandler()}> SIGN UP </button>
             <HomeButton path='/' {...props}>BACK</HomeButton>
