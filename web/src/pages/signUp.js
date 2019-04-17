@@ -13,11 +13,11 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import GuildSword from './0_GuildSword_Icon.png';
-import Sword from './1_Sword_Icon.png';
-import BowArrow from './2_BowArrow_Icon.png';
-import Staff from './3_Staff_Icon.png';
-import Shield from './4_Shield_Icon.png';
+import GuildSword from '../imgs/0_GuildSword_Icon.png';
+import Sword from '../imgs/1_Sword_Icon.png';
+import BowArrow from '../imgs/2_BowArrow_Icon.png';
+import Staff from '../imgs/3_Staff_Icon.png';
+import Shield from '../imgs/4_Shield_Icon.png';
 
 export default props => {
     // const {message} = useContext(FBContext); 
