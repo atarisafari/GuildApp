@@ -12,8 +12,9 @@ export default props => {
     console.log('props: ', props); 
     const token = localStorage.getItem('token');
     const [content,setContent] = useState('');
+    const [username,setUsername] = useState('');
     const [friends,setFriends] = useState([]);
-    //const [posts,setPosts] = useState([]);
+    const [posts,setPosts] = useState([]);
 
     const friendsHandler = async() => {
         let result =  await grabAllFriends(token).then(bleh => bleh) 
@@ -22,20 +23,20 @@ export default props => {
     }
     
     // Waiting for API
-    // const postsHandler = async() => {
-    //     let result =  await grabAllPosts(token).then(bleh => bleh) 
-    //     console.log('fetching friends', result);
-    //     setPosts(result);
-    // }
+    const postsHandler = async() => {
+        let result =  await grabAllPosts(token, username).then(bleh => bleh) 
+        console.log('fetching posts', result);
+        setPosts(result);
+    }
 
-    const posts = [{
-        name: 'Jon',
-        username: 'DogMan',
-    },
-    {
-        name: 'Doe',
-        username: 'DogWoman',
-    }];
+    // const posts = [{
+    //     name: 'Jon',
+    //     username: 'DogMan',
+    // },
+    // {
+    //     name: 'Doe',
+    //     username: 'DogWoman',
+    // }];
 
 
     useEffect(()=>{//This will run once and then only if token changes
@@ -49,7 +50,7 @@ export default props => {
 
     useEffect(()=>{//This will be executed always after the components have been rendered
         friendsHandler();
-        //postsHandler();
+        postsHandler();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
     
     useEffect(()=>{ 
@@ -78,7 +79,7 @@ export default props => {
 
     const contentHandler = content=>{
         setContent(content);
-        console.log(content);
+        console.log("Content:", content);
     }
     /*
     const addPostHandler = async() =>{
@@ -112,9 +113,17 @@ export default props => {
             }
             
             {
-                posts.map((value, index) => {
-                    return <Post key={index} username={value.username}  content={value.content}/>
-
+                posts.map((value) => {
+                    return (
+                        <Post   key={value.post_id} 
+                                id={value.post_id} 
+                                image_url={value.image_url}
+                                time_created={value.time_created}
+                                num_likes={value.num_likes}
+                                num_comments={value.num_comments}
+                                username={username}  
+                                content={value.content}/>
+                    );
                 })
             }
             

@@ -16,7 +16,7 @@ export const signUp = async (username,password,display_name='',profile_pic_url='
         })
         })
         return response.text().then(function(text) {
-            console.log(text);
+            console.log("SignUp response",text);
             return text ? JSON.parse(text) : {}
         })
         //return data;        
@@ -41,7 +41,7 @@ export const login = async (username,password) => {
         })
         })
         return response.text().then(function(text) {
-            console.log(text);
+            console.log("login response",text);
             return text ? JSON.parse(text) : {}
         })       
     }
@@ -66,7 +66,7 @@ export const addPost = async (token,content,image_url) => {
         })
         })
         return response.text().then(function(text) {
-            console.log(text);
+            console.log("addPost response",text);
             return text ? JSON.parse(text) : {}
         })       
     }
@@ -89,7 +89,7 @@ export const grabAllFriends = async (token) => {
         })
         })
         return await response.text().then(function(text) {
-            console.log(text);
+            console.log("grabAllFriends response",text);
             return text ? JSON.parse(text) : {}
         })   
     }
@@ -98,7 +98,7 @@ export const grabAllFriends = async (token) => {
     } 
 }
 
-export const grabAllPosts = async (token, username) => { 
+export const grabAllPosts = async (token, username='') => { //empty username means our own username
     try{
         let response = await fetch('http://157.230.66.35/php/grabAllPosts.php', {
         mode: 'cors',
@@ -113,7 +113,7 @@ export const grabAllPosts = async (token, username) => {
         })
         })
         return await response.text().then(function(text) {
-            console.log(text);
+            console.log("grabAllPosts response",text);
             return text ? JSON.parse(text) : {}
         })   
     }
@@ -137,7 +137,7 @@ export const addFriend = async (token, username ) => {
         })
         })
         return await response.text().then(function(text) {
-            console.log(text);
+            console.log("addFriend response",text);
             return text ? JSON.parse(text) : {}
         })   
     }
@@ -161,7 +161,7 @@ export const deletePost = async (token, post_id) => {
         })
         })
         return await response.text().then(function(text) {
-            console.log(text);
+            console.log("deletePost response",text);
             return text ? JSON.parse(text) : {}
         })   
     }
@@ -184,7 +184,7 @@ export const searchFriends = async (token) => {
         })
         })
         return await response.text().then(function(text) {
-            console.log(text);
+            console.log("searchFriends response",text);
             return text ? JSON.parse(text) : {}
         })   
     }
