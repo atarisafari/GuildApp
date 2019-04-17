@@ -119,19 +119,12 @@ export default props => {
                                             <GridListTileBar title={tile.title}/>
                                             {/* </a>*/}
                                         </GridListTile>
-                                    
-                                   
                                 ))}
                             </GridList>
-                           
                         </div>
                         
                     )}
-            
-                
                 </Popup>
-                    
-            
             </div>
             <div id="display_name_signUp">
                 Display Name: 

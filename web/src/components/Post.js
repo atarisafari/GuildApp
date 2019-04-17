@@ -59,7 +59,7 @@ const Post = (props) => {
     
 
     return (
-        <div id={props.id}>
+        <div id={props.id} >
             <Paper style={{ width: '30rem' }} elevation={4} >
                 <Box my={4} bgcolor="background.paper">
                     <Typography variant="h5" component="h3" > 
@@ -68,8 +68,10 @@ const Post = (props) => {
                         </Box>
             
                     </Typography>
-                    <Typography component="p" >
-                        <Box textAlign="justify" m={3} fontWeight="fontWeightLight">{props.content}</Box>
+                    <Typography component="p">
+                        <Box textAlign="justify" m={3} fontWeight="fontWeightLight">
+                            {props.content}
+                        </Box>
                     </Typography>
                 <IconButton >
                             <LikeButton />
