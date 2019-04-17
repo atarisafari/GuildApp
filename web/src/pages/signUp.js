@@ -112,7 +112,7 @@ export default props => {
                                     <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
                                 </GridListTile>
                                 {tileData.map(tile => (
-                                   
+                                        
                                         <GridListTile key={tile.img}>
                                         {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
                                             <img src={tile.img} alt={tile.title} />
