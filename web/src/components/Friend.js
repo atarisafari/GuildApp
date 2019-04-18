@@ -46,7 +46,7 @@ const Friend = (props) => {
                 <CardBody>
                     <CardTitle tag="h1"> {props.name}</CardTitle>
                     <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-                    <CardText tag="p">Place Holder for latest post</CardText>
+                    <CardText tag="p">{"knj.bkhvjkgjrxehrjtkygluh;i;jhuglytkfyrjdtjdagbfsdgfh"}</CardText>
                  
                 </CardBody>
         

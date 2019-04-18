@@ -100,30 +100,34 @@ export default props => {
                     <IconButton>
                         <Badge badgeContent={<AddIcon />} color="secondary" >
                             <Grid container justify="center" alignItems="center">
-                                <Avatar alt="" src={require('./profilePicPlaceholder.png')}  />
+                                <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
                             </Grid>
                         </Badge>
                     </IconButton>
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <GridList cellHeight={180}>
-                                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                                    <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
+                            <GridList cellHeight={160} cols={2}>
+                                <GridListTile cols={2} style={{ height: 'auto' }}>
+                                <ListSubheader component="div">
+                                    Choose Profile Picture 
+                                    <Button id="closeButtonn" close onClick={cancel}/> 
+                                </ListSubheader>
                                 </GridListTile>
+
                                 {tileData.map(tile => (
-                                        
-                                    <GridListTile key={tile.img} style={{ maxWidth: '50%', maxHeight: '50%' }} cols={tile.cols || 1}>
-                                    {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
-                                        <img src={tile.img} alt={tile.title} />
-                                        <GridListTileBar title={tile.title}/>
-                                        {/* </a>*/}
-                                    </GridListTile>
+                                    <a href="#" onClick={cancel} >
+                                    <GridListTile key={tile.img} style={{  height: '140px', maxWidth : '100%' , margin : '10px'}}>
                                     
-                                   
+                                        <img src={tile.img} alt={tile.title} style={{  height: 'auto', width : '100%'}}/>
+                                        <GridListTileBar title={tile.title} style={{ maxWidth : '100%'}}/>
+                                        
+                                    </GridListTile>
+                                    </a>
                                 ))}
+
                             </GridList>
-                           
+                                                
                         </div>
                         
                     )}
