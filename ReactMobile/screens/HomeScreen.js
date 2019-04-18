@@ -7,8 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { 
+	WebBrowser,
+	SecureStore
+} from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
@@ -17,6 +21,37 @@ export default class HomeScreen extends React.Component {
     title: "What's going on",
   };
 
+  
+	onPress = async () => {	
+		
+		let token = await SecureStore.getItemAsync('secure_token');
+		
+		try{
+			let response = await fetch('http://157.230.66.35/php/grabAllFriends.php', {
+				mode: 'cors',
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					token: token
+				})
+			})
+			
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(json){
+				console.log(json);
+			})
+
+		}catch(e){
+			console.log(e);
+		} 
+		
+	}
+  
   render() {
     return (
       <View style={styles.container}>
@@ -29,6 +64,10 @@ export default class HomeScreen extends React.Component {
           
           <Text style={styles.getStartedText}>hi</Text>
           
+          <Button 
+			onPress={this.onPress}
+			title="debugger"
+          />
         </ScrollView>
       </View>
     );
