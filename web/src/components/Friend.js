@@ -49,7 +49,7 @@ const Friend = (props) => {
                 
                 <CardBody>
                     <Avatar alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
-                    <CardTitle tag="h1"> {props.name}</CardTitle>
+                    <CardTitle tag="h2"> {props.name}</CardTitle>
                     <CardSubtitle tag="h5">{props.username}</CardSubtitle>
                     <CardText tag="p">Place Holder for latest post</CardText>
                 </CardBody>
