@@ -1,14 +1,13 @@
 
 import React, { Component, useState } from 'react';
-import { Button } from 'reactstrap';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
 import CommentButton from '@material-ui/icons/Comment';
 import IconButton from '@material-ui/core/IconButton'
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { unstable_Box as Box } from '@material-ui/core/Box';
+import { Card, CardText, CardBody,
+    CardTitle, Button } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+
 
 const Post = (props) => {
     const [comment,setComment] = useState('');
@@ -59,18 +58,17 @@ const Post = (props) => {
     
 
     return (
-        <div id={props.id}>
-            <Paper style={{ width: '30rem' }} elevation={4} >
-                <Box my={4} bgcolor="background.paper">
-                    <Typography variant="h5" component="h3" > 
-                        <Box textAlign="justify" m={3} fontWeight="fontWeightMedium">
-                            {user}
-                        </Box>
-            
-                    </Typography>
-                    <Typography component="p" >
-                        <Box textAlign="justify" m={3} fontWeight="fontWeightLight">{props.content}</Box>
-                    </Typography>
+        <div id={props.id} >
+            <Card style={{ width: '30rem', margin: '10px'}} elevation={4} >
+                <CardBody>
+                    <CardTitle tag="h1"> {user}</CardTitle>
+                    <CardText tag="p">
+                       
+                           
+                        {props.content}
+                           
+                       
+                    </CardText>
                 <IconButton >
                             <LikeButton />
                 </IconButton>
@@ -98,10 +96,10 @@ const Post = (props) => {
                         </div>
                     )}
                 />
-                </Box>
+              
 
-                
-            </Paper>
+                </CardBody>
+            </Card>
         </div>
     );
 };
