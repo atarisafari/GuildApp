@@ -5,22 +5,24 @@ import HomeButton from '../components/buttons/homeButton';
 import Header_component from '../components/header/Header_component';
 
 export default props => {
-    //const [posts,setPosts] = useState([]);
+    const token = localStorage.getItem('token');
+    const [posts,setPosts] = useState([]);
+    const [username,setUsername] = useState('');
 
-    // const postsHandler = async() => {
-    //     let result =  await grabAllPosts(token).then(bleh => bleh) 
-    //     console.log('fetching friends', result);
-    //     setPosts(result);
-    // }
+    const postsHandler = async() => {
+        let result =  await grabAllPosts(token, username).then(ble => ble) 
+        console.log('fetching posts', result);
+        setPosts(result);
+    }
 
-    const posts = [{
-        name: 'Jon',
-        username: 'DogMan',
-    },
-    {
-        name: 'Doe',
-        username: 'DogWoman',
-    }];
+    useEffect(()=>{//This will run once and then only if token changes
+        if(token === null){ //If token is lost 
+            alert("Please Login to verify your identity\nYou will now be redirected to the Login page.");
+            logout();
+        }
+        postsHandler();
+    }, [token]);
+
     const logout = async() =>{
         localStorage.clear();
         props.history.push("/");
@@ -31,10 +33,19 @@ export default props => {
         <Header_component props={props}/>
         <h1> Profile </h1>
         {
-            posts.map((value, index) => {
-                return <Post id={index} username={value.username}></Post>
-            })
-        }
+                posts.map((value) => {
+                    return (
+                        <Post   key={value.post_id} 
+                                id={value.post_id} 
+                                image_url={value.image_url}
+                                time_created={value.time_created}
+                                num_likes={value.num_likes}
+                                num_comments={value.num_comments}
+                                username={username}  
+                                content={value.content}/>
+                    );
+                })
+            }
         <HomeButton path='/home' {...props}>Home</HomeButton>
     </div>
     )

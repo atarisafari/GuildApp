@@ -22,6 +22,7 @@ class App extends Component {
         if(data.error === ""){
             console.log("Login was successful");
             localStorage.setItem('token', data.token);
+            localStorage.setItem('username', this.state.username);
             this.props.history.push("/home");
         }
         else{
