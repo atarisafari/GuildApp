@@ -143,6 +143,7 @@ export const addFriend = async (token, username ) => {
 export const deletePost = async (token, post_id) => { 
     try{
         let response = await fetch('https://guild-app.com/php/deletePost.php', {
+        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',

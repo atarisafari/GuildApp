@@ -16,7 +16,7 @@ const thumbsContainer = {
     flexWrap: 'wrap',
     marginTop: 16
 };
-  
+
 const thumb = {
     display: 'inline-flex',
     borderRadius: 2,
@@ -28,13 +28,13 @@ const thumb = {
     padding: 4,
     boxSizing: 'border-box'
 };
-  
+
 const thumbInner = {
     display: 'flex',
     minWidth: 0,
     overflow: 'hidden'
 };
-  
+
 const img = {
     display: 'block',
     width: 'auto',
@@ -58,15 +58,10 @@ const AddPost = (props) => {
 
     const imageUpload = files.map(file => (
         <div style={thumb} key={file.name}>
-          <div style={thumbInner}>
-                
-            <img
-            src={file.preview}
-            style={img}
-            />
-            
-          </div>
-          <Button close size="sm" position='absolute'/>
+                <div style={thumbInner}>
+                    <img src={file.preview} style={img}/>
+                </div>
+            <Button close size="sm" position='absolute'/>
         </div>
     ));
     

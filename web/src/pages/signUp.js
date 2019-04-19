@@ -107,19 +107,18 @@ export default props => {
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <GridList cellHeight={180}>
+                            <GridList cellHeight={150}>
                                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                                     <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
                                 </GridListTile>
                                 {tileData.map(tile => (
-                                        
-
-                                    <GridListTile key={tile.img} style={{ maxWidth: '50%', maxHeight: '50%' }} cols={tile.cols || 1}>
-                                    {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
-                                        <img src={tile.img} alt={tile.title} />
-                                        <GridListTileBar title={tile.title}/>
-                                        {/* </a>*/}
-                                    </GridListTile>
+                                    <a href='#' onClick={cancel}>
+                                        <GridListTile key={tile.img} style={{ maxWidth: '50%', height: '150px' }} cols={tile.cols || 1}>
+                                        {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
+                                            <img src={tile.img} alt={tile.title} />
+                                            <GridListTileBar title={tile.title}/>
+                                        </GridListTile>
+                                    </a>
                                     
                                 ))}
                             </GridList>
