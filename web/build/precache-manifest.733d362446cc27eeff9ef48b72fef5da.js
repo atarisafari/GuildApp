@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/2_BowArrow_Icon.e41b5764.png"
   },
   {
-    "revision": "b416953e99432bd72cad",
+    "revision": "c6a623bf0a7d1ac0d0fa",
     "url": "/static/css/main.1c94351c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/static/media/Purple-Abstract.8dadc391.jpg"
   },
   {
-    "revision": "e5fcdc9d910207b06cf7",
-    "url": "/static/js/2.22c470fd.chunk.js"
+    "revision": "b9e60413386af65cf0fd",
+    "url": "/static/js/2.17e9a7ef.chunk.js"
   },
   {
     "revision": "ad1f5489aa9e17571df4083c4d5aa13f",
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/static/media/1_Sword_Icon.b2724692.png"
   },
   {
-    "revision": "b416953e99432bd72cad",
-    "url": "/static/js/main.360763eb.chunk.js"
+    "revision": "c6a623bf0a7d1ac0d0fa",
+    "url": "/static/js/main.f1b06793.chunk.js"
   },
   {
     "revision": "b3bde274b037220926864855950d4819",
@@ -48,11 +48,11 @@ self.__precacheManifest = [
     "url": "/static/media/profilePicPlaceholder.1d88924d.png"
   },
   {
-    "revision": "e5fcdc9d910207b06cf7",
+    "revision": "b9e60413386af65cf0fd",
     "url": "/static/css/2.462773fc.chunk.css"
   },
   {
-    "revision": "cafc3e68c3aeab4c69fbf6e3067ca87c",
+    "revision": "b142440562ef41f5aa0a62e40316169b",
     "url": "/index.html"
   }
 ];

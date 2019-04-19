@@ -21,26 +21,22 @@ import { Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button } fro
 
 const Post = (props) => {
     const token = localStorage.getItem('token');
-    const [comment,setComment] = useState('');
+    const img = [GuildSword, Sword, BowArrow, Staff, Shield];
+    const [commentAdd,setCommentAdd] = useState('');
     const {classes} = props;
-    let user = '';
-    if(props.username===''){
-        user = localStorage.getItem('username');
-    }else{
-        user = props.username;
-    }
+    let user = props.username===''? localStorage.getItem('username') : props.username;
 
-    const commentHandler = comment=>{
-        setComment(comment);
-        console.log(comment);
+    const commentAddHandler = commentAdd=>{
+        setCommentAdd(commentAdd);
+        console.log(commentAdd);
     }
 
     const addComment = async() =>{
-        if(comment === ''){ //If passwords don't match then dont make the api call
+        if(commentAdd === ''){ //If passwords don't match then dont make the api call
             alert("Can't add an empty comment");
         }
         // else{
-        //     let data = await addComment(token, props.id, comment);
+        //     let data = await addComment(token, props.id, commentAdd);
         //     console.log("addComment Result" , data);
         //     if(data.error === ""){
         //         //TODO
@@ -51,6 +47,10 @@ const Post = (props) => {
         //     }
         // }
         
+    }
+
+    const random_img = img =>{
+        return img[Math.floor(Math.random()*img.length)];
     }
 
     const deleteHandler = async() => {
@@ -100,7 +100,7 @@ const Post = (props) => {
                                         className="mr-3 bg-light rounded"
                                         width="48"
                                         height="48"
-                                        src= {GuildSword}
+                                        src= {random_img(img)}
                                         alt= '/static/images/avatar/2.jpg'
                                     />
 
@@ -118,7 +118,7 @@ const Post = (props) => {
                         fullWidth 
                         multiline
                         placeholder="Make a comment..." 
-                        onBlur= { e => commentHandler(e.target.value)}
+                        onBlur= { e => commentAddHandler(e.target.value)}
                         InputProps={{
                             endAdornment: 
                                 <InputAdornment className={classes.post_comment_input} position="end">     

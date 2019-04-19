@@ -82,7 +82,8 @@ export default props => {
                                 name={values.display_name} 
                                 username={values.username}
                                 preview={values.preview} 
-                                history={props.history}/>
+                                history={props.history}
+                        />
                     );
                 })
             }
@@ -97,7 +98,8 @@ export default props => {
                                 num_likes={value.num_likes}
                                 num_comments={value.num_comments}
                                 username={username}  
-                                content={value.content}/>
+                                content={value.content}
+                        />
                     );
                 })
             }

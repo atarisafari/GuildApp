@@ -44,20 +44,23 @@ const AddPost = (props) => {
     }
 
     const addPostHandler = async() =>{
-        
-        let data = await addPost(token, content, '');
-        console.log("Result" , data);
-        if(data.error === ""){
-            console.log("Add post was successful");
-        }
-        else{
-            alert(data.error);
+        if(content === ''){
+            alert("Can't add an empty post");
+        }else{
+            let data = await addPost(token, content, '');
+            console.log("Result" , data);
+            if(data.error === ""){
+                console.log("Add post was successful");
+            }
+            else{
+                alert(data.error);
+            }
         }
     }
     
     return (
         <div id={props.id}>
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem'}}>
                 <Popup trigger={
                     <button>
                         <TextField 
@@ -98,8 +101,8 @@ const AddPost = (props) => {
                                     </section>
                                 </div>
 
-                                <div id="buttons">
-                                <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler}>POST</Button>
+                                <div id="buttons" onClick={cancel}>
+                                <Button type="submit" className="btn btn-primary" onClick={addPostHandler}>POST</Button>
                                 <a href="#" className="cancel" onClick={cancel}> Cancel </a>
                                 </div>
 

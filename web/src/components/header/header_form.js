@@ -45,7 +45,7 @@ class SearchFriendForm extends React.Component {
     console.log("addFriend response:" , data);
     if(data.error === ""){
         console.log("addFriend was successful");
-        alert("Friend request successfully sent to "+ this.username);
+        alert("Friend request successfully sent to "+ this.state.username);
     }
     else{
         alert(data.error);
