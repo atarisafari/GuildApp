@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 23053,
-  "expoServerNgrokUrl": "https://br-jyv.anonymous.reactmobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.br-jyv.anonymous.reactmobile.exp.direct",
-  "ngrokPid": 23111
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
