@@ -54,8 +54,12 @@ const Post = (props) => {
     }
 
     const deleteHandler = async() => {
-        let result =  await deletePost(token, props.id).then(ble => ble) 
-        console.log('Delete post response: ', result);
+        if (window.confirm('Are you sure you wish to delete this post?')){
+            console.log("Delete confirmed");
+            let result =  await deletePost(token, props.id).then(ble => ble) 
+            console.log('Delete post response: ', result);
+            window.location.reload();
+        }
     }
 
     const ToggleContent = ({ toggle, content }) => {

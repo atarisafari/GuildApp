@@ -18,10 +18,12 @@ const Friend = (props) => {
     }
 
     const blockUserHandler = async() => {
-        let result =  await blockUser(token, props.id).then(ble => ble) 
-        console.log('Delete post response: ', result);
-        alert(props.username + " has been blocked");
-        window.location.reload();
+        if (window.confirm('Are you sure you wish to block '+props.username+' ?')){
+            let result =  await blockUser(token, props.id).then(ble => ble) 
+            console.log('Delete post response: ', result);
+            alert(props.username + " has been blocked");
+            window.location.reload();
+        }
     }
 
     const random_img = img =>{

@@ -56,6 +56,7 @@ const AddPost = (props) => {
                 alert(data.error);
             }
         }
+        window.location.reload();
     }
     
     return (
