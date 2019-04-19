@@ -82,34 +82,35 @@ const Post = (props) => {
                     <CardText className={classes.post_card_text} tag="p">
                         {props.content}
                     </CardText>
-                <IconButton color="inherit">
-                    <Badge badgeContent={10} color="secondary">
-                        <FavoriteIcon />
-                    </Badge>
-                </IconButton>
+                    <small className="float-right text-muted">{props.time_created}</small>
+                    <IconButton color="inherit">
+                        <Badge badgeContent={10} color="secondary">
+                            <FavoriteIcon />
+                        </Badge>
+                    </IconButton>
             
-                <ToggleContent
-                    toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
-                    content={hide => (
-                        <div>
-                            <div className="media mb-3">
-                                <Avatar
-                                    className="mr-3 bg-light rounded"
-                                    width="48"
-                                    height="48"
-                                    src= {GuildSword}
-                                    alt= '/static/images/avatar/2.jpg'
-                                />
+                    <ToggleContent
+                        toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
+                        content={hide => (
+                            <div>
+                                <div className="media mb-3">
+                                    <Avatar
+                                        className="mr-3 bg-light rounded"
+                                        width="48"
+                                        height="48"
+                                        src= {GuildSword}
+                                        alt= '/static/images/avatar/2.jpg'
+                                    />
 
-                                <div className="media-body p-2 shadow-sm rounded bg-light border">
-                                    <small className="float-right text-muted">{props.time_created}</small>
-                                    <h6 className="mt-0 mb-1 text-muted">Jorge says:</h6>
-                                    Stop that!
+                                    <div className="media-body p-2 shadow-sm rounded bg-light border">
+                                        <small className="float-right text-muted">Today</small>
+                                        <h6 className="mt-0 mb-1 text-muted">Jorge says:</h6>
+                                        Stop that!
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                />
+                        )}
+                    />
                     <TextField 
                         id="textPopUp" 
                         fullWidth 
