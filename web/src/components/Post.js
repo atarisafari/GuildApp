@@ -1,5 +1,6 @@
 
 import React, { Component, useState } from 'react';
+import {deletePost} from '../utils/apiCalls';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
 import CommentButton from '@material-ui/icons/Comment';
 import styles from '../styles/post_profile_styles';
@@ -9,11 +10,17 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Badge from '@material-ui/core/Badge';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {withStyles} from '@material-ui/core/styles';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import GuildSword from '../imgs/0_GuildSword_Icon.png';
+import Sword from '../imgs/1_Sword_Icon.png';
+import BowArrow from '../imgs/2_BowArrow_Icon.png';
+import Staff from '../imgs/3_Staff_Icon.png';
+import Shield from '../imgs/4_Shield_Icon.png';
+import Avatar from '@material-ui/core/Avatar';
+import { Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 
 const Post = (props) => {
+    const token = localStorage.getItem('token');
     const [comment,setComment] = useState('');
     const {classes} = props;
     let user = '';
@@ -47,6 +54,11 @@ const Post = (props) => {
         
     }
 
+    const deleteHandler = async() => {
+        let result =  await deletePost(token, props.id).then(ble => ble) 
+        console.log('Delete post response: ', result);
+    }
+
     const ToggleContent = ({ toggle, content }) => {
         const [isShown, setIsShown] = useState(false);
         const hide = () => setIsShown(false);
@@ -66,7 +78,7 @@ const Post = (props) => {
 
             <Card className={classes.post_card} elevation={4} >
                 <CardBody className={classes.post_card_body}>
-                    <CardTitle className={classes.post_card_title} tag="h1"> {user}</CardTitle>
+                    <CardTitle className={classes.post_card_title} tag="h1"> {user}<Button close onClick={deleteHandler}/></CardTitle>
                     <CardText className={classes.post_card_text} tag="p">
                         {props.content}
                     </CardText>
@@ -80,7 +92,21 @@ const Post = (props) => {
                     toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
                     content={hide => (
                         <div>
-                            <p>Jorge says: Stop that!</p>
+                            <div className="media mb-3">
+                                <Avatar
+                                    className="mr-3 bg-light rounded"
+                                    width="48"
+                                    height="48"
+                                    src= {GuildSword}
+                                    alt= '/static/images/avatar/2.jpg'
+                                />
+
+                                <div className="media-body p-2 shadow-sm rounded bg-light border">
+                                    <small className="float-right text-muted">{props.time_created}</small>
+                                    <h6 className="mt-0 mb-1 text-muted">Jorge says:</h6>
+                                    Stop that!
+                                </div>
+                            </div>
                         </div>
                     )}
                 />

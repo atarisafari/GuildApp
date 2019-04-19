@@ -96,21 +96,19 @@ const AddPost = (props) => {
                                             {imageUpload}
                                         </aside>
                                     </section>
-                                    
                                 </div>
 
                                 <div id="buttons">
-                                <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                                <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler}>POST</Button>
                                 <a href="#" className="cancel" onClick={cancel}> Cancel </a>
                                 </div>
 
                             </CardBody>
                         </div>
                     )}
-            
                 
                 </Popup>
-                    
+            
             </Card>
         </div>
     );
