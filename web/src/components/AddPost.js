@@ -4,47 +4,15 @@ import {addPost} from '../utils/apiCalls';
 import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import Popup from "reactjs-popup";
 import Camera from '@material-ui/icons/CameraAlt';
-import axios from 'axios';
-import request from 'superagent';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {useDropzone} from 'react-dropzone';
 
-const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16
-};
-
-const thumb = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 100,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box'
-};
-
-const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden'
-};
-
-const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-};
-
 const AddPost = (props) => {
-    console.log('props: ', props); 
-    const [content,setContent] = useState('');
+    //console.log('AddPost props: ', props); 
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem('username');
+    const [content,setContent] = useState('');
     const [files, setFiles] = useState([]);
 
     const {getRootProps, getInputProps} = useDropzone({
@@ -77,7 +45,7 @@ const AddPost = (props) => {
 
     const addPostHandler = async() =>{
         
-        let data = await addPost(token, content);
+        let data = await addPost(token, content, '');
         console.log("Result" , data);
         if(data.error === ""){
             console.log("Add post was successful");
@@ -104,7 +72,7 @@ const AddPost = (props) => {
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <CardTitle tag="h1"> User Display Name</CardTitle>
+                            <CardTitle tag="h1">{user}</CardTitle>
                             <CardBody>
                                 <div id="postContent">
                                     <form autoComplete="off">
@@ -148,6 +116,36 @@ const AddPost = (props) => {
     );
 };
 
+const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16
+};
+
+const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+};
+
+const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+};
+
+const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+};
 
 export default AddPost;
 
