@@ -2,7 +2,6 @@
 export const signUp = async (username,password,display_name='',profile_pic_url='') => { 
     try{
         let response = await fetch('https://guild-app.com/php/signup.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -29,7 +28,6 @@ export const signUp = async (username,password,display_name='',profile_pic_url='
 export const login = async (username,password) => { 
     try{
         let response = await fetch('https://guild-app.com/php/login.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -53,7 +51,6 @@ export const login = async (username,password) => {
 export const addPost = async (token,content,image_url) => { 
     try{
         let response = await fetch('https://guild-app.com/php/addPost.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -78,7 +75,6 @@ export const addPost = async (token,content,image_url) => {
 export const grabAllFriends = async (token) => { 
     try{
         let response = await fetch('https://guild-app.com/php/grabAllFriends.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -101,7 +97,6 @@ export const grabAllFriends = async (token) => {
 export const grabAllPosts = async (token, username='') => { //empty username means our own username
     try{
         let response = await fetch('https://guild-app.com/php/grabAllPosts.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -125,7 +120,6 @@ export const grabAllPosts = async (token, username='') => { //empty username mea
 export const addFriend = async (token, username ) => { 
     try{
         let response = await fetch('https://guild-app.com/php/addFriend.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -149,7 +143,6 @@ export const addFriend = async (token, username ) => {
 export const deletePost = async (token, post_id) => { 
     try{
         let response = await fetch('https://guild-app.com/php/deletePost.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -173,7 +166,6 @@ export const deletePost = async (token, post_id) => {
 export const searchFriends = async (token) => { 
     try{
         let response = await fetch('https://guild-app.com/php/searchFriends.php', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
