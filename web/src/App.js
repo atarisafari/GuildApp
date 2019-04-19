@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {login} from './utils/apiCalls';
 import HomeButton from './components/buttons/homeButton';
+import logo from './imgs/Guild_Logo.png';
 
 
 class App extends Component {
@@ -33,21 +34,25 @@ class App extends Component {
     return (
       <div className="App">
         <header id="sign_in_header" className="App-header">
-          <div className="container">
+          <div className="container-left">
+          <p></p>
+          <img src={logo} width='500' height='300'/>
+          </div>
+          <div className="container-right">
             <div id="logo_header">
-                <p>LOGO</p>
+                <p>Guild</p>
             </div>
             <div id="login">
               <div id="username_login">
                 Username:
-                <input placeholder="Username" value={username} onChange= { e => this.setState({...this.state, username: e.target.value})}/>
+                <input className='username' placeholder="Username" value={username} onChange= { e => this.setState({...this.state, username: e.target.value})}/>
               </div>
               <div id="password_login">
                 Password: 
-                <input placeholder="Password" type='password' value={password} onChange= { e => this.setState({...this.state, password: e.target.value})}/>
+                <input className='password' placeholder="Password" type='password' value={password} onChange= { e => this.setState({...this.state, password: e.target.value})}/>
               </div>
-              <button onClick={()=>loginHandler()}> LOGIN </button>
-              <HomeButton path='/signUp' {...this.props}>SIGN UP</HomeButton>
+              <button className='login' onClick={()=>loginHandler()}> LOGIN </button>
+              <HomeButton className='signUp' path='/signUp' {...this.props}>SIGN UP</HomeButton>
             </div>
           </div>
         </header>
