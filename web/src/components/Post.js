@@ -78,7 +78,10 @@ const Post = (props) => {
 
             <Card className={classes.post_card} elevation={4} >
                 <CardBody className={classes.post_card_body}>
-                    <CardTitle className={classes.post_card_title} tag="h1"> {user}<Button close onClick={deleteHandler}/></CardTitle>
+                    <CardTitle className={classes.post_card_title} tag="h1"> 
+                        {user}
+                        <Button close onClick={deleteHandler}/>
+                    </CardTitle>
                     <CardText className={classes.post_card_text} tag="p">
                         {props.content}
                     </CardText>

@@ -164,6 +164,30 @@ export const deletePost = async (token, post_id) => {
     } 
 }
 
+export const blockUser = async (token, username ) => { 
+    try{
+        let response = await fetch('https://guild-app.com/php/blockUser.php', {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                username : username 
+            })
+        })
+        return await response.text().then(function(text) {
+            console.log("blockUser response",text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
 export const searchFriends = async (token) => { 
     try{
         let response = await fetch('https://guild-app.com/php/searchFriends.php', {
