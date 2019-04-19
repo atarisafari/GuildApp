@@ -80,7 +80,8 @@ export default props => {
                     return (
                         <Friend id={values.username}
                                 name={values.display_name} 
-                                username={values.username} 
+                                username={values.username}
+                                preview={values.preview} 
                                 history={props.history}/>
                     );
                 })
@@ -101,7 +102,6 @@ export default props => {
                 })
             }
             
-           
         </div>
     )
 }

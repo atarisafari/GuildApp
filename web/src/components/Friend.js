@@ -20,29 +20,6 @@ const Friend = (props) => {
         return img[Math.floor(Math.random()*img.length)];
     }
 
-    const tileData = [
-        {
-            img: GuildSword,
-            title: 'Guild Sword',
-        },
-        {
-            img: Sword,
-            title: 'Sword',
-        },
-        {
-            img: BowArrow,
-            title: 'Bow Arrow',
-        },
-        {
-            img: Staff,
-            title: 'Staff',
-        },
-        {
-            img: Shield,
-            title: 'Shield',
-        }
-    ];
-
     return (
         <div key={props.id} id={props.id}>
             <Card style={{ width: '18rem' }}>
@@ -51,9 +28,8 @@ const Friend = (props) => {
                     <Avatar alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
                     <CardTitle tag="h2"> {props.name}</CardTitle>
                     <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-                    <CardText tag="p">Place Holder for latest post</CardText>
+                    <CardText tag="p">{props.preview}</CardText>
                 </CardBody>
-        
                 
             </Card>
         </div>
