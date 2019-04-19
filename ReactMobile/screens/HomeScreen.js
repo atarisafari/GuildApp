@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
@@ -15,13 +15,40 @@ import {
 } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import Modal from "react-native-modal";
+import { TextField } from 'react-native-material-textfield';
+import strings from "../config/strings";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: "What's going on",
   };
 
-  
+  state = {
+    isModalVisible: false,
+  };
+
+  _toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+
+  handleLogOut = () => {
+    //check to see if we get a token back
+		async function checkToken() {
+			let result = await SecureStore.deleteItemAsync('secure_token');
+			if(result === null){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//if we get a token, log out
+		if(checkToken()){
+			this.props.navigation.navigate('Auth');
+		}
+    
+  };
+
 	onPress = async () => {	
 		
 		let token = await SecureStore.getItemAsync('secure_token');
@@ -62,14 +89,22 @@ export default class HomeScreen extends React.Component {
             </Text>
           </View>
           
-          <Text style={styles.getStartedText}>hi</Text>
+        <Text style={styles.getStartedText}>hi</Text>
           
-          <Button 
-			onPress={this.onPress}
-			title="debugger"
-          />
+        <Button 
+          onPress={this.onPress}
+          title="debugger"
+        />
+      
+        <Button 
+          title={strings.LOGOUT}
+          onPress={this.handleLogOut}
+        />
         </ScrollView>
+       
       </View>
+
+      
     );
   }
 
