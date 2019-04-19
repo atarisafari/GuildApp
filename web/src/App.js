@@ -40,7 +40,7 @@ class App extends Component {
           </div>
           <div className="container-right">
             <div id="logo_header">
-                <p>Guild</p>
+                <p className='guild'>Guild</p>
             </div>
             <div id="login">
               <div id="username_login">
