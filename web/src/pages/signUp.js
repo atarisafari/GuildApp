@@ -117,25 +117,21 @@ export default props => {
 
                                 {tileData.map(tile => (
                                     <a href="#" onClick={cancel} >
-                                    <GridListTile key={tile.img} style={{  height: '140px', maxWidth : '100%' , margin : '10px'}}>
                                     
-                                        <img src={tile.img} alt={tile.title} style={{  height: 'auto', width : '100%'}}/>
-                                        <GridListTileBar title={tile.title} style={{ maxWidth : '100%'}}/>
+                                     <GridListTile key={tile.img} style={{ maxWidth: '50%', maxHeight: '50%' }} cols={tile.cols || 1}>
+                                       
+                                        <img src={tile.img} alt={tile.title} />
+                                        <GridListTileBar title={tile.title}/>
                                         
                                     </GridListTile>
                                     </a>
                                 ))}
 
                             </GridList>
-                                                
                         </div>
                         
                     )}
-            
-                
                 </Popup>
-                    
-            
             </div>
             <div id="display_name_signUp">
                 Display Name: 

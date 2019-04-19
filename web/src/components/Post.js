@@ -2,16 +2,20 @@
 import React, { Component, useState } from 'react';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
 import CommentButton from '@material-ui/icons/Comment';
-import IconButton from '@material-ui/core/IconButton'
-import { Card, CardText, CardBody,
-    CardTitle, Button } from 'reactstrap';
+import styles from '../styles/post_profile_styles';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Badge from '@material-ui/core/Badge';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import {withStyles} from '@material-ui/core/styles';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 
 const Post = (props) => {
     const [comment,setComment] = useState('');
-
+    const {classes} = props;
     let user = '';
     if(props.username===''){
         user = localStorage.getItem('username');
@@ -58,46 +62,43 @@ const Post = (props) => {
     
 
     return (
-        <div id={props.id} >
-            <Card style={{ width: '30rem', margin: '10px'}} elevation={4} >
-                <CardBody>
-                    <CardTitle tag="h1"> {user}</CardTitle>
-                    <CardText tag="p">
-                       
-                           
+        <div className={classes.post_div} id={props.id} >
+
+            <Card className={classes.post_card} elevation={4} >
+                <CardBody className={classes.post_card_body}>
+                    <CardTitle className={classes.post_card_title} tag="h1"> {user}</CardTitle>
+                    <CardText className={classes.post_card_text} tag="p">
                         {props.content}
-                           
-                       
                     </CardText>
-                <IconButton >
-                            <LikeButton />
+                <IconButton color="inherit">
+                    <Badge badgeContent={10} color="secondary">
+                        <FavoriteIcon />
+                    </Badge>
                 </IconButton>
             
                 <ToggleContent
                     toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
                     content={hide => (
                         <div>
-                            <TextField 
-                                id="textPopUp" 
-                                fullWidth 
-                                multiline
-                                placeholder="Make a comment..." 
-                                onBlur= { e => commentHandler(e.target.value)}
-                                InputProps={{
-                                    endAdornment: 
-                                        <InputAdornment position="end">     
-                                            <Button variant="primary" size="small" onClick={()=>addComment()}>
-                                                Comment
-                                            </Button>
-                                        </InputAdornment>,
-                                }}
-                            /> 
-                        
+                            <p>Jorge says: Stop that!</p>
                         </div>
                     )}
                 />
-              
-
+                    <TextField 
+                        id="textPopUp" 
+                        fullWidth 
+                        multiline
+                        placeholder="Make a comment..." 
+                        onBlur= { e => commentHandler(e.target.value)}
+                        InputProps={{
+                            endAdornment: 
+                                <InputAdornment className={classes.post_comment_input} position="end">     
+                                    <Button className={classes.comment_button} variant="primary" size="small" onClick={()=>addComment()}>
+                                        Comment
+                                    </Button>
+                                </InputAdornment>
+                        }}
+                    /> 
                 </CardBody>
             </Card>
         </div>
@@ -105,5 +106,5 @@ const Post = (props) => {
 };
 
 
-export default Post;
+export default withStyles(styles)(Post);
 

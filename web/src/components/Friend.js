@@ -9,47 +9,29 @@ import Shield from '../imgs/4_Shield_Icon.png';
 import Avatar from '@material-ui/core/Avatar';
 
 const Friend = (props) => {
+    const img = [GuildSword, Sword, BowArrow, Staff, Shield];
 
     const goProfile = async() =>{
         //change username?
         props.history.push("/profile");
     }
 
-    const tileData = [
-        {
-            img: GuildSword,
-            title: 'Guild Sword',
-        },
-        {
-            img: Sword,
-            title: 'Sword',
-        },
-        {
-            img: BowArrow,
-            title: 'Bow Arrow',
-        },
-        {
-            img: Staff,
-            title: 'Staff',
-        },
-        {
-            img: Shield,
-            title: 'Shield',
-        }
-    ];
+    const random_img = img =>{
+        return img[Math.floor(Math.random()*img.length)];
+    }
 
     return (
         <div key={props.id} id={props.id}>
             <Card style={{ width: '18rem' }}>
                 
-                <Avatar alt="/static/images/avatar/2.jpg" src={Shield}  onClick={()=>goProfile()}/> 
                 <CardBody>
-                    <CardTitle tag="h1"> {props.name}</CardTitle>
+                    <Avatar alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
+                    <CardTitle tag="h2"> {props.name}</CardTitle>
                     <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-                    <CardText tag="p">{"knj.bkhvjkgjrxehrjtkygluh;i;jhuglytkfyrjdtjdagbfsdgfh"}</CardText>
-                 
+
+                    <CardText tag="p">{props.preview}</CardText>
+
                 </CardBody>
-        
                 
             </Card>
         </div>
