@@ -1,68 +1,163 @@
-import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import React, { Component } from 'react';
+ 
+import { AppRegistry, StyleSheet, TextInput, View, Alert, Button, Text } from 'react-native';
+class SignUpScreen extends React.Component {
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      display_name: '',
+      password: '',
+      confPassword: '',
+      profile_pic_url: ''
+    }
+  }
+  
+  UserRegistrationFunction = () =>{
+ 
+    const { username }  = this.state ;
+    const { display_name }  = this.state ;
+    const { password }  = this.state ;
+    const { confPassword }  = this.state ;
+    const { profile_pic_url }  = this.state ;
+    
+    fetch('https://guild-app.com/php/signup.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+    
+        username: username,
+        password: password,
+        display_name: display_name,
+        profile_pic_url: profile_pic_url,
+    
+      })
+    
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        if(password !== confPassword){ //If passwords don't match then dont make the api call
+          Alert.alert(
+            'Oops',
+            "Your passwords don't match, please try again.",
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            {cancelable: false},
+          );
+        }
+        else if(responseJson.error === ""){
+          console.log("Sign up was successful");
+          this.props.navigation.navigate('Auth');
+        }
+        else {
+          Alert.alert(
+            'Oops',
+            JSON.stringify(responseJson.error),
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            {cancelable: false},
+          );
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+  
+  }
 
-export default class SignUpScreen extends React.Component {
-    state = { username: '', password: '', confPassword: '', display_name: '', profile_pic_url: '' }
-    handleSignUp = () => {
-    // TODO: Firebase stuff...
-    console.log('handleSignUp')
+    render() {
+      return (
+ 
+        <View style={styles.MainContainer}>
+
+                <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
+        
+                <TextInput
+                  
+                  placeholder="Display name:"
+        
+                  onChangeText={display_name => this.setState({display_name})}
+        
+                  underlineColorAndroid='transparent'
+        
+                  style={styles.TextInputStyleClass}
+                />
+
+                <TextInput
+                  
+                  placeholder="Username:"
+        
+                  onChangeText={username => this.setState({username})}
+        
+                  underlineColorAndroid='transparent'
+        
+                  style={styles.TextInputStyleClass}
+                />
+        
+                <TextInput
+                  
+                  placeholder="Password:"
+        
+                  onChangeText={password => this.setState({password})}
+        
+                  underlineColorAndroid='transparent'
+        
+                  style={styles.TextInputStyleClass}
+
+                  secureTextEntry={true}
+                />
+
+                <TextInput
+                  
+                  placeholder="Retype Password: :"
+        
+                  onChangeText={confPassword => this.setState({confPassword})}
+        
+                  underlineColorAndroid='transparent'
+        
+                  style={styles.TextInputStyleClass}
+
+                  secureTextEntry={true}
+                />
+        
+                <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
+              
+      
+        </View>
+              
+        );
+      }
 }
-render() {
-    return (
-      <View style={styles.container}>
-        <Text>Sign Up</Text>
-        <TextInput
-          placeholder="Display Name"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={display_name => this.setState({ display_name })}
-          value={this.state.display_name}
-        />
-        <TextInput
-          placeholder="Username"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={username => this.setState({ displayusername_name })}
-          value={this.state.username}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          secureTextEntry={true} 
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Retype Password:"
-          autoCapitalize="none"
-          secureTextEntry={true} 
-          style={styles.textInput}
-          onChangeText={confPassword => this.setState({ confPassword })}
-          value={this.state.confPassword}
-        />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <Button
-          title="Already have an account? Login"
-          onPress={() => this.props.navigation.navigate('Auth')}
-        />
-      </View>
-    )
-  }
-}
+ 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+ 
+  MainContainer :{
+    
     justifyContent: 'center',
-    alignItems: 'center'
+    flex:1,
+    margin: 10
   },
-  textInput: {
+  
+  TextInputStyleClass: {
+  
+    textAlign: 'center',
+    marginBottom: 7,
     height: 40,
-    width: '90%',
-    borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8
+    borderColor: '#b8860b',
+    borderRadius: 5 ,
+    
+    
+    borderRadius: 10 ,
   }
-})
+  
+});
+ 
+
+export default SignUpScreen;
