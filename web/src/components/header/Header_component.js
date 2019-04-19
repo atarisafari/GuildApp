@@ -31,6 +31,7 @@ class Header_component extends React.Component {
     notificationsModalAnchorEl:null,
   };
 
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -115,17 +116,17 @@ class Header_component extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>
-            <AccountCircle onClick={this.goProfile} className={classes.popMenuIcons} />
-          <p onClick={this.goProfile}>Profile</p>
+        <MenuItem onClick={() =>{this.handleMenuClose(); this.goProfile();}}>
+            <AccountCircle className={classes.popMenuIcons} />
+          <p>Profile</p>
         </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>
               <SettingsIcon className={classes.popMenuIcons}/>
           <p>Settings</p>
         </MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>
-                <LogOutIcon onClick={this.handleLogout} className={classes.popMenuIcons}/>
-          <p onClick={this.handleLogout}>Logout</p>
+        <MenuItem onClick={() =>{this.handleMenuClose(); this.handleLogout();}}>
+                <LogOutIcon className={classes.popMenuIcons}/>
+          <p>Logout</p>
         </MenuItem>
       </Menu>
     );
@@ -206,7 +207,7 @@ Header_component.propTypes = {
 
 Header_component.defaultProps = {
   data:[
-    { "user": "justiscezager1234", "message":"Liked your post"},
+    {"user": "justiscezager1234", "message":"Liked your post"},
     {"user": "justiscezager1234","message":"Commented on your post"},
     {"user": "justiscezager1234", "message":"Send you a friend request"},
     {"user": "justiscezager1234", "message":"Accepted your friend request"},

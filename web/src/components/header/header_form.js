@@ -1,4 +1,5 @@
 import React from 'react';
+import {addFriend} from '../../utils/apiCalls';
 
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
@@ -12,6 +13,9 @@ class SearchFriendForm extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      username: '',
+    };
   }
 
   handleSubmit(event) {
@@ -34,8 +38,18 @@ class SearchFriendForm extends React.Component {
     console.log("Searching");
   }
 
-  addFriend = async() =>{
-    console.log("Adding");
+  addFriendHandler = async() =>{
+    console.log("Adding", this.state.username);
+
+    let data = await addFriend(localStorage.getItem('token'), this.state.username);
+    console.log("addFriend response:" , data);
+    if(data.error === ""){
+        console.log("addFriend was successful");
+        alert("Friend request successfully sent to "+ this.username);
+    }
+    else{
+        alert(data.error);
+    } 
   }
 
   render() {
@@ -50,7 +64,9 @@ class SearchFriendForm extends React.Component {
                 classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
-            }}
+                }}
+                value={this.state.username} 
+                onChange= { e => this.setState({...this.state, username: e.target.value})}
             />
         </div>
         <div className={classes.buttonWrap}>
@@ -59,7 +75,7 @@ class SearchFriendForm extends React.Component {
             </Button>
         </div>
         <div className={classes.buttonWrap}>
-            <Button type="submit" onClick={this.addFriend} className={classes.searchButton}>Add</Button>
+            <Button type="submit" onClick={this.addFriendHandler} className={classes.searchButton}>Add</Button>
         </div>
       </form>
     );

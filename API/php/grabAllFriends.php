@@ -37,9 +37,11 @@ foreach ($friendIDs as $obj)
                 $prev = 'null';
         else
                 $prev = $result["preview"];
-
+        
         $ret[]  = array('username' => $uData["username"], 'display_name' => $uData["display_name"], 'profile_pic_url' => $uData["profile_pic_url"], 'preview' => $prev);
 }
+
+
 
 echo json_encode($ret); 
 
