@@ -35,17 +35,17 @@ const Post = (props) => {
         if(commentAdd === ''){ //If passwords don't match then dont make the api call
             alert("Can't add an empty comment");
         }
-        // else{
-        //     let data = await addComment(token, props.id, commentAdd);
-        //     console.log("addComment Result" , data);
-        //     if(data.error === ""){
-        //         //TODO
-        //         console.log("Comment added");
-        //     }
-        //     else{
-        //         alert(data.error);
-        //     }
-        // }
+        else{
+            let data = await addComment(token, props.id, commentAdd);
+            console.log("addComment Result" , data);
+            if(data.error === ""){
+                //TODO
+                console.log("Comment added");
+            }
+            else{
+                alert(data.error);
+            }
+        }
         
     }
 
@@ -126,7 +126,7 @@ const Post = (props) => {
                         InputProps={{
                             endAdornment: 
                                 <InputAdornment className={classes.post_comment_input} position="end">     
-                                    <Button className={classes.comment_button} variant="primary" size="small" onClick={()=>addComment()}>
+                                    <Button className={classes.comment_button} variant="primary" size="small" onClick={addComment}>
                                         Comment
                                     </Button>
                                 </InputAdornment>
