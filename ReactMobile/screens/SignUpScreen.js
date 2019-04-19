@@ -71,68 +71,68 @@ class SignUpScreen extends React.Component {
   
   }
 
-    render() {
-      return (
- 
-        <View style={styles.MainContainer}>
+  render() {
+    return (
 
-                <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
-        
-                <TextInput
-                  
-                  placeholder="Display name:"
-        
-                  onChangeText={display_name => this.setState({display_name})}
-        
-                  underlineColorAndroid='transparent'
-        
-                  style={styles.TextInputStyleClass}
-                />
+      <View style={styles.MainContainer}>
 
-                <TextInput
-                  
-                  placeholder="Username:"
-        
-                  onChangeText={username => this.setState({username})}
-        
-                  underlineColorAndroid='transparent'
-        
-                  style={styles.TextInputStyleClass}
-                />
-        
-                <TextInput
-                  
-                  placeholder="Password:"
-        
-                  onChangeText={password => this.setState({password})}
-        
-                  underlineColorAndroid='transparent'
-        
-                  style={styles.TextInputStyleClass}
-
-                  secureTextEntry={true}
-                />
-
-                <TextInput
-                  
-                  placeholder="Retype Password: :"
-        
-                  onChangeText={confPassword => this.setState({confPassword})}
-        
-                  underlineColorAndroid='transparent'
-        
-                  style={styles.TextInputStyleClass}
-
-                  secureTextEntry={true}
-                />
-        
-                <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
-              
+              <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
       
-        </View>
+              <TextInput
+                
+                placeholder="Display name:"
+      
+                onChangeText={display_name => this.setState({display_name})}
+      
+                underlineColorAndroid='transparent'
+      
+                style={styles.TextInputStyleClass}
+              />
+
+              <TextInput
+                
+                placeholder="Username:"
+      
+                onChangeText={username => this.setState({username})}
+      
+                underlineColorAndroid='transparent'
+      
+                style={styles.TextInputStyleClass}
+              />
+      
+              <TextInput
+                
+                placeholder="Password:"
+      
+                onChangeText={password => this.setState({password})}
+      
+                underlineColorAndroid='transparent'
+      
+                style={styles.TextInputStyleClass}
+
+                secureTextEntry={true}
+              />
+
+              <TextInput
+                
+                placeholder="Retype Password: :"
+      
+                onChangeText={confPassword => this.setState({confPassword})}
+      
+                underlineColorAndroid='transparent'
+      
+                style={styles.TextInputStyleClass}
+
+                secureTextEntry={true}
+              />
+      
+              <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
+              <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
               
-        );
-      }
+      </View>
+            
+      );
+    }
 }
  
 const styles = StyleSheet.create({
