@@ -1,5 +1,6 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
+import '../styles/signUp.css';
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
 import Avatar from '@material-ui/core/Avatar';
@@ -91,10 +92,10 @@ export default props => {
 //    }
     //console.log(username,password);
     return (
-    <div className="App">
-        <h1> SignUp </h1> 
-        {/* <SamplePage2 />  */}
+    <div className="AppSignUp">
         <div id="signUp">
+            <h1> SignUp </h1> 
+            {/* <SamplePage2 />  */}
             <div id="profile_pic">
                 <Popup trigger={
                     <IconButton>
@@ -145,8 +146,8 @@ export default props => {
                 Retype Password: 
                 <input type='password' onBlur= { e => confPasswordHandler(e.target.value)}/>
             </div>
-            <button onClick={()=>signUpHandler()}> SIGN UP </button>
-            <HomeButton path='/' {...props}>BACK</HomeButton>
+            <button className="signUp" onClick={()=>signUpHandler()}> SIGN UP </button>
+            <HomeButton className='signUp' path='/' {...props}>BACK</HomeButton>
         </div>
     </div>
     )

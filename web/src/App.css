@@ -1,45 +1,49 @@
-.right {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background-color: white; 
+.container-right{
+	float: right;
+	width: 35%;
+	margin-top: 20%;
+	font-size: 1.5em;
 }
 
-#left{
-	position: fixed;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background-image: url('./Purple-Abstract.jpg');
+img{
+	margin-left: 9%;
+	margin-top: 30%;
 }
 
-#logo_header{
-	font-size: 70px;
-	margin-left: 30%;
-	margin-top: 50%;
-	font-family: 'Roboto Condensed', sans-serif;
-}
 
-#login{
-	margin-left: 30%;
-	font-size: 30px;
-}
-
-#password_login{
-	margin-top: 5%;
-}
-
-button{
-	border-radius: 20px;
+.container-left{
+	float: left;
+	background-color: black;
+	position: absolute;
+	width: 50%;
+	height: 100%;
 }
 
 input{
-	border-radius: 10px;
-	border-width: 1px;
+	border-radius: 20px;
 	border-color: black;
-	background-color: white;
-	height: 25px;
-} 
+	outline: none;
+}
+
+.username{
+	margin-left: 2%;
+}
+
+.password{
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+}
+
+.login{
+	margin-top: 10%;
+	border-radius: 20px;
+	margin-right: 10%;
+}
+
+.signUp{
+	border-radius: 20px;
+}
+
+p{
+	font-size: 500%;
+}
