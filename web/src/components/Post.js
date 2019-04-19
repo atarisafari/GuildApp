@@ -40,12 +40,11 @@ const Post = (props) => {
             alert("Can't add an empty comment");
         }
         // else{
-        //     let data = await signUp(username,password,display_name,profile_pic_url);
-        //     console.log("Result" , data);
+        //     let data = await addComment(token, props.id, comment);
+        //     console.log("addComment Result" , data);
         //     if(data.error === ""){
         //         //TODO
-        //         console.log("Sign up was successful");
-        //         props.history.push("/");
+        //         console.log("Comment added");
         //     }
         //     else{
         //         alert(data.error);
