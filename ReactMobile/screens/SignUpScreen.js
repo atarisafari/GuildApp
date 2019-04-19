@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
- 
 import { AppRegistry, StyleSheet, TextInput, View, Alert, Button, Text } from 'react-native';
+
 class SignUpScreen extends React.Component {
   
   constructor(props) {
