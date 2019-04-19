@@ -28,7 +28,9 @@ const Friend = (props) => {
                     <Avatar alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
                     <CardTitle tag="h2"> {props.name}</CardTitle>
                     <CardSubtitle tag="h5">{props.username}</CardSubtitle>
+
                     <CardText tag="p">{props.preview}</CardText>
+
                 </CardBody>
                 
             </Card>

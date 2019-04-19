@@ -100,7 +100,7 @@ export default props => {
                     <IconButton>
                         <Badge badgeContent={<AddIcon />} color="secondary" >
                             <Grid container justify="center" alignItems="center">
-                                <Avatar alt="" src={require('./profilePicPlaceholder.png')}  />
+                                <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
                             </Grid>
                         </Badge>
                     </IconButton>
@@ -120,7 +120,9 @@ export default props => {
                                         </GridListTile>
                                     </a>
                                     
+
                                 ))}
+
                             </GridList>
                         </div>
                         

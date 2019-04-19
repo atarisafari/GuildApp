@@ -10,6 +10,8 @@ import FormTextInput from "../components/FormTextInput";
 import imageLogo from "../assets/images/logo.png";
 import colors from "../config/colors";
 import strings from "../config/strings";
+import login from "../config/calls";
+import {SecureStore} from 'expo';
 
 interface State {
 	email: string;
@@ -22,44 +24,82 @@ interface State {
 
 class LoginScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
-	
+
 	readonly state: State = {
 		email: "",
 		password: "",
 		emailTouched: false,
 		passwordTouched: false
 	};
-	
+
 	handleEmailChange = (email: string) => {
 		this.setState({ email: email });
 	};
-	
+
 	handlePasswordChange = (password: string) => {
 		this.setState({ password: password });
 	};
-	
+
 	handleEmailSubmitPress = () => {
 		if (this.passwordInputRef.current) {
 			this.passwordInputRef.current.focus();
 		}
 	};
-	
+
 	// ...and we update them in the input onBlur callback
 	handleEmailBlur = () => {
 		this.setState({ emailTouched: true });
 	};
-	
+
 	handlePasswordBlur = () => {
 		this.setState({ passwordTouched: true });
 	};
-	
+
 	handleLoginPress = () => {
-		//
-		//Need to add API calls here for validation n shit
-		//
-		this.props.navigation.navigate('Main');
-	};
 	
+		//send login info to api
+		try{
+			let response = fetch('http://157.230.66.35/php/login.php', {
+				mode: 'cors',
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					username: this.state.email,
+					password: this.state.password,
+				})
+			})
+				.then(response => response.json())
+				.then(async function(json) {
+					
+					var token = json.token;
+	
+					await SecureStore.setItemAsync('secure_token', token);
+					
+				})
+		}
+		catch(e){
+			console.log(e);
+		}
+		
+		//check to see if we get a token back
+		async function checkToken() {
+			let result = await SecureStore.getItemAsync('secure_token');
+			if(result !== null){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//if we get a token, login in
+		if(checkToken()){
+			this.props.navigation.navigate('Main');
+		}
+	};
+
 	render() {
 		const {
 			email,
@@ -126,7 +166,7 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		flex: 1,
-		width: "100%",
+		width: "90%",
 		resizeMode: "contain",
 		alignSelf: "center"
 	},
