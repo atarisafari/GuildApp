@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
   ScrollView,
   StyleSheet,
+  ActionSheetIOS,
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  Modal, 
+  TouchableHighlight,
+  Picker
 } from 'react-native';
 import { 
 	WebBrowser,
@@ -15,65 +19,135 @@ import {
 } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import { MaterialIcons } from '@expo/vector-icons';
+import strings from "../config/strings";
+import { Input } from 'react-native-elements';
+import { ImagePicker, Permissions } from 'expo';
+
+var BUTTONS = [
+  'Camera',
+  'Choose from Photos',
+  'Cancel',
+];
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: "What's going on",
   };
 
-  
-	onPress = async () => {	
-		
-		let token = await SecureStore.getItemAsync('secure_token');
-		
-		try{
-			let response = await fetch('http://157.230.66.35/php/grabAllFriends.php', {
-				mode: 'cors',
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					token: token
-				})
-			})
-			
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(json){
-				console.log(json);
-			})
+  state = {
+    modalVisible: false,
+    clicked: 'none',
+  };
 
-		}catch(e){
-			console.log(e);
-		} 
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
+  handleLogOut = () => {
+    //check to see if we get a token back
+		async function checkToken() {
+			let result = await SecureStore.deleteItemAsync('secure_token');
+			if(result === null){
+				return true;
+			}else{
+				return false;
+			}
+		}
 		
-	}
-  
+		//if we get a token, log out
+		if(checkToken()){
+			this.props.navigation.navigate('Auth');
+		}
+    
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>
-              Perkele!!
-            </Text>
+
+          
+
+        {/*Modal*/}
+        <View style={{marginTop: 22}}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+          >
+
+            <View style={{marginTop: 22}}>
+              <View>
+                <Input
+                  placeholder="Add a post..." 
+                  multiline={true}
+                  rightIcon={
+                    <MaterialIcons
+                      onPress={this.showActionSheet} 
+                      name='camera-alt'
+                      size={24}
+                      color='black'
+                    />
+                  }
+                />
+
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}>
+                  <Text>Cancel</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
+
+      
+          {/*Add Post Header*/}
+          <View style={styles.form} onTouchStart={() => {this.setModalVisible(true);}}>
+            <Input
+              placeholder="Add a post..." 
+              multiline={true}
+              editable={false}
+              rightIcon={
+                <MaterialIcons
+                  name='camera-alt'
+                  size={24}
+                  color='black'
+                />
+              }
+            />
           </View>
+
+        </View>
           
-          <Text style={styles.getStartedText}>hi</Text>
-          
-          <Button 
-			onPress={this.onPress}
-			title="debugger"
-          />
+        <Button 
+          title={strings.LOGOUT}
+          onPress={this.handleLogOut}
+        />
+        <View>
+        
+        <Text>
+          Clicked button: {this.state.clicked}
+        </Text>
+      </View>
+
         </ScrollView>
       </View>
+
+      
     );
   }
 
-
+  showActionSheet = () => {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: BUTTONS,
+      cancelButtonIndex: 2,
+    },
+    (buttonIndex) => {
+      this.setState({ clicked: BUTTONS[buttonIndex] });
+    });
+  };
 
 }
 
@@ -164,4 +238,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  form: {
+		flex: 1,
+		justifyContent: "center",
+		width: "100%"
+  },
+  button: {
+    marginBottom: 10,
+    fontWeight: '500',
+  }
 });

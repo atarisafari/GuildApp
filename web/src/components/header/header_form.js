@@ -1,11 +1,11 @@
 import React from 'react';
 import {addFriend} from '../../utils/apiCalls';
-
+import styles from '../../styles/header_style';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core/styles';
-import styles from "./header_style"
 
 
 class SearchFriendForm extends React.Component {
@@ -45,7 +45,7 @@ class SearchFriendForm extends React.Component {
     console.log("addFriend response:" , data);
     if(data.error === ""){
         console.log("addFriend was successful");
-        alert("Friend request successfully sent to "+ this.username);
+        alert("Friend request successfully sent to "+ this.state.username);
     }
     else{
         alert(data.error);
@@ -69,13 +69,17 @@ class SearchFriendForm extends React.Component {
                 onChange= { e => this.setState({...this.state, username: e.target.value})}
             />
         </div>
-        <div className={classes.buttonWrap}>
-            <Button type="submit" onClick={this.searchFriend} className={classes.searchButton} >
-            <SearchIcon />
-            </Button>
-        </div>
-        <div className={classes.buttonWrap}>
-            <Button type="submit" onClick={this.addFriendHandler} className={classes.searchButton}>Add</Button>
+        <div className={classes.formButtonWrap}>
+          <div className={classes.searchButtonWrap}>
+              <Button type="submit" onClick={this.searchFriend} className={classes.searchButton} >
+              <SearchIcon />
+              </Button>
+          </div>
+          <div className={classes.addButtonWrap}>
+              <Button type="submit" onClick={this.addFriendHandler} className={classes.addButton}>
+                <AddIcon />
+              </Button>
+          </div>
         </div>
       </form>
     );

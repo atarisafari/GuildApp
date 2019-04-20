@@ -4,39 +4,26 @@ import Friend from '../components/Friend';
 import Post from '../components/Post';
 import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
-
 
 export default props => {
     console.log('props: ', props); 
     const token = localStorage.getItem('token');
     const [content,setContent] = useState('');
+    const [username,setUsername] = useState('');
     const [friends,setFriends] = useState([]);
-    //const [posts,setPosts] = useState([]);
+    const [posts,setPosts] = useState([]);
 
     const friendsHandler = async() => {
-        let result =  await grabAllFriends(token).then(bleh => bleh) 
+        let result =  await grabAllFriends(token).then(ble => ble) 
         console.log('fetching friends', result);
         setFriends(result);
     }
     
-    // Waiting for API
-    // const postsHandler = async() => {
-    //     let result =  await grabAllPosts(token).then(bleh => bleh) 
-    //     console.log('fetching friends', result);
-    //     setPosts(result);
-    // }
-
-    const posts = [{
-        name: 'Jon',
-        username: 'DogMan',
-    },
-    {
-        name: 'Doe',
-        username: 'DogWoman',
-    }];
-
+    const postsHandler = async() => {
+        let result =  await grabAllPosts(token, username).then(ble => ble) 
+        console.log('fetching posts', result);
+        setPosts(result);
+    }
 
     useEffect(()=>{//This will run once and then only if token changes
         if(token === null){ //If token is lost 
@@ -49,7 +36,7 @@ export default props => {
 
     useEffect(()=>{//This will be executed always after the components have been rendered
         friendsHandler();
-        //postsHandler();
+        postsHandler();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
     
     useEffect(()=>{ 
@@ -78,23 +65,11 @@ export default props => {
 
     const contentHandler = content=>{
         setContent(content);
-        console.log(content);
+        console.log("Content:", content);
     }
-    /*
-    const addPostHandler = async() =>{
-        
-        let data = await addPost(token, content);
-        console.log("Result" , data);
-        if(data.error === ""){
-            console.log("Add post was successful");
-        }
-        else{
-            alert(data.error);
-        }
-    }*/
 
     return (
-        <div className="App">
+        <div className="AppHome">
             <Header_component props={props}/>
             
             <h1> Home Page </h1> 
@@ -105,20 +80,30 @@ export default props => {
                     return (
                         <Friend id={values.username}
                                 name={values.display_name} 
-                                username={values.username} 
-                                history={props.history}/>
+                                username={values.username}
+                                preview={values.preview} 
+                                history={props.history}
+                        />
                     );
                 })
             }
             
             {
-                posts.map((value, index) => {
-                    return <Post key={index} username={value.username}  content={value.content}/>
-
+                posts.map((value) => {
+                    return (
+                        <Post   key={value.post_id} 
+                                id={value.post_id} 
+                                image_url={value.image_url}
+                                time_created={value.time_created}
+                                num_likes={value.num_likes}
+                                num_comments={value.num_comments}
+                                username={username}  
+                                content={value.content}
+                        />
+                    );
                 })
             }
             
-            <button onClick={()=>logout()}> LOG OUT </button>
         </div>
     )
 }
