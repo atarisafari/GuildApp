@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, TextInput, View, Alert, Button, Text } from 'react-native';
+import { AppRegistry, StyleSheet, ScrollView, TextInput, View, Alert, Button, Text } from 'react-native';
+import { ImagePicker, Permissions } from 'expo';
+import { MaterialIcons } from '@expo/vector-icons';
 
 class SignUpScreen extends React.Component {
   
@@ -13,6 +15,34 @@ class SignUpScreen extends React.Component {
       profile_pic_url: ''
     }
   }
+
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+
+  useLibraryHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  useCameraHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
   
   UserRegistrationFunction = () =>{
  
@@ -72,63 +102,73 @@ class SignUpScreen extends React.Component {
   }
 
   render() {
+    let { image } = this.state;
     return (
-
+      
       <View style={styles.MainContainer}>
+        <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
+        <ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
+          <Button title="launchCameraAsync" onPress={this.useCameraHandler} />
+          <Button
+            title="launchImageLibraryAsync"
+            onPress={this.useLibraryHandler}
+          />
+          <Text style={styles.paragraph}>
+            {JSON.stringify(this.state.profile_pic_url)}
+          </Text>
+        </ScrollView>
+       
+        <TextInput
+          
+          placeholder="Display name:"
 
-              <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
-      
-              <TextInput
-                
-                placeholder="Display name:"
-      
-                onChangeText={display_name => this.setState({display_name})}
-      
-                underlineColorAndroid='transparent'
-      
-                style={styles.TextInputStyleClass}
-              />
+          onChangeText={display_name => this.setState({display_name})}
 
-              <TextInput
-                
-                placeholder="Username:"
-      
-                onChangeText={username => this.setState({username})}
-      
-                underlineColorAndroid='transparent'
-      
-                style={styles.TextInputStyleClass}
-              />
-      
-              <TextInput
-                
-                placeholder="Password:"
-      
-                onChangeText={password => this.setState({password})}
-      
-                underlineColorAndroid='transparent'
-      
-                style={styles.TextInputStyleClass}
+          underlineColorAndroid='transparent'
 
-                secureTextEntry={true}
-              />
+          style={styles.TextInputStyleClass}
+        />
+        
+        <TextInput
+          
+          placeholder="Username:"
 
-              <TextInput
-                
-                placeholder="Retype Password: :"
-      
-                onChangeText={confPassword => this.setState({confPassword})}
-      
-                underlineColorAndroid='transparent'
-      
-                style={styles.TextInputStyleClass}
+          onChangeText={username => this.setState({username})}
 
-                secureTextEntry={true}
-              />
-      
-              <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
-              <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
-              
+          underlineColorAndroid='transparent'
+
+          style={styles.TextInputStyleClass}
+        />
+
+        <TextInput
+          
+          placeholder="Password:"
+
+          onChangeText={password => this.setState({password})}
+
+          underlineColorAndroid='transparent'
+
+          style={styles.TextInputStyleClass}
+
+          secureTextEntry={true}
+        />
+
+        <TextInput
+          
+          placeholder="Retype Password: :"
+
+          onChangeText={confPassword => this.setState({confPassword})}
+
+          underlineColorAndroid='transparent'
+
+          style={styles.TextInputStyleClass}
+
+          secureTextEntry={true}
+        />
+
+        <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
+        <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
+        
       </View>
             
       );
@@ -155,8 +195,19 @@ const styles = StyleSheet.create({
     
     
     borderRadius: 10 ,
-  }
+  },
+
+  container: {
+    paddingTop: 100,
+    minHeight: 300,
+  },
   
+  paragraph: {
+    marginHorizontal: 15,
+    marginTop: 30,
+    fontSize: 18,
+    color: '#34495e',
+  }
 });
  
 
