@@ -1,24 +1,22 @@
 export const signUp = async (username,password,display_name='',profile_pic_url='') => { 
     try{
         let response = await fetch('http://157.230.66.35/php/signup.php', {
-            mode: 'cors',
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                display_name: display_name,
-                profile_pic_url: profile_pic_url,
-            })
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+            display_name: display_name,
+            profile_pic_url: profile_pic_url,
         })
-        .then(function(response){
-            return response.json();
         })
-        .then(function(json){
-            console.log(json);
+        return response.text().then(function(text) {
+            console.log("SignUp response",text);
+            return text ? JSON.parse(text) : {}
         })
         //return data;        
     }
