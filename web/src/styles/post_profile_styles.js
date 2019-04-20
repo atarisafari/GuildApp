@@ -18,9 +18,8 @@ const styles = theme => ({
     post_card_body:{
         /*border: '1px solid black' ,*/
     },
-    post_title:{
+    post_card_title:{
         /* border: '1px solid red' ,*/
-        color:"#b20949",
         fontSize:'30px',
     },
     post_text:{
@@ -29,15 +28,16 @@ const styles = theme => ({
     },
     comment_button:{
         color: "white",
-        backgroundColor:"#69052b",
+        backgroundColor:"#b20949",
         height:'38px',
         borderRadius:'4px',
         textAlign:'center',
         marginRight: '5px',
         marginLeft: '5px',
         marginBottom:'9px',
+        border: '0px',
     },
-    post_comment_input:{
+    comment_input:{
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),},
@@ -59,6 +59,7 @@ const styles = theme => ({
         },
         marginBottom:'9px',
 }
+
 });
 
 
