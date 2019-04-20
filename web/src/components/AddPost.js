@@ -120,7 +120,6 @@ const AddPost = (props) => {
         </div>
     );
 };
-{/* 
 
 const thumbsContainer = {
     display: 'flex',
@@ -151,7 +150,7 @@ const img = {
     display: 'block',
     width: 'auto',
     height: '100%'
-}; */}
+};
 
 export default withStyles(styles)(AddPost);
 

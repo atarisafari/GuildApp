@@ -19,14 +19,14 @@ const styles = theme => ({
         borderRadius:' 20px',
     },
     
-   add_post_input:{
+    add_post_input:{
         width:'95%',
         backgroundColor:' white',
         border:' 0px',
         borderRadius:' 40px',
     },
-     
-     add_post_popup:{
+    
+    add_post_popup:{
         width:'600px',
         minHeight:' 300px',
         borderRadius:' 40px', 
