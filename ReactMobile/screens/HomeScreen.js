@@ -57,21 +57,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-          {/*Add Post Header*/}
-          <View style={styles.form}>
-            <Input
-              placeholder="Add a post..." 
-              multiline={true}
-              editable={false}
-              rightIcon={
-                <MaterialIcons
-                  name='camera-alt'
-                  size={24}
-                  color='black'
-                />
-              }
-            />
-          </View>
+          
 
         {/*Modal*/}
         <View style={{marginTop: 22}}>
@@ -96,12 +82,23 @@ export default class HomeScreen extends React.Component {
             </View>
           </Modal>
 
-          <TouchableHighlight
-            onPress={() => {
-              this.setModalVisible(true);
-            }}>
-            <Text>Show Modal</Text>
-          </TouchableHighlight>
+      
+          {/*Add Post Header*/}
+          <View style={styles.form} onTouchStart={() => {this.setModalVisible(true);}}>
+            <Input
+              placeholder="Add a post..." 
+              multiline={true}
+              editable={false}
+              rightIcon={
+                <MaterialIcons
+                  name='camera-alt'
+                  size={24}
+                  color='black'
+                />
+              }
+            />
+          </View>
+
         </View>
           
         <Button 
