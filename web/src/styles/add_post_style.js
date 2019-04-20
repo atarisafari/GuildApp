@@ -7,28 +7,34 @@ const styles = theme => ({
         marginRight:'10%',
         marginTop:' 20px',
         marginBottom:' 20px',
-        backgroundColor:' #cf2264',
-        border:' 1px solid green',
+        border:' 0px',
+        /*border:' 1px solid black',*/
         borderRadius:' 20px',
     },
     
-    add_post_button:{
-       
-        backgroundColor:' lightpink',
-        border:' 1px solid green',
+    add_post_button:{    
+        backgroundColor:' white',
+        border:' 0px',
+        /*border:' 1px solid blue',*/
         borderRadius:' 20px',
     },
     
    add_post_input:{
-        backgroundColor:' #b20949',
-        border:' 1px solid green',
+        width:'95%',
+        backgroundColor:' white',
+        border:' 0px',
         borderRadius:' 40px',
     },
      
      add_post_popup:{
         width:'600px',
-        height:' 500px',
+        minHeight:' 300px',
         borderRadius:' 40px', 
+    },
+
+    add_post_title:{
+        textAlign:'center',
+        fontSize:'20px',
     },
 
     post_button:{
@@ -40,7 +46,7 @@ const styles = theme => ({
         padding:'5px',
         marginTop:'0',
         textAlign:'center',
-        /* border:' '1px solid blue' "*/
+        /* border:'1px solid green'*/
     },
 
     post_cancel_button:{
@@ -52,7 +58,7 @@ const styles = theme => ({
         padding:'1px',
         marginTop:'0',
         textAlign:'center',
-        /* border:' '1px solid blue' "*/
+        /* border:'1px solid ytellow' */
     },
  });
 

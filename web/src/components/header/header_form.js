@@ -24,14 +24,6 @@ class SearchFriendForm extends React.Component {
     const data = new FormData(form);
     
     console.log(event.target.elements.search.value)
-    
-    
-    /*
-    fetch('/api/form-submit-url', {
-      method: 'POST',
-      body: data,
-    });
-    */
   }
   
   searchFriend = async() =>{
@@ -56,7 +48,7 @@ class SearchFriendForm extends React.Component {
     const { classes } = this.props;
 
     return (
-        <form className={classes.searchForm} onSubmit={this.handleSubmit}>
+        <form autoComplete="off" className={classes.searchForm} onSubmit={this.handleSubmit}>
         <div className={classes.inputWrap}>
             <InputBase  className={classes.searchInput}
                 name="search"

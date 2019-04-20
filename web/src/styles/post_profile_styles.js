@@ -2,10 +2,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { red } from '@material-ui/core/colors';
 
 const styles = theme => ({
-    add_post:{
-        width:'80%',
-        border: '1px solid black',
-    },
     post:{
         /*border: '1px solid green' ,*/
         marginLeft:'100px',
