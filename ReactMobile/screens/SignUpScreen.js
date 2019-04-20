@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, ScrollView, TextInput, View, Alert, Button, Text } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import RNBottomActionSheet from 'react-native-bottom-action-sheet';
+import Icon from 'react-native-vector-icons'
 class SignUpScreen extends React.Component {
   
   constructor(props) {

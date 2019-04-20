@@ -26,10 +26,9 @@ interface State {
 	emailTouched: boolean;
 	passwordTouched: boolean;
 }
-
 class LoginScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
-
+	
 	readonly state: State = {
 		email: "",
 		password: "",
@@ -81,39 +80,35 @@ class LoginScreen extends React.Component<{}, State> {
 				})
 			})
 				.then(response => response.json())
-				.then(async function(json) {
+				.then(async function(json)  {
 					
 					var token = json.token;
-	
-					await SecureStore.setItemAsync('secure_token', token);
+					if(json.error === ""){
+						await SecureStore.setItemAsync('secure_token', token);
+						checkToken();
+						
+					}
+					else{
+						alert(json.error);
+					}     
 					
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-		
-		//check to see if we get a token back
+
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
 			if(result !== null){
-				if(result.error === ""){
-					console.log("Login was successful");
-					return true;
-				}
-				else{
-					alert(result.error);
-					return false;
-				}
-			}else{
-				return false;
+				console.log("Login was successful");
+				
+				console.log('result', result);
 			}
 		}
 		
-		//if we get a token, login in
-		if(checkToken()){
-			this.props.navigation.navigate('Main');
-		}
+		this.props.navigation.navigate('Main');		
+		
 	};
 
 	render() {
@@ -133,12 +128,13 @@ class LoginScreen extends React.Component<{}, State> {
 		!password && passwordTouched
 		? strings.PASSWORD_REQUIRED
 		: undefined;
+
 		return (
 			<KeyboardAvoidingView
 				style={styles.container}
 				behavior="padding"
 			>
-			<Image source={imageLogo} style={styles.logo} />
+				<Image source={imageLogo} style={styles.logo} />
 				<View style={styles.form}>
 					<FormTextInput
 						value={this.state.email}
@@ -164,7 +160,8 @@ class LoginScreen extends React.Component<{}, State> {
 					/>
 					<Button
 						label={strings.LOGIN}
-						onPress={this.handleLoginPress}
+						
+						onPress={this.props.navigation.navigate('Main')}
 						disabled={!email || !password}
 					/>
 
@@ -172,7 +169,7 @@ class LoginScreen extends React.Component<{}, State> {
 						label={strings.SIGNUP}
 						onPress={this.handleSignUpPress}
 					/>	
-					
+						
 				</View>
 			</KeyboardAvoidingView>
 		);
