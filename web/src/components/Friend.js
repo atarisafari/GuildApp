@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import {blockUser} from '../utils/apiCalls';
+import { Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button } from 'reactstrap';
 import GuildSword from '../imgs/0_GuildSword_Icon.png';
 import Sword from '../imgs/1_Sword_Icon.png';
 import BowArrow from '../imgs/2_BowArrow_Icon.png';
@@ -11,54 +11,41 @@ import {withStyles} from '@material-ui/core/styles';
 import styles from '../styles/friend_style';
 
 const Friend = (props) => {
-    const {classes} = props;
-
+    const token = localStorage.getItem('token');
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
+    const {classes} = props;
 
     const goProfile = async() =>{
         //change username?
         props.history.push("/profile");
     }
 
+    const blockUserHandler = async() => {
+        if (window.confirm('Are you sure you wish to block '+props.username+' ?')){
+            let result =  await blockUser(token, props.id).then(ble => ble) 
+            console.log('Delete post response: ', result);
+            alert(props.username + " has been blocked");
+            window.location.reload();
+        }
+    }
+
     const random_img = img =>{
         return img[Math.floor(Math.random()*img.length)];
     }
-
-    const tileData = [
-        {
-            img: GuildSword,
-            title: 'Guild Sword',
-        },
-        {
-            img: Sword,
-            title: 'Sword',
-        },
-        {
-            img: BowArrow,
-            title: 'Bow Arrow',
-        },
-        {
-            img: Staff,
-            title: 'Staff',
-        },
-        {
-            img: Shield,
-            title: 'Shield',
-        }
-    ];
 
     return (
         <div key={props.id} id={props.id}>
             <Card className={classes.friend_card}>
                 
-                <CardBody>
+                <CardBody>                   
                     <Avatar className={classes.friend_img} alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
-                    <CardTitle className={classes.friend_title}tag="h2"> {props.name}</CardTitle>
-                    <CardSubtitle className={classes.friend_subtitile} tag="h5">{props.username}</CardSubtitle>
-                    <CardText className={classes.friend_post}tag="p">Place Holder for latest post</CardText>
-                </CardBody>
-        
-                
+                    <CardTitle className={classes.friend_title} tag="h2"> 
+                        {props.name}
+                    </CardTitle>
+                    <CardSubtitle className={classes.friend_subtitle} tag="h5">{props.username}</CardSubtitle>
+                    <CardText className={classes.friend_post} tag="p">{props.preview}</CardText>
+                    <Button className='float-right' className={classes.friend_block_button} onClick={blockUserHandler}>Block</Button>
+                </CardBody>             
             </Card>
         </div>
     );

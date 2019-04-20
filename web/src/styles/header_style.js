@@ -7,10 +7,11 @@ const styles = theme => ({
     mainBar:{
         backgroundColor:"#b20949",
         width: '100%',
+        minHeight:'70px',
         color: theme.palette.common.white,
     },
-    formButtonsWrap:{
-        width:'40%',
+    formButtonWrap:{
+        width:'30%',
         float:'left',
         display:'inline-box',
         height:'34.4px',
@@ -29,7 +30,7 @@ const styles = theme => ({
         height:'34.4px',
         margin:0,
         padding:0,
-        marginLeft:'5px',
+        marginLeft:'2px',
         /* border: '1px solid green',*/
         
     },
@@ -41,7 +42,6 @@ const styles = theme => ({
         backgroundColor:"#69052b",
         borderBottomLeftRadius:0,
         borderTopLeftRadius:0,
-        margin:'5px',
         marginTop:'0',
         /* border: '1px solid black' ,*/
     },
@@ -49,7 +49,6 @@ const styles = theme => ({
         height:'34.4px',
         color: "white",
         backgroundColor:"#69052b",
-        margin:'5px',
         marginTop:'0',
         /* border: '1px solid blue' ,*/
     },
@@ -59,7 +58,7 @@ const styles = theme => ({
         /*border: '1px solid black' ,*/
     },
     inputWrap:{
-        width:'60%',
+        width:'70%',
         float:'left',
         /* border: '1px solid yellow' ,*/
 

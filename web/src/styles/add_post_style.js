@@ -48,11 +48,12 @@ const styles = theme => ({
         height:'34.4px',
         width:'60px',
         color: "white",
-        backgroundColor:"#69052b",
+        backgroundColor:"#b20949",
         margin:'5px',
         padding:'5px',
         marginTop:'0',
         textAlign:'center',
+        border:'0px '
         /* border:'1px solid green'*/
     },
 
@@ -65,6 +66,7 @@ const styles = theme => ({
         padding:'1px',
         marginTop:'0',
         textAlign:'center',
+        border:'0px '
         /* border:'1px solid ytellow' */
     },
  });

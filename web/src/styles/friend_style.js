@@ -5,6 +5,20 @@ const styles = theme => ({
         margin:'20px',
     },
 
+    friend_block_button:{
+        height:'34.4px',
+        width:'60px',
+        color: "white",
+        backgroundColor:"#cc0000",
+        margin:'5px',
+        padding:'5px',
+        marginTop:'0',
+        textAlign:'center',
+        border:'0px',
+        /* border:'1px solid green'*/
+    },
+
+
     friend_img:{
         cursor: 'pointer',
     },

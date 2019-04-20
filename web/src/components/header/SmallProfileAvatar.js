@@ -4,7 +4,7 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import headerstyles from "./header_style"
+import headerstyles from "../../styles/header_style"
 
 
 
