@@ -69,7 +69,7 @@ export default props => {
     }
 
     return (
-        <div className="App">
+        <div className="AppHome">
             <Header_component props={props}/>
             
             <h1> Home Page </h1> 
