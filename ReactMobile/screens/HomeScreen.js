@@ -7,10 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
-  Modal,
-  TouchableHighlight,
-  KeyboardAvoidingView
+  Button
 } from 'react-native';
 import { 
 	WebBrowser,
@@ -18,11 +15,9 @@ import {
 } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import FormTextInput from "../components/FormTextInput";
-import { Input } from 'react-native-elements';
+import Modal from "react-native-modal";
+import { TextField } from 'react-native-material-textfield';
 import strings from "../config/strings";
-import { MaterialIcons } from '@expo/vector-icons';
-import { Makiko } from 'react-native-textinput-effects';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -30,12 +25,11 @@ export default class HomeScreen extends React.Component {
   };
 
   state = {
-    modalVisible: false,
+    isModalVisible: false,
   };
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+  _toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
 
   handleLogOut = () => {
     //check to see if we get a token back
@@ -59,73 +53,19 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.getStartedContainer}>
+            <Text style={styles.getStartedText}>
+              Perkele!!
+            </Text>
+          </View>
           
-        {/*LOG OUT Button */}
+        <Text style={styles.getStartedText}>hi</Text>
+          
         <Button 
           title={strings.LOGOUT}
           onPress={this.handleLogOut}
         />
-
-        <View style={{marginTop: 22}}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <KeyboardAvoidingView
-              style={styles.container}
-              behavior="padding"
-            >
-              <Input
-                placeholder='Add a post...'
-                multiline={true}
-                numberOfLines={1}
-                inputStyle={{
-                  height: null
-                }}
-                rightIcon={
-                  <MaterialIcons name='camera-alt' size={33} color="#e9967a"/>
-              }
-            />
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Cancel</Text>
-              </TouchableHighlight>
-            </KeyboardAvoidingView>
-          </View>
-        </Modal>
-
-          
-          {/*Add Post Header*/}
-          <View style={styles.form} onTouchStart={() => {
-            this.setModalVisible(true);
-          }}>
-          
-          <Input
-            placeholder='Add a post...'
-            multiline={true}
-            inputStyle={{
-              height: null
-            }}
-            rightIcon={
-              <MaterialIcons name='camera-alt' size={33} color="#e9967a"/>
-            }
-          />
-          </View>
-          
-      </View>
-
-
-
-
         </ScrollView>
-
        
       </View>
 
@@ -224,9 +164,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
-  form: {
-		flex: 1,
-		justifyContent: "center",
-		width: "100%"
-	}
 });
