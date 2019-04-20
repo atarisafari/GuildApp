@@ -108,67 +108,70 @@ class SignUpScreen extends React.Component {
       <View style={styles.MainContainer}>
         <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
         <ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
-          <Button title="launchCameraAsync" onPress={this.useCameraHandler} />
-          <Button
-            title="launchImageLibraryAsync"
-            onPress={this.useLibraryHandler}
+
+            <Button title="launchCameraAsync" onPress={this.useCameraHandler} />
+            <Button
+              title="launchImageLibraryAsync"
+              onPress={this.useLibraryHandler}
+            />
+            <Text style={styles.paragraph}>
+              {JSON.stringify(this.state.profile_pic_url)}
+            </Text>
+          
+
+          <TextInput
+            
+            placeholder="Display name:"
+
+            onChangeText={display_name => this.setState({display_name})}
+
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
           />
-          <Text style={styles.paragraph}>
-            {JSON.stringify(this.state.profile_pic_url)}
-          </Text>
+          
+          <TextInput
+            
+            placeholder="Username:"
+
+            onChangeText={username => this.setState({username})}
+
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+          />
+
+          <TextInput
+            
+            placeholder="Password:"
+
+            onChangeText={password => this.setState({password})}
+
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+
+            secureTextEntry={true}
+          />
+
+          <TextInput
+            
+            placeholder="Retype Password: :"
+
+            onChangeText={confPassword => this.setState({confPassword})}
+
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+
+            secureTextEntry={true}
+          />
+
+          <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
+          <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
+
+            
         </ScrollView>
-       
-        <TextInput
-          
-          placeholder="Display name:"
-
-          onChangeText={display_name => this.setState({display_name})}
-
-          underlineColorAndroid='transparent'
-
-          style={styles.TextInputStyleClass}
-        />
-        
-        <TextInput
-          
-          placeholder="Username:"
-
-          onChangeText={username => this.setState({username})}
-
-          underlineColorAndroid='transparent'
-
-          style={styles.TextInputStyleClass}
-        />
-
-        <TextInput
-          
-          placeholder="Password:"
-
-          onChangeText={password => this.setState({password})}
-
-          underlineColorAndroid='transparent'
-
-          style={styles.TextInputStyleClass}
-
-          secureTextEntry={true}
-        />
-
-        <TextInput
-          
-          placeholder="Retype Password: :"
-
-          onChangeText={confPassword => this.setState({confPassword})}
-
-          underlineColorAndroid='transparent'
-
-          style={styles.TextInputStyleClass}
-
-          secureTextEntry={true}
-        />
-
-        <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
-        <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
-        
       </View>
             
       );

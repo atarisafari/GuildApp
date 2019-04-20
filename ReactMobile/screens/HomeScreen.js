@@ -4,12 +4,14 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  ActionSheetIOS,
   Text,
   TouchableOpacity,
   View,
   Button,
   Modal, 
-  TouchableHighlight
+  TouchableHighlight,
+  Picker
 } from 'react-native';
 import { 
 	WebBrowser,
@@ -20,6 +22,13 @@ import { MonoText } from '../components/StyledText';
 import { MaterialIcons } from '@expo/vector-icons';
 import strings from "../config/strings";
 import { Input } from 'react-native-elements';
+import { ImagePicker, Permissions } from 'expo';
+
+var BUTTONS = [
+  'Camera',
+  'Choose from Photos',
+  'Cancel',
+];
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -28,6 +37,7 @@ export default class HomeScreen extends React.Component {
 
   state = {
     modalVisible: false,
+    clicked: 'none',
   };
 
   setModalVisible(visible) {
@@ -65,18 +75,28 @@ export default class HomeScreen extends React.Component {
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
+          >
+
             <View style={{marginTop: 22}}>
               <View>
-                <Text>Hello World!</Text>
+                <Input
+                  placeholder="Add a post..." 
+                  multiline={true}
+                  rightIcon={
+                    <MaterialIcons
+                      onPress={this.showActionSheet} 
+                      name='camera-alt'
+                      size={24}
+                      color='black'
+                    />
+                  }
+                />
 
                 <TouchableHighlight
                   onPress={() => {
                     this.setModalVisible(!this.state.modalVisible);
                   }}>
-                  <Text>Hide Modal</Text>
+                  <Text>Cancel</Text>
                 </TouchableHighlight>
               </View>
             </View>
@@ -105,7 +125,12 @@ export default class HomeScreen extends React.Component {
           title={strings.LOGOUT}
           onPress={this.handleLogOut}
         />
-
+        <View>
+        
+        <Text>
+          Clicked button: {this.state.clicked}
+        </Text>
+      </View>
 
         </ScrollView>
       </View>
@@ -114,7 +139,15 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-
+  showActionSheet = () => {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: BUTTONS,
+      cancelButtonIndex: 2,
+    },
+    (buttonIndex) => {
+      this.setState({ clicked: BUTTONS[buttonIndex] });
+    });
+  };
 
 }
 
@@ -209,5 +242,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		width: "100%"
-	}
+  },
+  button: {
+    marginBottom: 10,
+    fontWeight: '500',
+  }
 });
