@@ -2,6 +2,10 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { red } from '@material-ui/core/colors';
 
 const styles = theme => ({
+    add_post:{
+        width:'80%',
+        border: '1px solid black',
+    },
     post:{
         /*border: '1px solid green' ,*/
         marginLeft:'100px',
@@ -37,7 +41,7 @@ const styles = theme => ({
         marginLeft: '5px',
         marginBottom:'9px',
     },
-    post_comment_input:{
+    comment_input:{
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),},
@@ -59,6 +63,7 @@ const styles = theme => ({
         },
         marginBottom:'9px',
 }
+
 });
 
 

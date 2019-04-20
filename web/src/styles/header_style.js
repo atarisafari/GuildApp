@@ -19,23 +19,26 @@ const styles = theme => ({
     searchButtonWrap:{
         float:'left',
         height:'34.4px',
+        margin:0,
+        padding:0,
+        marginRight:'5px',
         /*border: '1px solid yellow',*/
         
     },
     addButtonWrap:{
-        float:'right',
         height:'34.4px',
         margin:0,
         padding:0,
+        marginLeft:'5px',
         /* border: '1px solid green',*/
         
     },
     searchButton:{
-            height:'34.4px',
+        height:'34.4px',
         marginLeft: 0,
+        marginRight: 0,
         color: "white",
         backgroundColor:"#69052b",
-        height:34.4,
         borderBottomLeftRadius:0,
         borderTopLeftRadius:0,
         margin:'5px',
@@ -44,10 +47,8 @@ const styles = theme => ({
     },
     addButton:{
         height:'34.4px',
-        marginLeft: 0,
         color: "white",
         backgroundColor:"#69052b",
-        height:34.4,
         margin:'5px',
         marginTop:'0',
         /* border: '1px solid blue' ,*/

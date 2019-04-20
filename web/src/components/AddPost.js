@@ -4,47 +4,15 @@ import {addPost} from '../utils/apiCalls';
 import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import Popup from "reactjs-popup";
 import Camera from '@material-ui/icons/CameraAlt';
-import axios from 'axios';
-import request from 'superagent';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {useDropzone} from 'react-dropzone';
 
-const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16
-};
-  
-const thumb = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 100,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box'
-};
-  
-const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden'
-};
-  
-const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-};
-
 const AddPost = (props) => {
-    console.log('props: ', props); 
-    const [content,setContent] = useState('');
+    //console.log('AddPost props: ', props); 
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem('username');
+    const [content,setContent] = useState('');
     const [files, setFiles] = useState([]);
 
     const {getRootProps, getInputProps} = useDropzone({
@@ -58,15 +26,10 @@ const AddPost = (props) => {
 
     const imageUpload = files.map(file => (
         <div style={thumb} key={file.name}>
-          <div style={thumbInner}>
-                
-            <img
-            src={file.preview}
-            style={img}
-            />
-            
-          </div>
-          <Button close size="sm" position='absolute'/>
+                <div style={thumbInner}>
+                    <img src={file.preview} style={img}/>
+                </div>
+            <Button close size="sm" position='absolute'/>
         </div>
     ));
     
@@ -81,20 +44,24 @@ const AddPost = (props) => {
     }
 
     const addPostHandler = async() =>{
-        
-        let data = await addPost(token, content);
-        console.log("Result" , data);
-        if(data.error === ""){
-            console.log("Add post was successful");
+        if(content === ''){
+            alert("Can't add an empty post");
+        }else{
+            let data = await addPost(token, content, '');
+            console.log("Result" , data);
+            if(data.error === ""){
+                console.log("Add post was successful");
+            }
+            else{
+                alert(data.error);
+            }
         }
-        else{
-            alert(data.error);
-        }
+        window.location.reload();
     }
     
     return (
         <div id={props.id}>
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem'}}>
                 <Popup trigger={
                     <button>
                         <TextField 
@@ -109,7 +76,7 @@ const AddPost = (props) => {
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <CardTitle tag="h1"> User Display Name</CardTitle>
+                            <CardTitle tag="h1">{user}</CardTitle>
                             <CardBody>
                                 <div id="postContent">
                                     <form autoComplete="off">
@@ -133,26 +100,54 @@ const AddPost = (props) => {
                                             {imageUpload}
                                         </aside>
                                     </section>
-                                    
                                 </div>
 
-                                <div id="buttons">
-                                <Button type="submit" class="btn btn-primary" onClick={()=>addPostHandler()}>POST</Button>
+                                <div id="buttons" onClick={cancel}>
+                                <Button type="submit" className="btn btn-primary" onClick={addPostHandler}>POST</Button>
                                 <a href="#" className="cancel" onClick={cancel}> Cancel </a>
                                 </div>
 
                             </CardBody>
                         </div>
                     )}
-            
                 
                 </Popup>
-                    
+            
             </Card>
         </div>
     );
 };
 
+const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16
+};
+
+const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+};
+
+const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+};
+
+const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+};
 
 export default AddPost;
 
