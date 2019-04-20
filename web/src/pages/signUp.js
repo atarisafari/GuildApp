@@ -1,5 +1,6 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
+import '../styles/signUp.css';
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
 import Avatar from '@material-ui/core/Avatar';
@@ -91,37 +92,38 @@ export default props => {
 //    }
     //console.log(username,password);
     return (
-    <div className="App">
-        <h1> SignUp </h1> 
-        {/* <SamplePage2 />  */}
+    <div className="AppSignUp">
         <div id="signUp">
+            <h1> SignUp </h1> 
+            {/* <SamplePage2 />  */}
             <div id="profile_pic">
                 <Popup trigger={
                     <IconButton>
                         <Badge badgeContent={<AddIcon />} color="secondary" >
                             <Grid container justify="center" alignItems="center">
-                                <Avatar alt="" src={require('./profilePicPlaceholder.png')}  />
+                                <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
                             </Grid>
                         </Badge>
                     </IconButton>
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <GridList cellHeight={180}>
+                            <GridList cellHeight={150}>
                                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                                     <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
                                 </GridListTile>
                                 {tileData.map(tile => (
-                                        
-
-                                    <GridListTile key={tile.img} style={{ maxWidth: '50%', maxHeight: '50%' }} cols={tile.cols || 1}>
-                                    {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
-                                        <img src={tile.img} alt={tile.title} />
-                                        <GridListTileBar title={tile.title}/>
-                                        {/* </a>*/}
-                                    </GridListTile>
+                                    <a href='#' onClick={cancel}>
+                                        <GridListTile key={tile.img} style={{ maxWidth: '50%', height: '150px' }} cols={tile.cols || 1}>
+                                        {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
+                                            <img src={tile.img} alt={tile.title} />
+                                            <GridListTileBar title={tile.title}/>
+                                        </GridListTile>
+                                    </a>
                                     
+
                                 ))}
+
                             </GridList>
                         </div>
                         
@@ -144,8 +146,8 @@ export default props => {
                 Retype Password: 
                 <input type='password' onBlur= { e => confPasswordHandler(e.target.value)}/>
             </div>
-            <button onClick={()=>signUpHandler()}> SIGN UP </button>
-            <HomeButton path='/' {...props}>BACK</HomeButton>
+            <button className="signUp" onClick={()=>signUpHandler()}> SIGN UP </button>
+            <HomeButton className='signUp' path='/' {...props}>BACK</HomeButton>
         </div>
     </div>
     )

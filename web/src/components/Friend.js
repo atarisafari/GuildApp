@@ -35,8 +35,7 @@ const Friend = (props) => {
 
     return (
         <div key={props.id} id={props.id}>
-            <Card className={classes.friend_card}>
-                
+            <Card className={classes.friend_card}>  
                 <CardBody>                   
                     <Avatar className={classes.friend_img} alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
                     <CardTitle className={classes.friend_title} tag="h2"> 

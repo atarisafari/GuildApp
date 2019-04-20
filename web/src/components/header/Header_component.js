@@ -146,7 +146,7 @@ class Header_component extends React.Component {
           </Badge>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>
+        <MenuItem onClick={() =>{this.handleMenuClose(); this.goProfile();}}>
             <AccountCircle className={classes.popMenuIcons} />
           <p>Profile</p>
         </MenuItem>
@@ -154,7 +154,7 @@ class Header_component extends React.Component {
               <SettingsIcon className={classes.popMenuIcons}/>
           <p>Settings</p>
         </MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>
+        <MenuItem onClick={() =>{this.handleMenuClose(); this.handleLogout();}}>
                 <LogOutIcon className={classes.popMenuIcons}/>
           <p>Logout</p>
         </MenuItem>
