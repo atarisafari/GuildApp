@@ -37,6 +37,13 @@ const styles = theme => ({
         fontSize:'20px',
     },
 
+    post_popup_camera:{
+        cursor: 'pointer',
+        margin:'10px',
+        width:'30px',
+        height:'30px',
+    },
+
     post_button:{
         height:'34.4px',
         width:'60px',

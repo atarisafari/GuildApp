@@ -132,7 +132,7 @@ const AddPost = (props) => {
                                     <section className="container">
                                         <div {...getRootProps({className: 'dropzone'})}>
                                             <input {...getInputProps()} />
-                                            <Camera style = {{cursor: 'pointer', margin:'10px',width:'30px',height:'30px',}} / >
+                                            <Camera  className={classes.post_popup_camera} / >
                                         </div>
                                         <aside style={thumbsContainer}>
                                             {imageUpload}
@@ -157,7 +157,4 @@ const AddPost = (props) => {
         </div>
     );
 };
-
-
 export default withStyles(styles)(AddPost);
-

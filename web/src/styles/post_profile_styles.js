@@ -18,9 +18,8 @@ const styles = theme => ({
     post_card_body:{
         /*border: '1px solid black' ,*/
     },
-    post_title:{
+    post_card_title:{
         /* border: '1px solid red' ,*/
-        color:"#b20949",
         fontSize:'30px',
     },
     post_text:{
