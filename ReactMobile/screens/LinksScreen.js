@@ -2,20 +2,26 @@ import React from 'react';
 import {
 	ScrollView,
 	StyleSheet,
-	Button
+	Button,
+	Text
 } from 'react-native';
 import {
 	SecureStore
 } from 'expo';
 
 interface State {
-	call: Bol
+	callDone: Boolean
 }
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Friends',
   };
+
+	//initially the call is not done
+	state: State = {
+		callDone: false
+	}
 
 	getFriends = async() => {
 
@@ -38,8 +44,9 @@ export default class LinksScreen extends React.Component {
 				.then(async function(json) {
 
 					console.log(json);
+					this.state.callDone = true;
 					return json;
-			})
+				})
 		}catch(e){
 			console.log(e)
 		}
@@ -48,14 +55,19 @@ export default class LinksScreen extends React.Component {
 	render() {
 
 		let Friends = this.getFriends();
-		console.log(Friends);
 
-    return (
-      <ScrollView style={styles.container}>
 
-      </ScrollView>
-    );
-  }
+
+		if(!this.state.callDone){
+			 return (<Text>dick</Text>);
+		}else{
+			return (
+				<ScrollView style={styles.container}>
+					<Text>Succ</Text>
+				</ScrollView>
+			);
+		}
+	}
 }
 
 const styles = StyleSheet.create({
