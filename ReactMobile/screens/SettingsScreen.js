@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from "../components/Button";
 import {
 	View,
-	StyleSheet
+	StyleSheet,
+	Button
 } from 'react-native';
 import {
 	SecureStore
@@ -10,7 +10,7 @@ import {
 
 export default class SettingsScreen extends React.Component {
 	static navigationOptions = {
-		title: 'app.json',
+		title: 'Settings`',
 	};
 	
   handleLogOut = () => {
@@ -36,9 +36,9 @@ export default class SettingsScreen extends React.Component {
 			<View style={styles.form}>
 				<Button 
 				style={styles.button}
-				label='Signout'
+				title='Signout'
 				onPress={this.handleLogOut}
-				/>
+			/>
 			</View>
 		);
 	}
@@ -46,11 +46,10 @@ export default class SettingsScreen extends React.Component {
 
 const styles = StyleSheet.create({
 	form: {
-		flex: 1,
-		justifyContent: "center",
-		width: "80%"
+		flexDirection: "column",
+		paddingTop: 20
 	},
 	button: {
-		color: "#841584"
+		width: 80
 	}
 })
