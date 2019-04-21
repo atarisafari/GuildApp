@@ -27,7 +27,7 @@ interface State {
 	passwordTouched: boolean;
 }
 
-class LoginScreen extends React.Component<{}, State> {
+class AuthenticationScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
 
 	readonly state: State = {
@@ -102,7 +102,7 @@ class LoginScreen extends React.Component<{}, State> {
 					return true;
 				}
 				else{
-					alert(result.error);
+			
 					return false;
 				}
 			}else{
@@ -199,4 +199,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default LoginScreen;
+export default AuthenticationScreen;

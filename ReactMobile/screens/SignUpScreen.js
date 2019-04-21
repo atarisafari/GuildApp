@@ -109,16 +109,6 @@ class SignUpScreen extends React.Component {
         <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
         <ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
 
-            <Button title="launchCameraAsync" onPress={this.useCameraHandler} />
-            <Button
-              title="launchImageLibraryAsync"
-              onPress={this.useLibraryHandler}
-            />
-            <Text style={styles.paragraph}>
-              {JSON.stringify(this.state.profile_pic_url)}
-            </Text>
-          
-
           <TextInput
             
             placeholder="Display name:"

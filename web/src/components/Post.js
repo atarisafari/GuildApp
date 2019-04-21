@@ -1,4 +1,3 @@
-
 import React, { Component, useState } from 'react';
 import {deletePost} from '../utils/apiCalls';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
