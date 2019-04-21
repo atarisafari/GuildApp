@@ -29,12 +29,8 @@ while($row = $result->fetch_assoc())
 
 $ret = array();
 
-//$stmt = $conn->prepare("SELECT * FROM user_info WHERE user_id IN (".implode(',',$friendIDs).") AND ((username like ?) OR (display_name LIKE ?))");
-//$stmt->bind_param("ss",$text,$text);
 
 $result = $conn->query("SELECT * FROM user_info WHERE user_id IN (".implode(',',$friendIDs).") AND username LIKE '$text%'");
-
-//$result = $stmt->get_result();
 
 $ret = array();
 
@@ -50,3 +46,4 @@ while($row = $result->fetch_assoc())
 }
 
 echo json_encode($ret);
+
