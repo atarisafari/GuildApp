@@ -9,12 +9,14 @@ import {
   TouchableOpacity,
   View,
   Button,
-  Modal, 
+  Modal,
   TouchableHighlight,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
-import { 
+import {
 	WebBrowser,
 	SecureStore
 } from 'expo';
@@ -29,27 +31,40 @@ import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';
 
 export default class Post extends React.Component {
-  /*
+
     constructor(props) {
         super(props);
         this.state = {
-          isLoading: true
+          showHide: false
         }
-      }
-    GetItem (fruit_name) {
-       
-      Alert.alert(fruit_name);
-    
-      }
-    
+    }
 
-    
+    ShowHideTextComponentView = () =>{
+
+      if(this.state.showHide == true)
+      {
+        this.setState({showHide: false})
+      }
+      else
+      {
+        this.setState({showHide: true})
+      }
+    }
+       /*
+    GetItem (fruit_name) {
+
+      Alert.alert(fruit_name);
+
+      }
+
+
+
 componentDidMount() {
     async function checkToken() {
         let token = await SecureStore.getItemAsync('secure_token');
         console.log(token);
     }
-   
+
     return fetch('https://guild-app.com/php/grabAllPosts.php', {
         method: 'POST',
         headers: {
@@ -60,7 +75,7 @@ componentDidMount() {
           token: token,
           username: username
         })
-      
+
       }).then((response) => response.json())
         .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -87,19 +102,59 @@ ListViewItemSeparator = () => {
         }}
       />
     );
-  }    
+  }
 */
   render() {
-   
-
       return (
-        
+
         <View style={styles.MainContainer}>
+
           <View style={styles.cardContainer}>
-            <TouchableOpacity style={styles.card}>
-              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/> 
+            <View style={styles.card}>
+              <Text style={styles.cardText} style={{fontWeight: 'bold'}}> Display name </Text>
+              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/>
               <Text style={styles.cardText}> Hello </Text>
-            </TouchableOpacity>
+              {/*Icons*/}
+              <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity>
+                  <Icon name='favorite'/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.ShowHideTextComponentView} >
+                  <Icon name='insert-comment'/>
+                </TouchableOpacity>
+              </View>
+              {
+                this.state.showHide ?
+
+                  <TextInput
+                      placeholder="Make a comment..."
+                      multiline={true}
+                      style={styles.TextInputStyleClass}
+                  />
+
+                : null
+              }
+            </View>
+
+
+          </View>
+
+          <View style={styles.cardContainer}>
+            <View style={styles.card}>
+              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/>
+              <Text style={styles.cardText}> Hello </Text>
+              {/*Icons*/}
+              <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity>
+                  <Icon name='favorite'/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon name='insert-comment'/>
+                </TouchableOpacity>
+              </View>
+
+            </View>
+
 
           </View>
  {/*
@@ -109,13 +164,13 @@ ListViewItemSeparator = () => {
 
    renderSeparator= {this.ListViewItemSeparator}
 
-   renderRow={(rowData) => <Text style={styles.rowViewContainer} 
+   renderRow={(rowData) => <Text style={styles.rowViewContainer}
    onPress={this.GetItem.bind(this, rowData.fruit_name)} >{rowData.fruit_name}</Text>}
 
  />
 */}
 </View>
-   
+
       );
     }
 
@@ -152,19 +207,26 @@ const styles = StyleSheet.create({
       fontSize: 16
     },
     MainContainer :{
- 
+
         // Setting up View inside content in Vertically center.
         justifyContent: 'center',
         flex:1,
         margin: 10
-         
+
         },
-    
+
     rowViewContainer: {
         fontSize: 20,
         paddingRight: 10,
         paddingTop: 10,
         paddingBottom: 10,
+    },
+    TextInputStyleClass: {
+      textAlign: 'auto',
+      marginBottom: 7,
+      height: 40,
+      borderWidth: 1,
+      borderRadius: 10,
     }
 });
   
