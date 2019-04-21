@@ -116,27 +116,23 @@ const Post = (props) => {
                             </div>
                         )}
                     />
-                    <TextField 
-                        id="textPopUp" 
-                        fullWidth 
-                        multiline
-                        placeholder="Make a comment..." 
-                        onBlur= { e => commentAddHandler(e.target.value)}
-                        InputProps={{
-                            endAdornment: 
-                                <InputAdornment className={classes.post_comment_input} position="end">     
-                                    <Button className={classes.comment_button} variant="primary" size="small" onClick={addComment}>
-                                        Comment
-                                    </Button>
-                                </InputAdornment>
-                        }}
-                    /> 
+                    <div className={classes.coment_input__button_wrap}>
+                        <TextField 
+                            className={classes.comment_input}
+                            id="textPopUp" 
+                            fullWidth 
+                            multiline
+                            placeholder="Make a comment..." 
+                            onBlur= { e => commentAddHandler(e.target.value)}
+                        /> 
+                        <Button className={classes.comment_button} variant="primary" size="small" onClick={addComment}>
+                            Comment
+                        </Button>
+                    </div>
                 </CardBody>
             </Card>
         </div>
     );
 };
 
-
 export default withStyles(styles)(Post);
-

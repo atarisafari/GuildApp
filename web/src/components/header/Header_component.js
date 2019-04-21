@@ -16,7 +16,7 @@ import LogOutIcon from '@material-ui/icons/Close';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 /* components and files import*/
-import styles from "./header_style"
+import styles from '../../styles/header_style';
 import SearchFriendForm from "./header_form"
 import ProfileAvatar from "./SmallProfileAvatar"
 

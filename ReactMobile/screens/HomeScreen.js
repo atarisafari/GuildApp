@@ -46,77 +46,6 @@ export default class HomeScreen extends React.Component {
     this.setState({modalVisible: visible});
   }
 
-  handleLogOut = () => {
-    //check to see if we get a token back
-		async function checkToken() {
-      let result = await SecureStore.deleteItemAsync('secure_token');
-			if(result === null){
-				return true;
-			}else{
-				return false;
-			}
-    }
-		
-		//if we get a token, log out
-		if(checkToken()){
-			this.props.navigation.navigate('Auth');
-    }
-  };
-  askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-  
-  useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-
-  useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-    
- 
 
   render() {
     return (
@@ -184,11 +113,6 @@ export default class HomeScreen extends React.Component {
           </View>
 
         </View>
-        <Post />
-        <Button 
-          title={strings.LOGOUT}
-          onPress={this.handleLogOut}
-        />
         <View>
         
         

@@ -7,10 +7,11 @@ const styles = theme => ({
     mainBar:{
         backgroundColor:"#b20949",
         width: '100%',
+        minHeight:'70px',
         color: theme.palette.common.white,
     },
-    formButtonsWrap:{
-        width:'40%',
+    formButtonWrap:{
+        width:'30%',
         float:'left',
         display:'inline-box',
         height:'34.4px',
@@ -19,36 +20,35 @@ const styles = theme => ({
     searchButtonWrap:{
         float:'left',
         height:'34.4px',
+        margin:0,
+        padding:0,
+        marginRight:'5px',
         /*border: '1px solid yellow',*/
         
     },
     addButtonWrap:{
-        float:'right',
         height:'34.4px',
         margin:0,
         padding:0,
+        marginLeft:'2px',
         /* border: '1px solid green',*/
         
     },
     searchButton:{
-            height:'34.4px',
+        height:'34.4px',
         marginLeft: 0,
+        marginRight: 0,
         color: "white",
         backgroundColor:"#69052b",
-        height:34.4,
         borderBottomLeftRadius:0,
         borderTopLeftRadius:0,
-        margin:'5px',
         marginTop:'0',
         /* border: '1px solid black' ,*/
     },
     addButton:{
         height:'34.4px',
-        marginLeft: 0,
         color: "white",
         backgroundColor:"#69052b",
-        height:34.4,
-        margin:'5px',
         marginTop:'0',
         /* border: '1px solid blue' ,*/
     },
@@ -58,7 +58,7 @@ const styles = theme => ({
         /*border: '1px solid black' ,*/
     },
     inputWrap:{
-        width:'60%',
+        width:'70%',
         float:'left',
         /* border: '1px solid yellow' ,*/
 
