@@ -24,7 +24,10 @@ const Post = (props) => {
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
     const [commentAdd,setCommentAdd] = useState('');
     const {classes} = props;
-    let user = props.username===''? localStorage.getItem('username') : props.username;
+    let user = 
+        props.username===''
+            ? localStorage.getItem('username') 
+            : localStorage.getItem('usernameFriend');
 
     const commentAddHandler = commentAdd=>{
         setCommentAdd(commentAdd);
@@ -100,8 +103,8 @@ const Post = (props) => {
                         content={hide => (
                             <div>
                                 <div className="media mb-3">
-                                    <Avatar
-                                        className="mr-3 bg-light rounded"
+                                    <img
+                                        className="m-2 rounded"
                                         width="48"
                                         height="48"
                                         src= {random_img(img)}

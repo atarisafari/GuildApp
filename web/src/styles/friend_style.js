@@ -1,3 +1,5 @@
+import { Radio } from "@material-ui/core";
+
 const styles = theme => ({
 
     friend_card:{
@@ -15,12 +17,17 @@ const styles = theme => ({
         marginTop:'0',
         textAlign:'center',
         border:'0px',
+        float: 'right',
         /* border:'1px solid green'*/
     },
 
 
     friend_img:{
         cursor: 'pointer',
+        width: '40px',
+        height: '40px',
+        margin: '5px',
+        borderRadius: '5px'
     },
 
     friend_title:{

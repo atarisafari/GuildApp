@@ -10,10 +10,9 @@ export default props => {
     console.log('props: ', props); 
     const token = localStorage.getItem('token');
     const [content,setContent] = useState('');
-    const [username,setUsername] = useState('');
     const [friends,setFriends] = useState([]);
     const [posts,setPosts] = useState([]);
-
+    
     const friendsHandler = async() => {
         let result =  await grabAllFriends(token).then(ble => ble) 
         console.log('fetching friends', result);
@@ -21,7 +20,8 @@ export default props => {
     }
     
     const postsHandler = async() => {
-        let result =  await grabAllPosts(token, username).then(ble => ble) 
+        
+        let result =  await grabAllPosts(token, localStorage.getItem('usernameFriend')).then(ble => ble) 
         console.log('fetching posts', result);
         setPosts(result);
     }
@@ -36,6 +36,7 @@ export default props => {
     }, [token]); //If this variable changes, this code will be run again
 
     useEffect(()=>{//This will be executed always after the components have been rendered
+        console.log("Username: ", localStorage.getItem('usernameFriend'));
         friendsHandler();
         postsHandler();
     },[]);//Array that contains all variables that if changed then that function should run again. [] = componentDidMount
@@ -98,7 +99,7 @@ export default props => {
                                     time_created={value.time_created}
                                     num_likes={value.num_likes}
                                     num_comments={value.num_comments}
-                                    username={username}  
+                                    username={localStorage.getItem('usernameFriend')}  
                                     content={value.content}
                             />
                         );

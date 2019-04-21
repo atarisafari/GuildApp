@@ -63,6 +63,7 @@ class Header_component extends React.Component {
   }
 
   goProfile = async() =>{
+    localStorage.setItem('usernameFriend', '');
     this.props.props.history.push("/profile");
   }
 

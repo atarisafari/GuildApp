@@ -17,6 +17,7 @@ const Friend = (props) => {
 
     const goProfile = async() =>{
         //change username?
+        localStorage.setItem('usernameFriend', props.username);
         props.history.push("/profile");
     }
 
@@ -37,13 +38,13 @@ const Friend = (props) => {
         <div key={props.id} id={props.id}>
             <Card className={classes.friend_card}>
                 <CardBody>                   
-                    <Avatar className={classes.friend_img} alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
+                    <Button className={classes.friend_block_button} onClick={blockUserHandler}>Block</Button>
+                    <img className={classes.friend_img} alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
                     <CardTitle className={classes.friend_title} tag="h2"> 
                         {props.name}
                     </CardTitle>
                     <CardSubtitle className={classes.friend_subtitle} tag="h5">{props.username}</CardSubtitle>
                     <CardText className={classes.friend_post} tag="p">{props.preview}</CardText>
-                    <Button className='float-right' className={classes.friend_block_button} onClick={blockUserHandler}>Block</Button>
                 </CardBody>             
             </Card>
         </div>

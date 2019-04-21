@@ -94,7 +94,7 @@ export const grabAllFriends = async (token) => {
     } 
 }
 
-export const grabAllPosts = async (token, username='') => { //empty username means our own username
+export const grabAllPosts = async (token, username) => { //empty username means our own username
     try{
         let response = await fetch('https://guild-app.com/php/grabAllPosts.php', {
             method: 'POST',
@@ -108,7 +108,7 @@ export const grabAllPosts = async (token, username='') => { //empty username mea
             })
         })
         return await response.text().then(function(text) {
-            console.log("grabAllPosts response",text);
+            console.log("grabAllPosts response from ", username + text);
             return text ? JSON.parse(text) : {}
         })   
     }

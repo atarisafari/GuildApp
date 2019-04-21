@@ -24,6 +24,7 @@ class App extends Component {
             console.log("Login was successful");
             localStorage.setItem('token', data.token);
             localStorage.setItem('username', this.state.username);
+            localStorage.setItem('usernameFriend', '');
             this.props.history.push("/home");
         }
         else{
@@ -36,7 +37,7 @@ class App extends Component {
         <header id="sign_in_header" className="App-header">
           <div className="container-left">
           <p></p>
-          <img src={logo} width='500' height='300'/>
+          <img src={logo} width='80%' height='auto'/>
           </div>
           <div className="container-right">
             <div id="logo_header">
