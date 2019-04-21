@@ -1,5 +1,3 @@
-  GNU nano 2.9.3                                                                                                                                                                                          blockUser.php                                                                                                                                                                                                    
-
 <?php
 
 include("establishConn.php");
@@ -85,3 +83,6 @@ else
 
 
 }
+
+
+
