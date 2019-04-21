@@ -25,7 +25,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
 import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
-import AuthenticationScreen from '../screens/AuthenticationScreen'
+import AuthenticationScreen from '../screens/AuthenticationScreen';
+import logo from '../assets/images/logo.png';
 
 export default class Post extends React.Component {
   /*
@@ -90,17 +91,17 @@ ListViewItemSeparator = () => {
 */
   render() {
    
-      if (this.state.isLoading) {
-        return (
-          <View style={{flex: 1, paddingTop: 20}}>
-            <ActivityIndicator />
-          </View>
-        );
-      }
-   
+
       return (
         
         <View style={styles.MainContainer}>
+          <View style={styles.cardContainer}>
+            <TouchableOpacity style={styles.card}>
+              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/> 
+              <Text style={styles.cardText}> Hello </Text>
+            </TouchableOpacity>
+
+          </View>
  {/*
  <ListView
 
@@ -120,9 +121,13 @@ ListViewItemSeparator = () => {
 
 }
 const styles = StyleSheet.create({
-    container: {
+    cardContainer: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    cardContainer: {
+      marginTop: 20,
+      backgroundColor: '#F5FCFF',
     },
     cardImage: {
       width: '100%',
@@ -160,6 +165,6 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        }
+    }
 });
   

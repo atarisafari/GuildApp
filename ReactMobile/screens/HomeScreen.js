@@ -184,7 +184,7 @@ export default class HomeScreen extends React.Component {
           </View>
 
         </View>
-        {/*<Post />*/}
+        <Post />
         <Button 
           title={strings.LOGOUT}
           onPress={this.handleLogOut}
@@ -299,27 +299,5 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 10,
     fontWeight: '500'
-  },
-  cardImage: {
-    width: '100%',
-    height: 350,
-    resizeMode: 'cover'
-  },
-  card: {
-    backgroundColor: '#fff',
-    marginTop: 10,
-    marginLeft: '2%',
-    width: '96%',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-    shadowOffset: {
-      width: 3,
-      height: 3
-    }
-  },
-  cardText: {
-    padding: 10,
-    fontSize: 16
   }
 });
