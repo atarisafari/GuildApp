@@ -1,4 +1,3 @@
-
 import React, { Component, useState } from 'react';
 import {deletePost} from '../utils/apiCalls';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
@@ -35,17 +34,17 @@ const Post = (props) => {
         if(commentAdd === ''){ //If passwords don't match then dont make the api call
             alert("Can't add an empty comment");
         }
-        // else{
-        //     let data = await addComment(token, props.id, commentAdd);
-        //     console.log("addComment Result" , data);
-        //     if(data.error === ""){
-        //         //TODO
-        //         console.log("Comment added");
-        //     }
-        //     else{
-        //         alert(data.error);
-        //     }
-        // }
+        else{
+            let data = await addComment(token, props.id, commentAdd);
+            console.log("addComment Result" , data);
+            if(data.error === ""){
+                //TODO
+                console.log("Comment added");
+            }
+            else{
+                alert(data.error);
+            }
+        }
         
     }
 
@@ -117,27 +116,23 @@ const Post = (props) => {
                             </div>
                         )}
                     />
-                    <TextField 
-                        id="textPopUp" 
-                        fullWidth 
-                        multiline
-                        placeholder="Make a comment..." 
-                        onBlur= { e => commentAddHandler(e.target.value)}
-                        InputProps={{
-                            endAdornment: 
-                                <InputAdornment className={classes.post_comment_input} position="end">     
-                                    <Button className={classes.comment_button} variant="primary" size="small" onClick={()=>addComment()}>
-                                        Comment
-                                    </Button>
-                                </InputAdornment>
-                        }}
-                    /> 
+                    <div className={classes.coment_input__button_wrap}>
+                        <TextField 
+                            className={classes.comment_input}
+                            id="textPopUp" 
+                            fullWidth 
+                            multiline
+                            placeholder="Make a comment..." 
+                            onBlur= { e => commentAddHandler(e.target.value)}
+                        /> 
+                        <Button className={classes.comment_button} variant="primary" size="small" onClick={addComment}>
+                            Comment
+                        </Button>
+                    </div>
                 </CardBody>
             </Card>
         </div>
     );
 };
 
-
 export default withStyles(styles)(Post);
-

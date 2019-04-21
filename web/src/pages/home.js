@@ -4,6 +4,7 @@ import Friend from '../components/Friend';
 import Post from '../components/Post';
 import AddPost from '../components/AddPost';
 import Header_component from '../components/header/Header_component';
+import styles from '../styles/home_styles.css';
 
 export default props => {
     console.log('props: ', props); 
@@ -69,41 +70,42 @@ export default props => {
     }
 
     return (
-        <div className="App">
+        <div className="AppHome">
             <Header_component props={props}/>
             
-            <h1> Home Page </h1> 
             {/* <Home />  */}
-            <AddPost id="add_post"/>
-            { 
-                friends.map((values) => {
-                    return (
-                        <Friend id={values.username}
-                                name={values.display_name} 
-                                username={values.username}
-                                preview={values.preview} 
-                                history={props.history}
-                        />
-                    );
-                })
-            }
-            
-            {
-                posts.map((value) => {
-                    return (
-                        <Post   key={value.post_id} 
-                                id={value.post_id} 
-                                image_url={value.image_url}
-                                time_created={value.time_created}
-                                num_likes={value.num_likes}
-                                num_comments={value.num_comments}
-                                username={username}  
-                                content={value.content}
-                        />
-                    );
-                })
-            }
-            
+            <div className ="home_collum1">
+                { 
+                    friends.map((values) => {
+                        return (
+                            <Friend id={values.username}
+                                    name={values.display_name} 
+                                    username={values.username}
+                                    preview={values.preview} 
+                                    history={props.history}
+                            />
+                        );
+                    })
+                }
+            </div>
+            <div className ="home_collum2">
+                 <AddPost id="add_post"/>
+                {
+                    posts.map((value) => {
+                        return (
+                            <Post   key={value.post_id} 
+                                    id={value.post_id} 
+                                    image_url={value.image_url}
+                                    time_created={value.time_created}
+                                    num_likes={value.num_likes}
+                                    num_comments={value.num_comments}
+                                    username={username}  
+                                    content={value.content}
+                            />
+                        );
+                    })
+                }
+            </div>
         </div>
     )
 }

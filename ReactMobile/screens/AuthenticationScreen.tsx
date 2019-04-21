@@ -3,15 +3,20 @@ import {
 	Image,
 	KeyboardAvoidingView,
 	StyleSheet,
-	View
+	View,
+	Text
 } from "react-native";
 import Button from "../components/Button";
 import FormTextInput from "../components/FormTextInput";
 import imageLogo from "../assets/images/logo.png";
+
 import colors from "../config/colors";
 import strings from "../config/strings";
+import SignUpScreen from '../SignUpScreen';
 import login from "../config/calls";
+import SignUp from "../config/calls";
 import {SecureStore} from 'expo';
+import Hyperlink from 'react-native-hyperlink'
 
 interface State {
 	email: string;
@@ -22,7 +27,7 @@ interface State {
 	passwordTouched: boolean;
 }
 
-class LoginScreen extends React.Component<{}, State> {
+class AuthenticationScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
 
 	readonly state: State = {
@@ -55,8 +60,12 @@ class LoginScreen extends React.Component<{}, State> {
 		this.setState({ passwordTouched: true });
 	};
 
+	handleSignUpPress = () => {
+		this.props.navigation.navigate('SignUpScreen');
+	};
+
 	handleLoginPress = () => {
-	
+
 		//send login info to api
 		try{
 			let response = fetch('http://157.230.66.35/php/login.php', {
@@ -73,27 +82,34 @@ class LoginScreen extends React.Component<{}, State> {
 			})
 				.then(response => response.json())
 				.then(async function(json) {
-					
+
 					var token = json.token;
-	
+
 					await SecureStore.setItemAsync('secure_token', token);
-					
+
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-		
+
 		//check to see if we get a token back
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
-			if(result !== null){
-				return true;
+			if(result !== ""){
+				if(result.error === ""){
+					console.log("Login was successful");
+					return true;
+				}
+				else{
+
+					return false;
+				}
 			}else{
 				return false;
 			}
 		}
-		
+
 		//if we get a token, login in
 		if(checkToken()){
 			this.props.navigation.navigate('Main');
@@ -123,35 +139,40 @@ class LoginScreen extends React.Component<{}, State> {
 				behavior="padding"
 			>
 			<Image source={imageLogo} style={styles.logo} />
-			<View style={styles.form}>
-			<FormTextInput
-				value={this.state.email}
-				onChangeText={this.handleEmailChange}
-				onSubmitEditing={this.handleEmailSubmitPress}
-				placeholder={strings.EMAIL_PLACEHOLDER}
-				autoCorrect={false}
-				keyboardType="email-address"
-				returnKeyType="next"
-				autoCapitalize={"none"}
-				onBlur={this.handleEmailBlur}
-				error={emailError}
-			/>
-			<FormTextInput
-				ref={this.passwordInputRef}
-				value={this.state.password}
-				onChangeText={this.handlePasswordChange}
-				placeholder={strings.PASSWORD_PLACEHOLDER}
-				secureTextEntry={true}
-				returnKeyType="done"
-				onBlur={this.handlePasswordBlur}
-				error={passwordError}
-			/>
-			<Button
-				label={strings.LOGIN}
-				onPress={this.handleLoginPress}
-				disabled={!email || !password}
-			/>
-			</View>
+				<View style={styles.form}>
+					<FormTextInput
+						value={this.state.email}
+						onChangeText={this.handleEmailChange}
+						onSubmitEditing={this.handleEmailSubmitPress}
+						placeholder="Username"
+						autoCorrect={false}
+						returnKeyType="next"
+						autoCapitalize={"none"}
+						onBlur={this.handleEmailBlur}
+						error={emailError}
+					/>
+					<FormTextInput
+						ref={this.passwordInputRef}
+						value={this.state.password}
+						onChangeText={this.handlePasswordChange}
+						placeholder={strings.PASSWORD_PLACEHOLDER}
+						secureTextEntry={true}
+						returnKeyType="done"
+						onBlur={this.handlePasswordBlur}
+						error={passwordError}
+					/>
+					<Button
+						label={strings.LOGIN}
+						onPress={this.handleLoginPress}
+						disabled={!email || !password}
+					/>
+
+					<Button
+						label={strings.SIGNUP}
+						onPress={this.handleSignUpPress}
+					/>
+
+				</View>
 			</KeyboardAvoidingView>
 		);
 	}
@@ -177,4 +198,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default LoginScreen;
+export default AuthenticationScreen;

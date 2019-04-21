@@ -1,17 +1,58 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {
+	ScrollView,
+	StyleSheet,
+	Button
+} from 'react-native';
+import {
+	SecureStore
+} from 'expo';
+
+interface State {
+	call: Bol
+}
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
-    title: 'Find Friends',
+    title: 'Friends',
   };
 
-  render() {
+	getFriends = async() => {
+
+
+		let token = await SecureStore.getItemAsync('secure_token');
+
+		try{
+			fetch('https://guild-app.com/php/grabAllFriends.php', {
+				mode: 'cors',
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					token: token
+				})
+			})
+				.then(response => response.json())
+				.then(async function(json) {
+
+					console.log(json);
+					return json;
+			})
+		}catch(e){
+			console.log(e)
+		}
+	}
+
+	render() {
+
+		let Friends = this.getFriends();
+		console.log(Friends);
+
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
+
       </ScrollView>
     );
   }
