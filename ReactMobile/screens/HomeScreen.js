@@ -44,24 +44,6 @@ export default class HomeScreen extends React.Component {
     this.setState({modalVisible: visible});
   }
 
-  handleLogOut = () => {
-    //check to see if we get a token back
-		async function checkToken() {
-			let result = await SecureStore.deleteItemAsync('secure_token');
-			if(result === null){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		//if we get a token, log out
-		if(checkToken()){
-			this.props.navigation.navigate('Auth');
-		}
-    
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -121,10 +103,7 @@ export default class HomeScreen extends React.Component {
 
         </View>
           
-        <Button 
-          title={strings.LOGOUT}
-          onPress={this.handleLogOut}
-        />
+	
         <View>
         
         <Text>
