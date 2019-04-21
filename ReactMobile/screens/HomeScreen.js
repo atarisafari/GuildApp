@@ -11,7 +11,7 @@ import {
   Button,
   Modal, 
   TouchableHighlight,
-  Picker
+  FlatList
 } from 'react-native';
 import { 
 	WebBrowser,
@@ -20,16 +20,17 @@ import {
 
 import { MonoText } from '../components/StyledText';
 import { MaterialIcons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
-import { Input } from 'react-native-elements';
+import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
+import Post from '../components/Post'
 
 var BUTTONS = [
   'Camera',
   'Choose from Photos',
   'Cancel',
 ];
-
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: "What's going on",
@@ -37,8 +38,9 @@ export default class HomeScreen extends React.Component {
 
   state = {
     modalVisible: false,
-    clicked: 'none',
+    profile_pic_url: '',
   };
+
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -47,27 +49,79 @@ export default class HomeScreen extends React.Component {
   handleLogOut = () => {
     //check to see if we get a token back
 		async function checkToken() {
-			let result = await SecureStore.deleteItemAsync('secure_token');
+      let result = await SecureStore.deleteItemAsync('secure_token');
 			if(result === null){
 				return true;
 			}else{
 				return false;
 			}
-		}
+    }
 		
 		//if we get a token, log out
 		if(checkToken()){
 			this.props.navigation.navigate('Auth');
-		}
-    
+    }
   };
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+  
+  useLibraryHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  useCameraHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+
+  useLibraryHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  useCameraHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+    
+ 
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-          
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>  
 
         {/*Modal*/}
         <View style={{marginTop: 22}}>
@@ -82,22 +136,32 @@ export default class HomeScreen extends React.Component {
                 <Input
                   placeholder="Add a post..." 
                   multiline={true}
-                  rightIcon={
-                    <MaterialIcons
-                      onPress={this.showActionSheet} 
-                      name='camera-alt'
-                      size={24}
-                      color='black'
-                    />
-                  }
+          
                 />
+                
+                {/*Camera and Album */}
+                <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity>
+                  <Icon name='photo-library' title="launchImageLibraryAsync" onPress={this.useLibraryHandler}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon name='add-a-photo' title="launchCameraAsync" onPress={this.useCameraHandler}/>
+                </TouchableOpacity>
+                </View>
+                <Text style={styles.paragraph}>
+                  {JSON.stringify(this.state.profile_pic_url)}
+                </Text>
 
+                {/*Exit modal */}
                 <TouchableHighlight
                   onPress={() => {
                     this.setModalVisible(!this.state.modalVisible);
                   }}>
+
                   <Text>Cancel</Text>
+
                 </TouchableHighlight>
+                
               </View>
             </View>
           </Modal>
@@ -120,16 +184,14 @@ export default class HomeScreen extends React.Component {
           </View>
 
         </View>
-          
+        {/*<Post />*/}
         <Button 
           title={strings.LOGOUT}
           onPress={this.handleLogOut}
         />
         <View>
         
-        <Text>
-          Clicked button: {this.state.clicked}
-        </Text>
+        
       </View>
 
         </ScrollView>
@@ -139,15 +201,6 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  showActionSheet = () => {
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: BUTTONS,
-      cancelButtonIndex: 2,
-    },
-    (buttonIndex) => {
-      this.setState({ clicked: BUTTONS[buttonIndex] });
-    });
-  };
 
 }
 
@@ -245,6 +298,28 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 10,
-    fontWeight: '500',
+    fontWeight: '500'
+  },
+  cardImage: {
+    width: '100%',
+    height: 350,
+    resizeMode: 'cover'
+  },
+  card: {
+    backgroundColor: '#fff',
+    marginTop: 10,
+    marginLeft: '2%',
+    width: '96%',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 1,
+    shadowOffset: {
+      width: 3,
+      height: 3
+    }
+  },
+  cardText: {
+    padding: 10,
+    fontSize: 16
   }
 });
