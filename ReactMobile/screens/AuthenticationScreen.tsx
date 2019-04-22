@@ -18,6 +18,7 @@ import SignUp from "../config/calls";
 import {SecureStore} from 'expo';
 import Hyperlink from 'react-native-hyperlink'
 
+var token = "";
 interface State {
 	email: string;
 	password: string;
@@ -82,10 +83,14 @@ class AuthenticationScreen extends React.Component<{}, State> {
 			})
 				.then(response => response.json())
 				.then(async function(json) {
+					console.log("json", json);
+					token = json.token;
+					var error = json.error;
 					
-					var token = json.token;
-	
-					await SecureStore.setItemAsync('secure_token', token);
+					if(token !== ""){
+						console.log("token", token);
+						await SecureStore.setItemAsync('secure_token', token);
+					}
 					
 				})
 		}
@@ -96,24 +101,28 @@ class AuthenticationScreen extends React.Component<{}, State> {
 		//check to see if we get a token back
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
-			if(result !== null){
-				if(result.error === ""){
+			
+				console.log("result", result);
+				if(result !== ""){
 					console.log("Login was successful");
-					return true;
+					return result;
 				}
 				else{
-			
-					return false;
+					console.log("Login was unsuccessful");
+					return "";
 				}
-			}else{
-				return false;
-			}
+			
 		}
-		
-		//if we get a token, login in
-		if(checkToken()){
+
+		checkToken()
+		.then(function(result){
+			console.log("result1", result);
 			this.props.navigation.navigate('Main');
-		}
+		})
+		.catch(function (error){
+			// Handle error
+			console.log("error", error);
+		});
 	};
 
 	render() {
