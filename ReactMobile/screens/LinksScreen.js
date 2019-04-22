@@ -26,7 +26,6 @@ export default class LinksScreen extends React.Component {
 		};
 	}
 
-
 	getFriends = async() => {
 
 		if(this.state.friendTime){
@@ -47,15 +46,15 @@ export default class LinksScreen extends React.Component {
 					token: token
 				})
 			})
-				.then(response => response.json())
-				.then((json) =>{
-					this.setState({
-						isLoading: false,
-						friendTime: this.state.friendTime,
-						data: json
-					});
-					return;
-				})
+			.then(response => response.json())
+			.then((json) =>{
+				this.setState({
+					isLoading: false,
+					friendTime: this.state.friendTime,
+					data: json
+				});
+				return;
+			})
 		}catch(e){
 			console.log(e)
 		}

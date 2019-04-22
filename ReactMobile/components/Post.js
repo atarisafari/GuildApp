@@ -47,6 +47,7 @@ export default class Post extends React.Component {
   getPosts = async() => {
 
 		let token = await SecureStore.getItemAsync('secure_token');
+    let username = await SecureStore.getItemAsync('secure_username');
 
 		try{
 			fetch('https://guild-app.com/php/grabAllPosts.php', {
@@ -68,7 +69,6 @@ export default class Post extends React.Component {
           isLoading: false,
           data: json
         });
-        return json
       })
 		}catch(e){
 			console.log("error", e)
@@ -89,7 +89,7 @@ export default class Post extends React.Component {
   
   render() {
     let Posts = this.getPosts();
-		
+		const username = "123"; //SecureStore.getItemAsync('secure_username');
 		if(this.state.isLoading){
 			return (
 				<View style={styles.loading}>
@@ -100,27 +100,14 @@ export default class Post extends React.Component {
     
       return (
 
-        <View style={styles.MainContainer}>
-
+        <View style={styles.MainContainer}>{
+				this.state.data.map((stuff, i) => (
         
-					<View>
-						<TouchableOpacity
-							style={styles.container}
-							onPress={this.onClick}
-						>
-							<Text style={styles.text}>
-								{this.stuff.username}
-							</Text>
-						</TouchableOpacity>
-					</View>
-					
-			
-        this.state.data.map((stuff, i) => (
           <View style={styles.cardContainer}>
             <View style={styles.card}>
-              <Text style={styles.cardText} style={{fontWeight: 'bold'}}> Display name </Text>
-              <Image style={styles.cardImage} source={require('../assets/images/logo.png')} style={styles.imageSize}/>
-              <Text style={styles.cardText}> Hello </Text>
+              <Text style={styles.cardText} style={{fontWeight: 'bold'}}>{username}</Text>
+              <Image style={styles.cardImage} source={{uri: stuff.image_url}} style={styles.imageSize}/>
+              <Text style={styles.cardText}> {stuff.content} </Text>
               {/*Icons*/}
               <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity style={{paddingLeft: 15, paddingRight: 20}}>
@@ -130,6 +117,8 @@ export default class Post extends React.Component {
                   <Icon name='insert-comment' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
               </View>
+              <View>
+                </View>
               {
                 this.state.showHide ?
                   <View style={styles.commentContainner}>
@@ -147,9 +136,9 @@ export default class Post extends React.Component {
             </View>
 
           </View>
-          ))	
-
-
+          ))
+			}
+      
   </View>
 
       );
