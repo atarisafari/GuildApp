@@ -1,6 +1,7 @@
 
-import React, { Component, useState } from 'react';
-import {deletePost} from '../utils/apiCalls';
+import React, { Component, useState, useEffect} from 'react';
+import {deletePost, addComment, grabAllComments} from '../utils/apiCalls';
+import Comment from './Comment';
 import LikeButton from '@material-ui/icons/FavoriteBorder';
 import CommentButton from '@material-ui/icons/Comment';
 import styles from '../styles/post_profile_styles';
@@ -15,7 +16,6 @@ import Sword from '../imgs/1_Sword_Icon.png';
 import BowArrow from '../imgs/2_BowArrow_Icon.png';
 import Staff from '../imgs/3_Staff_Icon.png';
 import Shield from '../imgs/4_Shield_Icon.png';
-import Avatar from '@material-ui/core/Avatar';
 import { Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 
@@ -23,37 +23,41 @@ const Post = (props) => {
     const token = localStorage.getItem('token');
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
     const [commentAdd,setCommentAdd] = useState('');
+    const [comments,setComments] = useState([]);
     const {classes} = props;
     let user = 
         props.username===''
             ? localStorage.getItem('username') 
             : localStorage.getItem('usernameFriend');
 
-    const commentAddHandler = commentAdd=>{
-        setCommentAdd(commentAdd);
-        console.log(commentAdd);
+    const commentsHandler = async() => {
+        console.log("calling comments " + props.id);
+        let result =  await grabAllComments(token, props.id).then(ble => ble) 
+        console.log('fetching posts', result);
+        setComments(result);
+    }
+    
+    const commentAddHandler = content =>{
+        setCommentAdd(content);//TODO
+        console.log(content);
     }
 
-    const addComment = async() =>{
+    const addCommentHandler = async() =>{
         if(commentAdd === ''){ //If passwords don't match then dont make the api call
             alert("Can't add an empty comment");
         }
         else{
-            let data = await addComment(token, props.id, commentAdd);
-            console.log("addComment Result" , data);
-            if(data.error === ""){
+            let result = await addComment(token, props.id, commentAdd);
+            console.log("addComment Result" , result);
+            if(result.error === ""){
                 //TODO
                 console.log("Comment added");
             }
             else{
-                alert(data.error);
+                alert(result.error);
             }
         }
         
-    }
-
-    const random_img = img =>{
-        return img[Math.floor(Math.random()*img.length)];
     }
 
     const deleteHandler = async() => {
@@ -78,10 +82,12 @@ const Post = (props) => {
         );
     };
     
+    useEffect(()=>{//This will be executed always after the components have been rendered
+        commentsHandler();
+    },[]);
 
     return (
         <div className={classes.post_div} id={props.id} >
-
             <Card className={classes.post_card} elevation={4} >
                 <CardBody className={classes.post_card_body}>
                     <CardTitle className={classes.post_card_title} tag="h1"> 
@@ -102,21 +108,21 @@ const Post = (props) => {
                         toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
                         content={hide => (
                             <div>
-                                <div className="media mb-3">
-                                    <img
-                                        className="m-2 rounded"
-                                        width="48"
-                                        height="48"
-                                        src= {random_img(img)}
-                                        alt= '/static/images/avatar/2.jpg'
-                                    />
-
-                                    <div className="media-body p-2 shadow-sm rounded bg-light border">
-                                        <small className="float-right text-muted">Today</small>
-                                        <h6 className="mt-0 mb-1 text-muted">Jorge says:</h6>
-                                        Stop that!
-                                    </div>
-                                </div>
+                                <Comment/>
+                                {
+                                    comments.map((value) => {
+                                        return (
+                                            <Comment    key={value.comment_id} 
+                                                        id={value.comment_id} 
+                                                        image_url={value.profile_pic_url}
+                                                        name={value.display_name}
+                                                        time_created={value.time_created}
+                                                        username={value.username}  
+                                                        content={value.content}
+                                            />
+                                        );
+                                    })
+                                }
                             </div>
                         )}
                     />
@@ -130,7 +136,7 @@ const Post = (props) => {
                             placeholder="Make a comment..." 
                             onBlur= { e => commentAddHandler(e.target.value)}
                         /> 
-                        <Button className={classes.comment_button} variant="primary" size="small" onClick={addComment}>
+                        <Button className={classes.comment_button} variant="primary" size="small" onClick={addCommentHandler}>
                             Comment
                         </Button>
                     </div>

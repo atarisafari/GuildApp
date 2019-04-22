@@ -20,7 +20,6 @@ export default props => {
     }
     
     const postsHandler = async() => {
-        
         let result =  await grabAllPosts(token, localStorage.getItem('usernameFriend')).then(ble => ble) 
         console.log('fetching posts', result);
         setPosts(result);

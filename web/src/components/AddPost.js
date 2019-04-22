@@ -33,7 +33,7 @@ const AddPost = (props) => {
                 <div style={thumbInner}>
                     <img src={file.preview} style={img}/>
                 </div>
-            <Button close size="sm" position='absolute'/>
+                <Button close size="sm" position='absolute'/>
         </div>
     ));
     
@@ -99,7 +99,7 @@ const AddPost = (props) => {
                                     <section className="container">
                                         <div {...getRootProps({className: 'dropzone'})}>
                                             <input {...getInputProps()} />
-                                            <Camera  className={classes.post_popup_camera} / >
+                                            <Camera  className={classes.post_popup_camera} />
                                         </div>
                                         <aside style={thumbsContainer}>
                                             {imageUpload}
