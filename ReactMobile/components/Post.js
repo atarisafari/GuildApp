@@ -38,9 +38,42 @@ export default class Post extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        showHide: false
+        showHide: false,
+        title: 'Posts',
+        isLoading: true
       }
   }
+
+  getPosts = async() => {
+
+		let token = await SecureStore.getItemAsync('secure_token');
+
+		try{
+			fetch('https://guild-app.com/php/grabAllPosts.php', {
+				mode: 'cors',
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+          token: token,
+          username: username
+        })
+			})
+      .then(response => response.json())
+      .then((json) =>{
+        console.log(json)
+        this.setState({
+          isLoading: false,
+          data: json
+        });
+        return json
+      })
+		}catch(e){
+			console.log("error", e)
+		}
+	}
 
   ShowHideTextComponentView = () =>{
 
@@ -55,11 +88,34 @@ export default class Post extends React.Component {
   }
   
   render() {
+    let Posts = this.getPosts();
+		
+		if(this.state.isLoading){
+			return (
+				<View style={styles.loading}>
+					<ActivityIndicator size="large"/>
+				</View>
+			);
+		}
     
       return (
 
         <View style={styles.MainContainer}>
 
+        
+					<View>
+						<TouchableOpacity
+							style={styles.container}
+							onPress={this.onClick}
+						>
+							<Text style={styles.text}>
+								{this.stuff.username}
+							</Text>
+						</TouchableOpacity>
+					</View>
+					
+			
+        this.state.data.map((stuff, i) => (
           <View style={styles.cardContainer}>
             <View style={styles.card}>
               <Text style={styles.cardText} style={{fontWeight: 'bold'}}> Display name </Text>
@@ -90,27 +146,9 @@ export default class Post extends React.Component {
               }
             </View>
 
-
           </View>
+          ))	
 
-          <View style={styles.cardContainer}>
-            <View style={styles.card}>
-              <Image style={styles.cardImage} source={require('../assets/images/logo.png')} style={styles.imageSize}/>
-              <Text style={styles.cardText}> Hello </Text>
-              {/*Icons*/}
-              <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity>
-                  <Icon name='favorite'/>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Icon name='insert-comment'/>
-                </TouchableOpacity>
-              </View>
-
-            </View>
-
-
-          </View>
 
   </View>
 

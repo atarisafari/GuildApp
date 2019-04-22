@@ -83,47 +83,49 @@ class AuthenticationScreen extends React.Component<{}, State> {
 			})
 				.then(response => response.json())
 				.then(async function(json) {
-					console.log("json", json);
+					
 					token = json.token;
 					var error = json.error;
-					
-					if(token !== ""){
+					/*
+					if(error === ""){
 						console.log("token", token);
+						console.log("Login was successful");
 						await SecureStore.setItemAsync('secure_token', token);
+						
 					}
-					
+					else {
+						console.log("error", error);
+						console.log("Login was unsuccessful");
+					}
+					*/
+
+					var token = json.token;
+	
+					await SecureStore.setItemAsync('secure_token', token);
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-		
+
 		//check to see if we get a token back
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
-			
-				console.log("result", result);
-				if(result !== ""){
-					console.log("Login was successful");
-					return result;
-				}
-				else{
-					console.log("Login was unsuccessful");
-					return "";
-				}
-			
+			if(result !== null){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//if we get a token, login in
+		if(checkToken()){
+			this.props.navigation.navigate('Main');
 		}
 
-		checkToken()
-		.then(function(result){
-			console.log("result1", result);
-			this.props.navigation.navigate('Main');
-		})
-		.catch(function (error){
-			// Handle error
-			console.log("error", error);
-		});
 	};
+
+	
 
 	render() {
 		const {

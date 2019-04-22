@@ -17,7 +17,6 @@ export default class LinksScreen extends React.Component {
     title: 'Friends',
   };
 
-
 	
 	constructor(props: Props) { 
 		super(props); 

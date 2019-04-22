@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19004,
-  "packagerPid": 1224,
+  "packagerPort": 19005,
+  "packagerPid": 43175,
   "expoServerNgrokUrl": "https://ck-ysz.jiayizh.reactmobile.exp.direct",
   "packagerNgrokUrl": "https://packager.ck-ysz.jiayizh.reactmobile.exp.direct",
-  "ngrokPid": 1235
+  "ngrokPid": 43189
 }
