@@ -1,4 +1,6 @@
 import React from 'react';
+import PrimarySearchAppBar from "../components/search"
+
 import {
 	ScrollView,
 	StyleSheet,
@@ -7,6 +9,7 @@ import {
 import {
 	SecureStore
 } from 'expo';
+import search from '../components/search';
 
 interface State {
 	call: Bol
@@ -51,9 +54,9 @@ export default class LinksScreen extends React.Component {
 		console.log(Friends);
 
     return (
-      <ScrollView style={styles.container}>
 
-      </ScrollView>
+			<PrimarySearchAppBar/>
+
     );
   }
 }
