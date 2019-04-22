@@ -102,6 +102,7 @@ class AuthenticationScreen extends React.Component<{}, State> {
 					var token = json.token;
 	
 					await SecureStore.setItemAsync('secure_token', token);
+					await SecureStore.setItemAsync('secure_username', "");
 				})
 		}
 		catch(e){
