@@ -72,6 +72,31 @@ export const addPost = async (token,content,image_url='') => {
     } 
 }
 
+export const addComment = async (token, post_id, content) => { 
+    try{
+        let response = await fetch('https://guild-app.com/php/addComment.php', {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                post_id: post_id,
+                content: content
+            })
+        })
+        return await response.text().then(function(text) {
+            console.log("addComment response",text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
 export const grabAllFriends = async (token) => { 
     try{
         let response = await fetch('https://guild-app.com/php/grabAllFriends.php', {
@@ -94,7 +119,7 @@ export const grabAllFriends = async (token) => {
     } 
 }
 
-export const grabAllPosts = async (token, username='') => { //empty username means our own username
+export const grabAllPosts = async (token, username) => { //empty username means our own username
     try{
         let response = await fetch('https://guild-app.com/php/grabAllPosts.php', {
             method: 'POST',
@@ -108,7 +133,30 @@ export const grabAllPosts = async (token, username='') => { //empty username mea
             })
         })
         return await response.text().then(function(text) {
-            console.log("grabAllPosts response",text);
+            console.log("grabAllPosts response from ", username + text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const grabAllComments = async (token, post_id) => { //empty username means our own username
+    try{
+        let response = await fetch('https://guild-app.com/php/grabAllComments.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                post_id: post_id
+            })
+        })
+        return await response.text().then(function(text) {
+            console.log("grabAllComments response", text);
             return text ? JSON.parse(text) : {}
         })   
     }
@@ -202,6 +250,30 @@ export const searchFriends = async (token) => {
         })
         return await response.text().then(function(text) {
             console.log("searchFriends response",text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}
+
+export const deleteComment = async (token, comment_id) => { 
+    try{
+        let response = await fetch('https://guild-app.com/php/deleteComment.php', {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                comment_id: comment_id
+            })
+        })
+        return await response.text().then(function(text) {
+            console.log("deleteComment response",text);
             return text ? JSON.parse(text) : {}
         })   
     }

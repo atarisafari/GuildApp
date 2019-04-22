@@ -1,5 +1,6 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
+import '../styles/signUp.css';
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
 import Avatar from '@material-ui/core/Avatar';
@@ -91,10 +92,10 @@ export default props => {
 //    }
     //console.log(username,password);
     return (
-    <div className="App">
-        <h1> SignUp </h1> 
-        {/* <SamplePage2 />  */}
+    <div className="AppSignUp">
         <div id="signUp">
+            <h1> SignUp </h1> 
+            {/* <SamplePage2 />  */}
             <div id="profile_pic">
                 <Popup trigger={
                     <IconButton>
@@ -113,7 +114,7 @@ export default props => {
                                 </GridListTile>
                                 {tileData.map(tile => (
                                     <a href='#' onClick={cancel}>
-                                        <GridListTile key={tile.img} style={{ maxWidth: '50%', height: '150px' }} cols={tile.cols || 1}>
+                                        <GridListTile key={tile.img} style={{ maxWidth: '100%', height: 'auto' }} cols={tile.cols || 1}>
                                         {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
                                             <img src={tile.img} alt={tile.title} />
                                             <GridListTileBar title={tile.title}/>
@@ -145,8 +146,8 @@ export default props => {
                 Retype Password: 
                 <input type='password' onBlur= { e => confPasswordHandler(e.target.value)}/>
             </div>
-            <button onClick={()=>signUpHandler()}> SIGN UP </button>
-            <HomeButton path='/' {...props}>BACK</HomeButton>
+            <button className="signUp" onClick={()=>signUpHandler()}> SIGN UP </button>
+            <HomeButton className='signUp' path='/' {...props}>BACK</HomeButton>
         </div>
     </div>
     )

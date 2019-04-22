@@ -7,6 +7,9 @@ import Camera from '@material-ui/icons/CameraAlt';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {useDropzone} from 'react-dropzone';
+import {withStyles} from '@material-ui/core/styles';
+import styles from '../styles/add_post_style';
+
 
 const AddPost = (props) => {
     //console.log('AddPost props: ', props); 
@@ -14,6 +17,7 @@ const AddPost = (props) => {
     const user = localStorage.getItem('username');
     const [content,setContent] = useState('');
     const [files, setFiles] = useState([]);
+    const {classes} = props;
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
@@ -29,7 +33,7 @@ const AddPost = (props) => {
                 <div style={thumbInner}>
                     <img src={file.preview} style={img}/>
                 </div>
-            <Button close size="sm" position='absolute'/>
+                <Button close size="sm" position='absolute'/>
         </div>
     ));
     
@@ -61,10 +65,11 @@ const AddPost = (props) => {
     
     return (
         <div id={props.id}>
-            <Card style={{ width: '25rem'}}>
-                <Popup trigger={
-                    <button>
+            <Card  className={classes.add_post}>
+                <Popup  className={classes.add_post_popup} trigger={
+                    <button  className={classes.add_post_button}>
                         <TextField 
+                            className={classes.add_post_input}
                             id="textPopUp" 
                             fullWidth 
                             placeholder="Add a post..." 
@@ -76,7 +81,7 @@ const AddPost = (props) => {
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <CardTitle tag="h1">{user}</CardTitle>
+                            <CardTitle className={classes.add_post_title} tag="h1"> {user}</CardTitle>
                             <CardBody>
                                 <div id="postContent">
                                     <form autoComplete="off">
@@ -94,19 +99,17 @@ const AddPost = (props) => {
                                     <section className="container">
                                         <div {...getRootProps({className: 'dropzone'})}>
                                             <input {...getInputProps()} />
-                                            <Camera/ >
+                                            <Camera  className={classes.post_popup_camera} />
                                         </div>
                                         <aside style={thumbsContainer}>
                                             {imageUpload}
                                         </aside>
                                     </section>
                                 </div>
-
                                 <div id="buttons" onClick={cancel}>
-                                <Button type="submit" className="btn btn-primary" onClick={addPostHandler}>POST</Button>
-                                <a href="#" className="cancel" onClick={cancel}> Cancel </a>
+                                <Button  className={classes.post_button} type="submit" class="btn btn-primary" onClick={addPostHandler}>POST</Button>
+                                <Button  className="cancel" className={classes.post_cancel_button} onClick={cancel}>Cancel</Button>
                                 </div>
-
                             </CardBody>
                         </div>
                     )}
@@ -149,5 +152,5 @@ const img = {
     height: '100%'
 };
 
-export default AddPost;
+export default withStyles(styles)(AddPost);
 

@@ -7,13 +7,17 @@ import BowArrow from '../imgs/2_BowArrow_Icon.png';
 import Staff from '../imgs/3_Staff_Icon.png';
 import Shield from '../imgs/4_Shield_Icon.png';
 import Avatar from '@material-ui/core/Avatar';
+import {withStyles} from '@material-ui/core/styles';
+import styles from '../styles/friend_style';
 
 const Friend = (props) => {
     const token = localStorage.getItem('token');
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
+    const {classes} = props;
 
     const goProfile = async() =>{
         //change username?
+        localStorage.setItem('usernameFriend', props.username);
         props.history.push("/profile");
     }
 
@@ -32,21 +36,19 @@ const Friend = (props) => {
 
     return (
         <div key={props.id} id={props.id}>
-            <Card style={{ width: '18rem' }}>
-                
-                <CardBody>
-                    <Button className='float-right' onClick={blockUserHandler}>Block</Button>
-                    <Avatar alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
-                    <CardTitle tag="h2"> 
+            <Card className={classes.friend_card}>
+                <CardBody>                   
+                    <Button className={classes.friend_block_button} onClick={blockUserHandler}>Block</Button>
+                    <img className={classes.friend_img} alt="/static/images/avatar/2.jpg" src={random_img(img)}  onClick={()=>goProfile()}/> 
+                    <CardTitle className={classes.friend_title} tag="h2"> 
                         {props.name}
                     </CardTitle>
-                    <CardSubtitle tag="h5">{props.username}</CardSubtitle>
-                    <CardText tag="p">{props.preview}</CardText>
-                </CardBody>
-                
+                    <CardSubtitle className={classes.friend_subtitle} tag="h5">{props.username}</CardSubtitle>
+                    <CardText className={classes.friend_post} tag="p">{props.preview}</CardText>
+                </CardBody>             
             </Card>
         </div>
     );
 };
 
-export default Friend;
+export default withStyles(styles)(Friend);

@@ -1,16 +1,16 @@
 import React, { useContext, useState, useEffect  } from 'react';
 import {grabAllPosts} from '../utils/apiCalls';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 import HomeButton from '../components/buttons/homeButton';
 import Header_component from '../components/header/Header_component';
 
 export default props => {
     const token = localStorage.getItem('token');
     const [posts,setPosts] = useState([]);
-    const [username,setUsername] = useState('');
 
     const postsHandler = async() => {
-        let result =  await grabAllPosts(token, username).then(ble => ble) 
+        let result =  await grabAllPosts(token, localStorage.getItem('usernameFriend')).then(ble => ble) 
         console.log('fetching posts', result);
         setPosts(result);
     }
@@ -20,6 +20,7 @@ export default props => {
             alert("Please Login to verify your identity\nYou will now be redirected to the Login page.");
             logout();
         }
+        
         postsHandler();
     }, [token]);
 
@@ -32,6 +33,7 @@ export default props => {
     <div className="App">
         <Header_component props={props}/>
         <h1> Profile </h1>
+        <AddPost id="add_post"/>
         {
                 posts.map((value) => {
                     return (
@@ -41,7 +43,7 @@ export default props => {
                                 time_created={value.time_created}
                                 num_likes={value.num_likes}
                                 num_comments={value.num_comments}
-                                username={username}  
+                                username={localStorage.getItem('usernameFriend')}  
                                 content={value.content}/>
                     );
                 })

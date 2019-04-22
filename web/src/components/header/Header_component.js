@@ -16,7 +16,7 @@ import LogOutIcon from '@material-ui/icons/Close';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 /* components and files import*/
-import styles from "./header_style"
+import styles from '../../styles/header_style';
 import SearchFriendForm from "./header_form"
 import ProfileAvatar from "./SmallProfileAvatar"
 
@@ -63,6 +63,7 @@ class Header_component extends React.Component {
   }
 
   goProfile = async() =>{
+    localStorage.setItem('usernameFriend', '');
     this.props.props.history.push("/profile");
   }
 
@@ -167,7 +168,7 @@ class Header_component extends React.Component {
         <div className={classes.mainBar} position="static">
           <Toolbar>
               <IconButton className={classes.logoButton}>
-              <a  className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
+              <a className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
               </IconButton>
               <SearchFriendForm/>
             <div className={classes.grow} />
