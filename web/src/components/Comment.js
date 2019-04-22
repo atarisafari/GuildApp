@@ -20,7 +20,7 @@ const Comment = (props) => {
         if (window.confirm('Are you sure you wish to delete this comment?')){
             console.log("Delete confirmed");
             let result =  await deleteComment(token, props.id).then(ble => ble) 
-            console.log('Delete post response: ', result);
+            console.log('Delete comment response: ', result);
             window.location.reload();
         }
     }

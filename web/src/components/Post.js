@@ -24,6 +24,8 @@ const Post = (props) => {
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
     const [commentAdd,setCommentAdd] = useState('');
     const [comments,setComments] = useState([]);
+    const [likes,setLikes] = useState(Math.floor(Math.random()*5)+1);//useState(props.num_likes);
+    const [liked,setLiked] = useState(false);
     const {classes} = props;
     let user = 
         props.username===''
@@ -39,6 +41,15 @@ const Post = (props) => {
         }
     }
     
+    const grabLikes = async() => {
+        
+    }
+
+    const likeHandler = async() => {
+        liked ? setLiked(false) : setLiked(true)
+        liked ? setLikes(likes-1) : setLikes(likes+1)
+    }
+
     const commentAddHandler = content =>{
         setCommentAdd(content);//TODO
         console.log(content);
@@ -86,6 +97,7 @@ const Post = (props) => {
     
     useEffect(()=>{//This will be executed always after the components have been rendered
         commentsHandler();
+        grabLikes();
     },[]);
 
     return (
@@ -101,7 +113,7 @@ const Post = (props) => {
                     </CardText>
                     <small className="float-right text-muted">{props.time_created}</small>
                     <IconButton color="inherit">
-                        <Badge badgeContent={10} color="secondary">
+                        <Badge badgeContent={likes} onClick={likeHandler} color="secondary">
                             <FavoriteIcon />
                         </Badge>
                     </IconButton>
