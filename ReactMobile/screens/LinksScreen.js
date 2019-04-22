@@ -2,10 +2,11 @@ import React from 'react';
 import {
 	ScrollView,
 	StyleSheet,
-	Button,
+	TouchableOpacity,
 	Text,
 	View,
 	ActivityIndicator,
+	ListItem
 } from 'react-native';
 import {
 	SecureStore
@@ -56,6 +57,12 @@ export default class LinksScreen extends React.Component {
 		}
 	}
 	
+	//this should navigate to another screen for just the friend's posts
+	//after should have a back button on that screen to navigate back to this screen
+	onClick = () =>{
+		console.log("We'll make this work eventually")
+	}
+	
 	render(){ 
 		
 		let friends = this.getFriends();
@@ -63,27 +70,47 @@ export default class LinksScreen extends React.Component {
 		if(this.state.isLoading){
 			return (
 				<View style={styles.loading}>
-					<ActivityIndicator/>
+					<ActivityIndicator size="large"/>
 				</View>
 			);
 		}
 		
-		//Do stuff that we want it to do 
-		return this.state.data.map((stuff) => {
-			return (
-				<View><Text>{stuff.username}</Text></View>
-			)
-		})
+		//lists out our friends with nice little buttons
+		return (
+			<ScrollView>{
+				this.state.data.map((stuff, i) => (
+					<View>
+						<TouchableOpacity
+							style={styles.container}
+							onPress={this.onClick}
+						>
+							<Text style={styles.text}>
+								{stuff.username}
+							</Text>
+						</TouchableOpacity>
+					</View>
+					
+				))	
+			}</ScrollView>
+		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		paddingTop: 15,
-		backgroundColor: '#fff',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: 30,
+		margin: 5,
+		borderColor: '#000000',
+		borderWidth: 1,
+		backgroundColor: '#ffffff'
 	},
 	loading:{
-		paddingTop: 20,
+		paddingTop: 30,
+	},
+	text: {
+		fontSize: 24,
 	}
 });

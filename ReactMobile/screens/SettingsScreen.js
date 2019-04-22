@@ -10,7 +10,7 @@ import {
 
 export default class SettingsScreen extends React.Component {
 	static navigationOptions = {
-		title: 'Settings`',
+		title: 'Settings',
 	};
 	
   handleLogOut = () => {
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 		paddingTop: 20
 	},
 	button: {
-		width: 80
+		width: 80,
+		margin: 10
 	}
 })
