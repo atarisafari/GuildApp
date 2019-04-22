@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/2_BowArrow_Icon.e41b5764.png"
   },
   {
-    "revision": "ec7e77da73daf93c91bb",
+    "revision": "13801dd6611e56bddf09",
     "url": "/static/css/main.57cd10d7.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/static/media/profilePicPlaceholder.1d88924d.png"
   },
   {
-    "revision": "77d122baa05439cb203f",
-    "url": "/static/js/2.afe911a0.chunk.js"
+    "revision": "93c2ab2f69888ce20d1c",
+    "url": "/static/js/2.2f6a4e68.chunk.js"
   },
   {
     "revision": "ad1f5489aa9e17571df4083c4d5aa13f",
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/static/media/1_Sword_Icon.b2724692.png"
   },
   {
-    "revision": "ec7e77da73daf93c91bb",
-    "url": "/static/js/main.be13cc38.chunk.js"
+    "revision": "13801dd6611e56bddf09",
+    "url": "/static/js/main.7984f2bf.chunk.js"
   },
   {
     "revision": "b3bde274b037220926864855950d4819",
@@ -48,11 +48,11 @@ self.__precacheManifest = [
     "url": "/static/media/logo.eb16ecf4.png"
   },
   {
-    "revision": "77d122baa05439cb203f",
+    "revision": "93c2ab2f69888ce20d1c",
     "url": "/static/css/2.462773fc.chunk.css"
   },
   {
-    "revision": "e34387cef452202688bf965edc6a78c3",
+    "revision": "a21d809669776864b7257272c03e02a3",
     "url": "/index.html"
   }
 ];
