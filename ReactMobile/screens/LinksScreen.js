@@ -2,21 +2,31 @@ import React from 'react';
 import {
 	ScrollView,
 	StyleSheet,
-	Button
+	TouchableOpacity,
+	Text,
+	View,
+	ActivityIndicator,
+	ListItem
 } from 'react-native';
 import {
 	SecureStore
 } from 'expo';
-
-interface State {
-	call: Bol
-}
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Friends',
   };
 
+
+	
+	constructor(props: Props) { 
+		super(props); 
+		this.state = {
+			isLoading: true,
+		};
+	} 
+	
+	
 	getFriends = async() => {
 
 
@@ -35,33 +45,72 @@ export default class LinksScreen extends React.Component {
 				})
 			})
 				.then(response => response.json())
-				.then(async function(json) {
-
-					console.log(json);
-					return json;
-			})
+				.then((json) =>{
+					this.setState({
+						isLoading: false,
+						data: json
+					});
+					return json
+				})
 		}catch(e){
 			console.log(e)
 		}
 	}
-
-	render() {
-
-		let Friends = this.getFriends();
-		console.log(Friends);
-
-    return (
-      <ScrollView style={styles.container}>
-
-      </ScrollView>
-    );
-  }
+	
+	//this should navigate to another screen for just the friend's posts
+	//after should have a back button on that screen to navigate back to this screen
+	onClick = () =>{
+		console.log("We'll make this work eventually")
+	}
+	
+	render(){ 
+		
+		let friends = this.getFriends();
+		
+		if(this.state.isLoading){
+			return (
+				<View style={styles.loading}>
+					<ActivityIndicator size="large"/>
+				</View>
+			);
+		}
+		
+		//lists out our friends with nice little buttons
+		return (
+			<ScrollView>{
+				this.state.data.map((stuff, i) => (
+					<View>
+						<TouchableOpacity
+							style={styles.container}
+							onPress={this.onClick}
+						>
+							<Text style={styles.text}>
+								{stuff.username}
+							</Text>
+						</TouchableOpacity>
+					</View>
+					
+				))	
+			}</ScrollView>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+	container: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: 30,
+		margin: 5,
+		borderColor: '#000000',
+		borderWidth: 1,
+		backgroundColor: '#ffffff'
+	},
+	loading:{
+		paddingTop: 30,
+	},
+	text: {
+		fontSize: 24,
+	}
 });
