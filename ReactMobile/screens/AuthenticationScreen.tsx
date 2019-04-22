@@ -65,7 +65,7 @@ class AuthenticationScreen extends React.Component<{}, State> {
 	};
 
 	handleLoginPress = () => {
-
+	
 		//send login info to api
 		try{
 			let response = fetch('http://157.230.66.35/php/login.php', {
@@ -82,34 +82,34 @@ class AuthenticationScreen extends React.Component<{}, State> {
 			})
 				.then(response => response.json())
 				.then(async function(json) {
-
+					
 					var token = json.token;
-
+	
 					await SecureStore.setItemAsync('secure_token', token);
-
+					
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-
+		
 		//check to see if we get a token back
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
-			if(result !== ""){
+			if(result !== null){
 				if(result.error === ""){
 					console.log("Login was successful");
 					return true;
 				}
 				else{
-
+			
 					return false;
 				}
 			}else{
 				return false;
 			}
 		}
-
+		
 		//if we get a token, login in
 		if(checkToken()){
 			this.props.navigation.navigate('Main');
@@ -122,7 +122,7 @@ class AuthenticationScreen extends React.Component<{}, State> {
 			password,
 			emailTouched,
 			passwordTouched
-		} = this.state;
+		} = this.state; 
 		// Show the validation errors only when the inputs
 		// are empty AND have been blurred at least once
 		const emailError =
@@ -144,8 +144,9 @@ class AuthenticationScreen extends React.Component<{}, State> {
 						value={this.state.email}
 						onChangeText={this.handleEmailChange}
 						onSubmitEditing={this.handleEmailSubmitPress}
-						placeholder="Username"
+						placeholder={strings.EMAIL_PLACEHOLDER}
 						autoCorrect={false}
+						keyboardType="email-address"
 						returnKeyType="next"
 						autoCapitalize={"none"}
 						onBlur={this.handleEmailBlur}
@@ -170,8 +171,8 @@ class AuthenticationScreen extends React.Component<{}, State> {
 					<Button
 						label={strings.SIGNUP}
 						onPress={this.handleSignUpPress}
-					/>
-
+					/>	
+					
 				</View>
 			</KeyboardAvoidingView>
 		);

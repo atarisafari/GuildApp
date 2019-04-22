@@ -8,7 +8,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
   Modal,
   TouchableHighlight,
   FlatList,
@@ -25,7 +24,7 @@ import { MonoText } from '../components/StyledText';
 import { MaterialIcons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
-import { Input, Icon } from 'react-native-elements';
+import { Input, Icon, Button } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';
@@ -50,60 +49,7 @@ export default class Post extends React.Component {
         this.setState({showHide: true})
       }
     }
-       /*
-    GetItem (fruit_name) {
 
-      Alert.alert(fruit_name);
-
-      }
-
-
-
-componentDidMount() {
-    async function checkToken() {
-        let token = await SecureStore.getItemAsync('secure_token');
-        console.log(token);
-    }
-
-    return fetch('https://guild-app.com/php/grabAllPosts.php', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token: token,
-          username: username
-        })
-
-      }).then((response) => response.json())
-        .then((responseJson) => {
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson),
-        }, function() {
-          // In this block you can do something with new state.
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-
-ListViewItemSeparator = () => {
-    return (
-      <View
-        style={{
-          height: .5,
-          width: "100%",
-          backgroundColor: "#000",
-        }}
-      />
-    );
-  }
-*/
   render() {
       return (
 
@@ -117,21 +63,24 @@ ListViewItemSeparator = () => {
               {/*Icons*/}
               <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity>
-                  <Icon name='favorite'/>
+                  <Icon name='favorite-border' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.ShowHideTextComponentView} >
-                  <Icon name='insert-comment'/>
+                  <Icon name='insert-comment' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
               </View>
               {
                 this.state.showHide ?
-
-                  <TextInput
-                      placeholder="Make a comment..."
-                      multiline={true}
-                      style={styles.TextInputStyleClass}
-                  />
-
+                  <View style={styles.commentContainner}>
+                      <TextInput
+                          placeholder="Make a comment..."
+                          multiline={true}
+                          style={styles.TextInputStyleClass}
+                      />
+                    <View style={{justifyContent:'space-between', paddingLeft: 12, paddingRight: 5}}>
+                      <Button title="Comment" buttonStyle={styles.button}/>
+                    </View>
+                  </View>
                 : null
               }
             </View>
@@ -157,19 +106,8 @@ ListViewItemSeparator = () => {
 
 
           </View>
- {/*
- <ListView
 
-   dataSource={this.state.dataSource}
-
-   renderSeparator= {this.ListViewItemSeparator}
-
-   renderRow={(rowData) => <Text style={styles.rowViewContainer}
-   onPress={this.GetItem.bind(this, rowData.fruit_name)} >{rowData.fruit_name}</Text>}
-
- />
-*/}
-</View>
+  </View>
 
       );
     }
@@ -208,12 +146,11 @@ const styles = StyleSheet.create({
     },
     MainContainer :{
 
-        // Setting up View inside content in Vertically center.
-        justifyContent: 'center',
-        flex:1,
-        margin: 10
-
-        },
+      // Setting up View inside content in Vertically center.
+      justifyContent: 'center',
+      flex:1,
+      margin: 10
+      },
 
     rowViewContainer: {
         fontSize: 20,
@@ -222,11 +159,22 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     TextInputStyleClass: {
+      flex: 1,
       textAlign: 'auto',
       marginBottom: 7,
       height: 40,
       borderWidth: 1,
       borderRadius: 10,
-    }
+      paddingLeft: 10
+    },
+    button: {
+      backgroundColor: '#b20949',
+      borderRadius: 10
+   },
+   commentContainner: {
+      flex:2,
+      flexDirection:"row",
+      justifyContent:'space-between'
+   }
 });
   
