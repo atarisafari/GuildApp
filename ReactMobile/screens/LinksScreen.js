@@ -3,26 +3,29 @@ import {
 	ScrollView,
 	StyleSheet,
 	Button,
-	Text
+	Text,
+	View,
+	ActivityIndicator,
 } from 'react-native';
 import {
 	SecureStore
 } from 'expo';
-
-interface State {
-	callDone: Boolean
-}
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Friends',
   };
 
-	//initially the call is not done
-	state: State = {
-		callDone: false
-	}
 
+	
+	constructor(props: Props) { 
+		super(props); 
+		this.state = {
+			isLoading: true,
+		};
+	} 
+	
+	
 	getFriends = async() => {
 
 
@@ -41,39 +44,46 @@ export default class LinksScreen extends React.Component {
 				})
 			})
 				.then(response => response.json())
-				.then(async function(json) {
-
-					console.log(json);
-					this.state.callDone = true;
-					return json;
+				.then((json) =>{
+					this.setState({
+						isLoading: false,
+						data: json
+					});
+					return json
 				})
 		}catch(e){
 			console.log(e)
 		}
 	}
-
-	render() {
-
-		let Friends = this.getFriends();
-
-
-
-		if(!this.state.callDone){
-			 return (<Text>dick</Text>);
-		}else{
+	
+	render(){ 
+		
+		let friends = this.getFriends();
+		
+		if(this.state.isLoading){
 			return (
-				<ScrollView style={styles.container}>
-					<Text>Succ</Text>
-				</ScrollView>
+				<View style={styles.loading}>
+					<ActivityIndicator/>
+				</View>
 			);
 		}
+		
+		//Do stuff that we want it to do 
+		return this.state.data.map((stuff) => {
+			return (
+				<View><Text>{stuff.username}</Text></View>
+			)
+		})
 	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+	container: {
+		flex: 1,
+		paddingTop: 15,
+		backgroundColor: '#fff',
+	},
+	loading:{
+		paddingTop: 20,
+	}
 });
