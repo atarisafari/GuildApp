@@ -18,8 +18,7 @@ export default class LinksScreen extends React.Component {
   };
 
 
-
-	constructor(props: Props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			isLoading: true,

@@ -1,7 +1,7 @@
 const strings = {
-  LOGIN: "Log In",
+  LOGIN: "LOG IN",
   WELCOME_TO_LOGIN: "Welcome to the login screen!",
-  EMAIL_PLACEHOLDER: "Email",
+  EMAIL_PLACEHOLDER: "Username",
   PASSWORD_PLACEHOLDER: "Password",
   LOGOUT: "LOG OUT",
   SIGNUP: "SIGN UP",

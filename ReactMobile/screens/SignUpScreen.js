@@ -4,7 +4,7 @@ import { ImagePicker, Permissions } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 
 class SignUpScreen extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -43,15 +43,15 @@ class SignUpScreen extends React.Component {
     this.setState({ profile_pic_url });
   };
 
-  
+
   UserRegistrationFunction = () =>{
- 
+
     const { username }  = this.state ;
     const { display_name }  = this.state ;
     const { password }  = this.state ;
     const { confPassword }  = this.state ;
     const { profile_pic_url }  = this.state ;
-    
+
     fetch('https://guild-app.com/php/signup.php', {
       method: 'POST',
       headers: {
@@ -59,14 +59,14 @@ class SignUpScreen extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-    
+
         username: username,
         password: password,
         display_name: display_name,
         profile_pic_url: profile_pic_url,
-    
+
       })
-    
+
     })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -98,19 +98,19 @@ class SignUpScreen extends React.Component {
       }).catch((error) => {
         console.error(error);
       });
-  
+
   }
 
   render() {
     let { image } = this.state;
     return (
-      
+
       <View style={styles.MainContainer}>
         <Text style= {{ fontSize: 20, color: "#000", textAlign: 'center', marginBottom: 15 }}>Create Account</Text>
         <ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
 
           <TextInput
-            
+
             placeholder="Display name:"
 
             onChangeText={display_name => this.setState({display_name})}
@@ -119,9 +119,9 @@ class SignUpScreen extends React.Component {
 
             style={styles.TextInputStyleClass}
           />
-          
+
           <TextInput
-            
+
             placeholder="Username:"
 
             onChangeText={username => this.setState({username})}
@@ -132,7 +132,7 @@ class SignUpScreen extends React.Component {
           />
 
           <TextInput
-            
+
             placeholder="Password:"
 
             onChangeText={password => this.setState({password})}
@@ -145,7 +145,7 @@ class SignUpScreen extends React.Component {
           />
 
           <TextInput
-            
+
             placeholder="Retype Password: :"
 
             onChangeText={confPassword => this.setState({confPassword})}
@@ -160,33 +160,30 @@ class SignUpScreen extends React.Component {
           <Button title="Sign Up" onPress={this.UserRegistrationFunction} color="#b8860b" />
           <Button title="Already have an account? Login" onPress={() => this.props.navigation.navigate('Auth')} />
 
-            
+
         </ScrollView>
       </View>
-            
+
       );
     }
 }
- 
+
 const styles = StyleSheet.create({
- 
+
   MainContainer :{
-    
+
     justifyContent: 'center',
     flex:1,
     margin: 10
   },
-  
+
   TextInputStyleClass: {
-  
+
     textAlign: 'center',
     marginBottom: 7,
     height: 40,
     borderWidth: 1,
     borderColor: '#b8860b',
-    borderRadius: 5 ,
-    
-    
     borderRadius: 10 ,
   },
 
@@ -194,7 +191,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     minHeight: 300,
   },
-  
+
   paragraph: {
     marginHorizontal: 15,
     marginTop: 30,
@@ -202,6 +199,6 @@ const styles = StyleSheet.create({
     color: '#34495e',
   }
 });
- 
+
 
 export default SignUpScreen;

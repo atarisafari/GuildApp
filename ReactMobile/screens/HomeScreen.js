@@ -9,11 +9,13 @@ import {
   TouchableOpacity,
   View,
   Button,
-  Modal, 
+  Modal,
   TouchableHighlight,
-  FlatList
+  FlatList,
+  KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
-import { 
+import {
 	WebBrowser,
 	SecureStore
 } from 'expo';
@@ -24,62 +26,165 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
 import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
-import Post from '../components/Post'
+import Post from '../components/Post';
+import {Dimensions} from 'react-native';
 
-var BUTTONS = [
-  'Camera',
-  'Choose from Photos',
-  'Cancel',
-];
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: "What's going on",
   };
 
-  state = {
-    modalVisible: false,
-    profile_pic_url: '',
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      profile_pic_url: '',
+      keyboardSub: true
+    }
+  }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
+  handleLogOut = () => {
+    //check to see if we get a token back
+		async function checkToken() {
+      let result = await SecureStore.deleteItemAsync('secure_token');
+			if(result === null){
+				return true;
+			}else{
+				return false;
+			}
+    }
+
+		//if we get a token, log out
+		if(checkToken()){
+			this.props.navigation.navigate('Auth');
+    }
+  };
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+
+  useLibraryHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  useCameraHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+
+  useLibraryHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  useCameraHandler = async () => {
+    await this.askPermissionsAsync();
+    let profile_pic_url = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: false,
+    });
+    this.setState({ profile_pic_url });
+  };
+
+  componentDidMount() {
+    if(Platform.OS === 'ios') {
+      this.keyboardSub = Keyboard.addListener('keyboardWillShow', ()=> {
+        this.scrollView.scrollToEnd({ animated: true })
+      })
+      console.log("OS: ios")
+     }
+     else {
+      this.keyboardSub = Keyboard.addListener('keyboardDidShow', ()=> {
+        this.scrollView.scrollToEnd({ animated: true })
+      })
+      console.log("OS: android")
+    }
+  }
+
+  componentWillUnmount() {
+    this.keyboardSub.remove()
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>  
 
-        {/*Modal*/}
-        <View style={{marginTop: 22}}>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-          >
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          style={{backgroundColor: '#f5f5f5', flex: 1}}
+          ref={ref => this.scrollView = ref}>
 
-            <View style={{marginTop: 22}}>
-              <View>
-                <Input
-                  placeholder="Add a post..." 
-                  multiline={true}
-          
-                />
-                
-                {/*Camera and Album */}
-                <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity>
-                  <Icon name='photo-library' title="launchImageLibraryAsync" onPress={this.useLibraryHandler}/>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Icon name='add-a-photo' title="launchCameraAsync" onPress={this.useCameraHandler}/>
-                </TouchableOpacity>
+          {/*Modal*/}
+          <View>
+            <Modal
+              animationType="slide"
+              transparent={false}
+              visible={this.state.modalVisible}
+            >
+              <View style={{flexDirection: 'row'}}>
+                  
+                  {/*Camera and Album */}
+                <View style={{flexDirection: 'column'}}>
+                  <TouchableOpacity style={styles.iconContainer}>
+                    <Icon name='photo-library' title="launchImageLibraryAsync" color={'#b20949'} size={35} onPress={this.useLibraryHandler}/>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.iconContainer}>
+                    <Icon name='add-a-photo' title="launchCameraAsync" color={'#b20949'} size={35} onPress={this.useCameraHandler}/>
+                  </TouchableOpacity>
                 </View>
+
+                <View style={styles.imageContainer}>
+                  <Image style={styles.cardImage} source={this.state.profile_pic_url} style={styles.imageSize}/>
+                </View>
+
+              </View>
+                {/*Image url
                 <Text style={styles.paragraph}>
-                  {JSON.stringify(this.state.profile_pic_url)}
+                        {JSON.stringify(this.state.profile_pic_url)}
                 </Text>
+              */}
+                <View style={{marginTop: 30}}>
+                  <Input
+                    placeholder="Add a post..."
+                    multiline={true}
+                    inputStyle={{
+                      height: null
+                    }}
+                  />
+                </View>
 
                 {/*Exit modal */}
                 <TouchableHighlight
@@ -90,38 +195,41 @@ export default class HomeScreen extends React.Component {
                   <Text>Cancel</Text>
 
                 </TouchableHighlight>
-                
-              </View>
-            </View>
-          </Modal>
 
-      
-          {/*Add Post Header*/}
-          <View style={styles.form} onTouchStart={() => {this.setModalVisible(true);}}>
-            <Input
-              placeholder="Add a post..." 
-              multiline={true}
-              editable={false}
-              rightIcon={
-                <MaterialIcons
-                  name='camera-alt'
-                  size={24}
-                  color='black'
-                />
-              }
-            />
+              
+            </Modal>
+
+
+            {/*Add Post Header*/}
+            <View style={styles.form} onTouchStart={() => {this.setModalVisible(true);}}>
+              <Input
+                placeholder="Add a post..."
+                multiline={true}
+                editable={false}
+                rightIcon={
+                  <MaterialIcons
+                    name='camera-alt'
+                    size={24}
+                    color='black'
+                  />
+                }
+              />
+            </View>
+
           </View>
 
+            <Post />
+
+          <View>
+
+
         </View>
-        <View>
-        
-        
-      </View>
 
         </ScrollView>
+
       </View>
 
-      
+
     );
   }
 
@@ -216,12 +324,23 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   form: {
-		flex: 1,
-		justifyContent: "center",
 		width: "100%"
   },
   button: {
     marginBottom: 10,
     fontWeight: '500'
+  },
+  iconContainer: {
+    marginLeft: 5, 
+    width: 80,
+    marginTop: 57
+  },
+  imageSize: {
+    height: SCREEN_HEIGHT * 0.2,
+    width: SCREEN_WIDTH * 0.5,
+   },
+  imageContainer: {
+    marginTop: 48,
+    marginLeft: 40
   }
 });
