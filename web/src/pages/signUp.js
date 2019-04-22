@@ -114,7 +114,7 @@ export default props => {
                                 </GridListTile>
                                 {tileData.map(tile => (
                                     <a href='#' onClick={cancel}>
-                                        <GridListTile key={tile.img} style={{ maxWidth: '50%', height: '150px' }} cols={tile.cols || 1}>
+                                        <GridListTile key={tile.img} style={{ maxWidth: '100%', height: 'auto' }} cols={tile.cols || 1}>
                                         {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
                                             <img src={tile.img} alt={tile.title} />
                                             <GridListTileBar title={tile.title}/>

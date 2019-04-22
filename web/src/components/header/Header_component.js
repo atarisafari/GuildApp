@@ -168,7 +168,7 @@ class Header_component extends React.Component {
         <div className={classes.mainBar} position="static">
           <Toolbar>
               <IconButton className={classes.logoButton}>
-              <a  className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
+              <a className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
               </IconButton>
               <SearchFriendForm/>
             <div className={classes.grow} />
