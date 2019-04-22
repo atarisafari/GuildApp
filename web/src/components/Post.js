@@ -70,7 +70,6 @@ const Post = (props) => {
                 alert(result.error);
             }
         }
-        
     }
 
     const deleteHandler = async() => {

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect  } from 'react';
 import {grabAllPosts} from '../utils/apiCalls';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 import HomeButton from '../components/buttons/homeButton';
 import Header_component from '../components/header/Header_component';
 
@@ -32,6 +33,7 @@ export default props => {
     <div className="App">
         <Header_component props={props}/>
         <h1> Profile </h1>
+        <AddPost id="add_post"/>
         {
                 posts.map((value) => {
                     return (
