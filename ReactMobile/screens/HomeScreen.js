@@ -150,20 +150,21 @@ export default class HomeScreen extends React.Component {
           ref={ref => this.scrollView = ref}>
 
           {/*Modal*/}
-          <View style={{marginTop: 22}}>
+          <View>
             <Modal
               animationType="slide"
               transparent={false}
               visible={this.state.modalVisible}
             >
 
-              <View style={{marginTop: 22}}>
+              <View style={{marginTop: 50}}>
                 <View>
-                  <Input
-                    placeholder="Add a post..."
-                    multiline={true}
-
-                  />
+                  <View >
+                    <Input
+                      placeholder="Add a post..."
+                      multiline={true}
+                    />
+                  </View>
 
                   {/*Camera and Album */}
                   <View style={{flexDirection: 'row'}}>
@@ -213,10 +214,6 @@ export default class HomeScreen extends React.Component {
 
             <Post />
 
-          <Button
-            title={strings.LOGOUT}
-            onPress={this.handleLogOut}
-          />
           <View>
 
 
@@ -321,8 +318,6 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   form: {
-		flex: 1,
-		justifyContent: "center",
 		width: "100%"
   },
   button: {

@@ -28,29 +28,35 @@ import { Input, Icon, Button } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';
+import {Dimensions} from 'react-native'
+
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 export default class Post extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          showHide: false
-        }
-    }
-
-    ShowHideTextComponentView = () =>{
-
-      if(this.state.showHide == true)
-      {
-        this.setState({showHide: false})
+  constructor(props) {
+      super(props);
+      this.state = {
+        showHide: false
       }
-      else
-      {
-        this.setState({showHide: true})
-      }
+  }
+
+  ShowHideTextComponentView = () =>{
+
+    if(this.state.showHide == true)
+    {
+      this.setState({showHide: false})
     }
+    else
+    {
+      this.setState({showHide: true})
+    }
+  }
+  
 
   render() {
+    
       return (
 
         <View style={styles.MainContainer}>
@@ -58,11 +64,11 @@ export default class Post extends React.Component {
           <View style={styles.cardContainer}>
             <View style={styles.card}>
               <Text style={styles.cardText} style={{fontWeight: 'bold'}}> Display name </Text>
-              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/>
+              <Image style={styles.cardImage} source={require('../assets/images/logo.png')} style={styles.imageSize}/>
               <Text style={styles.cardText}> Hello </Text>
               {/*Icons*/}
               <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity>
+                <TouchableOpacity style={{paddingLeft: 15, paddingRight: 20}}>
                   <Icon name='favorite-border' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.ShowHideTextComponentView} >
@@ -90,7 +96,7 @@ export default class Post extends React.Component {
 
           <View style={styles.cardContainer}>
             <View style={styles.card}>
-              <Image style={styles.cardImage} source={require('../assets/images/logo.png')}/>
+              <Image style={styles.cardImage} source={require('../assets/images/logo.png')} style={styles.imageSize}/>
               <Text style={styles.cardText}> Hello </Text>
               {/*Icons*/}
               <View style={{flexDirection: 'row'}}>
@@ -175,6 +181,12 @@ const styles = StyleSheet.create({
       flex:2,
       flexDirection:"row",
       justifyContent:'space-between'
+   },
+   imageSize: {
+    height: SCREEN_HEIGHT * 0.45,
+    width: SCREEN_WIDTH * 0.9,
+    marginRight: 2,
+    marginLeft: 2
    }
 });
   
