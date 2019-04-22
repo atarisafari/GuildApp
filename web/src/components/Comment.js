@@ -7,9 +7,7 @@ import Shield from '../imgs/4_Shield_Icon.png';
 
 
 const Comment = (props) => {
-    const token = localStorage.getItem('token');
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
-    const {classes} = props;
 
     const random_img = img =>{
         return img[Math.floor(Math.random()*img.length)];

@@ -34,7 +34,9 @@ const Post = (props) => {
         console.log("calling comments " + props.id);
         let result =  await grabAllComments(token, props.id).then(ble => ble) 
         console.log('fetching posts', result);
-        setComments(result);
+        if(result!== null){
+            setComments(result);
+        }
     }
     
     const commentAddHandler = content =>{
@@ -108,18 +110,17 @@ const Post = (props) => {
                         toggle={show => <IconButton onClick={show}><CommentButton/></IconButton>}
                         content={hide => (
                             <div>
-                                <Comment/>
                                 {
                                     comments.map((value) => {
-                                        return (
-                                            <Comment    key={value.comment_id} 
-                                                        id={value.comment_id} 
-                                                        image_url={value.profile_pic_url}
-                                                        name={value.display_name}
-                                                        time_created={value.time_created}
-                                                        username={value.username}  
-                                                        content={value.content}
-                                            />
+                                            return (
+                                                <Comment    key={value.comment_id} 
+                                                            id={value.comment_id} 
+                                                            image_url={value.profile_pic_url}
+                                                            name={value.display_name}
+                                                            time_created={value.time_created}
+                                                            username={value.username}  
+                                                            content={value.content}
+                                                />
                                         );
                                     })
                                 }
