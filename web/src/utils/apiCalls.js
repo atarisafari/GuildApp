@@ -257,3 +257,27 @@ export const searchFriends = async (token) => {
         console.log(e);
     } 
 }
+
+export const deleteComment = async (token, comment_id) => { 
+    try{
+        let response = await fetch('https://guild-app.com/php/deleteComment.php', {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                comment_id: comment_id
+            })
+        })
+        return await response.text().then(function(text) {
+            console.log("deleteComment response",text);
+            return text ? JSON.parse(text) : {}
+        })   
+    }
+    catch(e){
+        console.log(e);
+    } 
+}

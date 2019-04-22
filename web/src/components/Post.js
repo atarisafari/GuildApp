@@ -52,8 +52,8 @@ const Post = (props) => {
             let result = await addComment(token, props.id, commentAdd);
             console.log("addComment Result" , result);
             if(result.error === ""){
-                //TODO
                 console.log("Comment added");
+                window.location.reload();
             }
             else{
                 alert(result.error);
