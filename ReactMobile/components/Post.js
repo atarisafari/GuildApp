@@ -28,7 +28,7 @@ import { Input, Icon, Button } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';
-import {Dimensions} from 'react-native'
+import {Dimensions} from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
