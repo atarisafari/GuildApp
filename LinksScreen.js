@@ -131,6 +131,7 @@ export default class LinksScreen extends React.Component {
               <View>
                   <Text style={styles.posts}>
                     {stuff.content}{'\n'}
+                    <Text>Likes: </Text>{stuff.num_likes}{'\n'}
                     {stuff.time_created}
                   </Text>
               </View>
