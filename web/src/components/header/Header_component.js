@@ -161,15 +161,13 @@ class Header_component extends React.Component {
         </MenuItem>
       </Menu>
     );
-    let profileImageLink = '';
+    let profileImageLink = '../../imgs/0_GuildSword_Icon.png';
   
     return (
       <div className={classes.root}>
         <div className={classes.mainBar} position="static">
           <Toolbar>
-              <IconButton className={classes.logoButton}>
-              <a className={classes.logo} onClick={this.goHome}>{this.props.props.children}></a>
-              </IconButton>
+              <a className={classes.logo} onClick={this.goHome}>{this.props.props.children}</a>
               <SearchFriendForm/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

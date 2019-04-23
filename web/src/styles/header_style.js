@@ -1,13 +1,16 @@
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import Logo from '../components/header/logo.png';
+import Logo from '../imgs/Guild_Logo.png';
 import profilePic from '../components/header/profilePicPlaceholder.png';
+import Sword from '../imgs/0_GuildSword_Icon.png';
+import Shield from '../imgs/4_Shield_Icon.png';
+import Staff from '../imgs/3_Staff_Icon.png';
 
 const styles = theme => ({
     
     mainBar:{
         backgroundColor:"#b20949",
         width: '100%',
-        minHeight:'70px',
+        height:'70px',
         color: theme.palette.common.white,
     },
     formButtonWrap:{
@@ -74,18 +77,19 @@ const styles = theme => ({
         flexGrow: 1,
     },
     logoButton:{
-        width:'50px',
-        height:'50px',
-        margin:"10px",
+        width:'80px',
+        height:'80px',
+        marginTop:"0px",
         padding:0,
     },
     logo: {
+        cursor:"pointer",
         backgroundImage: `url(${Logo})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         backgroundPosition: "center",
-        height:"50px",
-        width: "50px",
+        height:"80px",
+        width: "80px",
     },
     search: {
         position: 'relative',
@@ -138,7 +142,7 @@ const styles = theme => ({
         margin:"10px"
     },
     profileAvatar: {
-        backgroundImage: `url(${profilePic})`,
+        backgroundImage: `url(${Sword})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         backgroundPosition: "center",
