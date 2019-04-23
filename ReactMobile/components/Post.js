@@ -64,7 +64,6 @@ export default class Post extends React.Component {
 			})
       .then(response => response.json())
       .then((json) =>{
-        console.log(json)
         this.setState({
           isLoading: false,
           data: json
@@ -86,7 +85,7 @@ export default class Post extends React.Component {
       this.setState({showHide: true})
     }
   }
-  
+
   render() {
     let Posts = this.getPosts();
 		const username = "123"; //SecureStore.getItemAsync('secure_username');
@@ -97,12 +96,12 @@ export default class Post extends React.Component {
 				</View>
 			);
 		}
-    
+
       return (
 
         <View style={styles.MainContainer}>{
 				this.state.data.map((stuff, i) => (
-        
+
           <View style={styles.cardContainer}>
             <View style={styles.card}>
               <Text style={styles.cardText} style={{fontWeight: 'bold'}}>{username}</Text>
@@ -138,7 +137,7 @@ export default class Post extends React.Component {
           </View>
           ))
 			}
-      
+
   </View>
 
       );
@@ -215,4 +214,4 @@ const styles = StyleSheet.create({
     marginLeft: 2
    }
 });
-  
+
