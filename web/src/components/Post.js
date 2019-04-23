@@ -23,7 +23,7 @@ const Post = (props) => {
     const img = [GuildSword, Sword, BowArrow, Staff, Shield];
     const [commentAdd,setCommentAdd] = useState('');
     const [comments,setComments] = useState([]);
-    const [likes,setLikes] = useState(Math.floor(Math.random()*5)+1);//useState(props.num_likes);
+    const [likes,setLikes] = useState(props.num_likes); //useState(Math.floor(Math.random()*5)+1);
     const [liked,setLiked] = useState(false);
     const {classes} = props;
     let user = 
