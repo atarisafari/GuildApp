@@ -27,6 +27,7 @@ import strings from "../config/strings";
 import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 import {Dimensions} from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -65,59 +66,6 @@ export default class HomeScreen extends React.Component {
 			this.props.navigation.navigate('Auth');
     }
   };
-  askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-
-  useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-
-  useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
 
   componentDidMount() {
     if(Platform.OS === 'ios') {
@@ -146,85 +94,17 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
           style={{backgroundColor: '#f5f5f5', flex: 1}}
           ref={ref => this.scrollView = ref}>
-
-          {/*Modal*/}
+          
           <View>
-            <Modal
-              animationType="slide"
-              transparent={false}
-              visible={this.state.modalVisible}
-            >
-              <View style={{flexDirection: 'row'}}>
-                  
-                  {/*Camera and Album */}
-                <View style={{flexDirection: 'column'}}>
-                  <TouchableOpacity style={styles.iconContainer}>
-                    <Icon name='photo-library' title="launchImageLibraryAsync" color={'#b20949'} size={35} onPress={this.useLibraryHandler}/>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.iconContainer}>
-                    <Icon name='add-a-photo' title="launchCameraAsync" color={'#b20949'} size={35} onPress={this.useCameraHandler}/>
-                  </TouchableOpacity>
-                </View>
-
-                <View style={styles.imageContainer}>
-                  <Image style={styles.cardImage} source={this.state.profile_pic_url} style={styles.imageSize}/>
-                </View>
-
-              </View>
-                {/*Image url
-                <Text style={styles.paragraph}>
-                        {JSON.stringify(this.state.profile_pic_url)}
-                </Text>
-              */}
-                <View style={{marginTop: 30}}>
-                  <Input
-                    placeholder="Add a post..."
-                    multiline={true}
-                    inputStyle={{
-                      height: null
-                    }}
-                  />
-                </View>
-
-                {/*Exit modal */}
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}>
-
-                  <Text>Cancel</Text>
-
-                </TouchableHighlight>
-
-              
-            </Modal>
-
-
-            {/*Add Post Header*/}
-            <View style={styles.form} onTouchStart={() => {this.setModalVisible(true);}}>
-              <Input
-                placeholder="Add a post..."
-                multiline={true}
-                editable={false}
-                rightIcon={
-                  <MaterialIcons
-                    name='camera-alt'
-                    size={24}
-                    color='black'
-                  />
-                }
-              />
-            </View>
+            <AddPost />
 
           </View>
-
+          {/*
+          <View>
             <Post />
 
-          <View>
-
-
-        </View>
-
+          </View>
+*/}
         </ScrollView>
 
       </View>
@@ -324,7 +204,7 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   form: {
-		width: "100%"
+        width: "100%"
   },
   button: {
     marginBottom: 10,

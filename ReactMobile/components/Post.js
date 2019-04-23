@@ -13,7 +13,8 @@ import {
   FlatList,
   ActivityIndicator,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Button
 } from 'react-native';
 import {
 	WebBrowser,
@@ -24,7 +25,7 @@ import { MonoText } from '../components/StyledText';
 import { MaterialIcons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
-import { Input, Icon, Button } from 'react-native-elements';
+import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';
@@ -116,7 +117,7 @@ export default class Post extends React.Component {
                   <Icon name='insert-comment' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
               </View>
-              <View>
+              <View style={{flexDirection: 'col'}}>
                 </View>
               {
                 this.state.showHide ?

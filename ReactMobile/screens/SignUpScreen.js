@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, ScrollView, TextInput, View, Alert, Button, Text } from 'react-native';
-import { ImagePicker, Permissions } from 'expo';
-import { MaterialIcons } from '@expo/vector-icons';
-
 class SignUpScreen extends React.Component {
 
   constructor(props) {
@@ -15,34 +12,6 @@ class SignUpScreen extends React.Component {
       profile_pic_url: ''
     }
   }
-
-  askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-
-  useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
-  useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: false,
-    });
-    this.setState({ profile_pic_url });
-  };
-
 
   UserRegistrationFunction = () =>{
 
@@ -102,7 +71,7 @@ class SignUpScreen extends React.Component {
   }
 
   render() {
-    let { image } = this.state;
+    
     return (
 
       <View style={styles.MainContainer}>
