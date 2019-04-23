@@ -20,13 +20,13 @@ class ProfileAvatar extends React.Component{
             ) 
         }
         else{
-            let profilePic = './logo.png';
+            let profilePic = this.props.profileImageLink;
             return(
                 /*<AccountCircle />*/
                 <a className={classes.profileAvatar} ></a>
             )
         }
-     }
+    }
 }
 
 export default withStyles(headerstyles)(ProfileAvatar);

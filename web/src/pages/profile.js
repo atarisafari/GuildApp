@@ -32,7 +32,7 @@ export default props => {
     return (
     <div className="App">
         <Header_component props={props}/>
-        <h1> Profile </h1>
+        <h1 className="m-3 text-center">{localStorage.getItem('usernameFriend')===''? localStorage.getItem('username') : localStorage.getItem('usernameFriend')}'s Profile</h1>
         <AddPost id="add_post"/>
         {
                 posts.map((value) => {
