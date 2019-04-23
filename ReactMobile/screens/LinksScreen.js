@@ -28,11 +28,9 @@ export default class LinksScreen extends React.Component {
 
 	getFriends = async() => {
 
-		if(this.state.friendTime){
-			return;
-		}
-
 		let token = await SecureStore.getItemAsync('secure_token');
+
+    console.log(token)
 
 		try{
 			fetch('https://guild-app.com/php/grabAllFriends.php', {

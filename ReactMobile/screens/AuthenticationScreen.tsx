@@ -66,8 +66,9 @@ class AuthenticationScreen extends React.Component<{}, State> {
 		this.props.navigation.navigate('SignUpScreen');
 	};
 
+
 	handleLoginPress = () => {
-	
+
 		//send login info to api
 		try{
 			let response = fetch('http://157.230.66.35/php/login.php', {
@@ -83,36 +84,39 @@ class AuthenticationScreen extends React.Component<{}, State> {
 				})
 			})
 				.then(response => response.json())
-				//.then(async function(json) {
-				.then((json) => {					
+				.then(async function(json){
 					var token = json.token;
 					var error = json.error;
-					
+
 					if(error === ""){
 						console.log("Login was successful");
-						Stor('secure_token', token)
-						this.props.navigation.navigate('Main');
+
+						await SecureStore.setItemAsync('secure_token', token);
+
+						//this.props.navigation.navigate('Main');
 					}
 					else {
 						console.log("error:", error);
 						console.log("Login was unsuccessful");
 						Alert.alert(
-							'Oops',
+							'Tyhmä idiootti',
 							JSON.stringify(error),
 							[
 							  {text: 'OK', onPress: () => console.log('OK Pressed')},
 							],
 							{cancelable: false},
 						  );
+            return;
 					}
 				})
+        .then(this.props.navigation.navigate('Main'))
 		}
 		catch(e){
 			console.log(e);
 		}
 	};
 
-	
+
 
 	render() {
 		const {
@@ -120,7 +124,7 @@ class AuthenticationScreen extends React.Component<{}, State> {
 			password,
 			emailTouched,
 			passwordTouched
-		} = this.state; 
+		} = this.state;
 		// Show the validation errors only when the inputs
 		// are empty AND have been blurred at least once
 		const emailError =
@@ -169,8 +173,8 @@ class AuthenticationScreen extends React.Component<{}, State> {
 					<Button
 						label={strings.SIGNUP}
 						onPress={this.handleSignUpPress}
-					/>	
-					
+					/>
+
 				</View>
 			</KeyboardAvoidingView>
 		);
