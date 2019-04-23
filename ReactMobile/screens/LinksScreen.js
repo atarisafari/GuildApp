@@ -1,6 +1,6 @@
 import React from 'react';
-import PrimarySearchAppBar from "../components/search"
-
+import { Button} from 'react-native';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 import {
 	ScrollView,
 	StyleSheet,
@@ -13,8 +13,11 @@ import {
 import {
 	SecureStore
 } from 'expo';
-import search from '../components/search';
+import Post from '../components/Post';
 
+const MainNavigator = createStackNavigator({
+	Profile: {screen: Post},
+  });
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Friends',
@@ -85,24 +88,7 @@ export default class LinksScreen extends React.Component {
 	}
 
 	render(){
-
-<<<<<<< HEAD
-    return (
-
-			<PrimarySearchAppBar/>
-
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});
-=======
+		const {navigate} = this.props.navigation;
 		let friends = this.getFriends();
 
 		if(this.state.isLoading){
@@ -115,11 +101,11 @@ const styles = StyleSheet.create({
 
 		if(this.state.friendTime){
 			return(
-				<TouchableOpacity
-				style={styles.container}
-				onPress={this.onBackClick}>
-					<Text>fycking cunt</Text>
-				</TouchableOpacity>
+				<Button
+        		title="Go to Jane's profile"
+       			onPress={() => navigate('HomeScreen')}
+      			/>
+				
 			)
 		}
 
@@ -148,17 +134,18 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		padding: 30,
+		padding: 10,
 		margin: 5,
 		borderColor: '#000000',
 		borderWidth: 1,
-		backgroundColor: '#ffffff'
+		backgroundColor: '#ffffff',
+		borderRadius: 25,
+		textAlign: 'center'
 	},
 	loading:{
-		paddingTop: 30,
+		paddingTop: 10,
 	},
 	text: {
-		fontSize: 24,
+		fontSize: 20,
 	}
 });
->>>>>>> 0f12a6e142490de13751af3818662bfca5212369

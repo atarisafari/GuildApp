@@ -1,18 +1,10 @@
 {
   "devToolsPort": 19002,
-<<<<<<< HEAD
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
-=======
   "expoServerPort": 19000,
-  "packagerPort": 19005,
-  "packagerPid": 43175,
-  "expoServerNgrokUrl": "https://ck-ysz.jiayizh.reactmobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.ck-ysz.jiayizh.reactmobile.exp.direct",
-  "ngrokPid": 43189
->>>>>>> 0f12a6e142490de13751af3818662bfca5212369
+  "packagerPort": 19001,
+  "packagerPid": 2780,
+  "expoServerNgrokUrl": "https://2g-ci8.anonymous.reactmobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.2g-ci8.anonymous.reactmobile.exp.direct",
+  "ngrokPid": 2794,
+  "webpackServerPort": null
 }
