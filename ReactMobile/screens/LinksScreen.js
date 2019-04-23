@@ -78,7 +78,7 @@ export default class LinksScreen extends React.Component {
       .then(response => response.json())
       .then((json) =>{
 
-        let posts = json
+        console.log(json)
 
         this.setState({
           isLoading: false,
@@ -118,15 +118,20 @@ export default class LinksScreen extends React.Component {
 			return(
         <ScrollView>
           <TouchableOpacity
-          style={styles.container}
+          style={styles.Back}
           onPress={this.onBackClick}>
             <Text>BACK</Text>
           </TouchableOpacity>
           <View>{
             this.state.posts.map((stuff, i) => (
-              <View style='container'>
+              <View style={styles.container}>
+
                   <Text style={styles.text}>
                     {stuff.content}
+                  </Text>
+
+                  <Text>
+                    Likes: {stuff.num_likes}
                   </Text>
               </View>
             ))
@@ -157,7 +162,7 @@ export default class LinksScreen extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row',
+		flexDirection: 'column',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: 30,
@@ -171,5 +176,17 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 24,
-	}
+    felxDirection: "column",
+    justifyContent: "space-between"
+	},
+  Back: {
+    flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: 30,
+		margin: 5,
+		borderColor: '#000000',
+		borderWidth: 1,
+		backgroundColor: '#e5e9e9'
+  }
 });
