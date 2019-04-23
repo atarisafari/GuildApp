@@ -13,7 +13,8 @@ import {
   FlatList,
   ActivityIndicator,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Button
 } from 'react-native';
 import {
 	WebBrowser,
@@ -24,7 +25,7 @@ import { MonoText } from '../components/StyledText';
 import { MaterialIcons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import strings from "../config/strings";
-import { Input, Icon, Button } from 'react-native-elements';
+import { Input, Icon } from 'react-native-elements';
 import { ImagePicker, Permissions } from 'expo';
 import AuthenticationScreen from '../screens/AuthenticationScreen';
 import logo from '../assets/images/logo.png';

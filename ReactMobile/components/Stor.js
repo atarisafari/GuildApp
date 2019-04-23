@@ -1,14 +1,17 @@
 import Expo from 'expo' 
  
-const Stor = async (key: string, value?: Object) => {
+const Stor = async (key: string, value: string) => {
 	 
-	let json = ''
-	 
-	if ('object' == typeof value) {
-		Expo.SecureStore.setItemAsync(key, JSON.stringify(value))
+	var json = ''
+	
+	if ("string" == typeof value) {
+		console.log(key, value)
+		Expo.SecureStore.setItemAsync(key, value)
+		return '';
 	}
 	else {
 		json = await Expo.SecureStore.getItemAsync(key)
+		console.log(key, json)
 		return json
 	}
 

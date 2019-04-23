@@ -4,7 +4,8 @@ import {
 	KeyboardAvoidingView,
 	StyleSheet,
 	View,
-	Text
+	Text,
+	Alert
 } from "react-native";
 import Button from "../components/Button";
 import FormTextInput from "../components/FormTextInput";
@@ -17,8 +18,8 @@ import login from "../config/calls";
 import SignUp from "../config/calls";
 import {SecureStore} from 'expo';
 import Hyperlink from 'react-native-hyperlink'
+import Stor from '../components/Stor';
 
-var token = "";
 interface State {
 	email: string;
 	password: string;
@@ -82,48 +83,33 @@ class AuthenticationScreen extends React.Component<{}, State> {
 				})
 			})
 				.then(response => response.json())
-				.then(async function(json) {
-					
-					token = json.token;
+				//.then(async function(json) {
+				.then((json) => {					
+					var token = json.token;
 					var error = json.error;
-					/*
+					
 					if(error === ""){
-						console.log("token", token);
 						console.log("Login was successful");
-						await SecureStore.setItemAsync('secure_token', token);
-						
+						Stor('secure_token', token)
+						this.props.navigation.navigate('Main');
 					}
 					else {
-						console.log("error", error);
+						console.log("error:", error);
 						console.log("Login was unsuccessful");
+						Alert.alert(
+							'Oops',
+							JSON.stringify(error),
+							[
+							  {text: 'OK', onPress: () => console.log('OK Pressed')},
+							],
+							{cancelable: false},
+						  );
 					}
-					*/
-
-					var token = json.token;
-	
-					await SecureStore.setItemAsync('secure_token', token);
-					await SecureStore.setItemAsync('secure_username', "");
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-
-		//check to see if we get a token back
-		async function checkToken() {
-			let result = await SecureStore.getItemAsync('secure_token');
-			if(result !== null){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		//if we get a token, login in
-		if(checkToken()){
-			this.props.navigation.navigate('Main');
-		}
-
 	};
 
 	
