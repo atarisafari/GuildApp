@@ -38,37 +38,39 @@ export default class AddPost extends React.Component {
       }
     
     setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+        this.setState({modalVisible: visible});
     }
 
     askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
+        await Permissions.askAsync(Permissions.CAMERA);
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        // you would probably do something to verify that permissions
+        // are actually granted, but I'm skipping that for brevity
     };
 
     useLibraryHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        base64: false,
-    });
-    this.setState({ profile_pic_url });
+        await this.askPermissionsAsync();
+        let image_url = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            base64: false,
+        });
+        this.setState({ image_url });
     };
 
     useCameraHandler = async () => {
-    await this.askPermissionsAsync();
-    let profile_pic_url = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        base64: false,
-    });
-    this.setState({ profile_pic_url });
+        await this.askPermissionsAsync();
+        let image_url = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            base64: false,
+        });
+        this.setState({ image_url });
     };
 
-    AddPostHandler = () =>{
+    AddPostHandler = async() => {
+
+        let token = await SecureStore.getItemAsync('secure_token');
 
         const { content }  = this.state ;
         const { image_url }  = this.state ;
@@ -86,16 +88,19 @@ export default class AddPost extends React.Component {
             image_url: image_url,
     
           })
-    
         })
-          .then((response) => response.json())
-          .then((responseJson) => {
+        .then((response) => response.json())
+        .then((responseJson) => {
             console.log(responseJson)
-          }).catch((error) => {
+            console.log(content)
+            console.log(image_url)
+        }).catch((error) => {
             console.error(error);
-          });
+        });
+
+        this.setModalVisible(!this.state.modalVisible);
     
-      }    
+    }    
 
   
     render() {
@@ -140,7 +145,7 @@ export default class AddPost extends React.Component {
                     </View>
 
                     <View style={styles.imageContainer}>
-                    <Image style={styles.cardImage} source={this.state.profile_pic_url} style={styles.imageSize}/>
+                        <Image style={styles.cardImage} source={this.state.image_url} style={styles.imageSize}/>
                     </View>
 
                 </View>
@@ -159,20 +164,23 @@ export default class AddPost extends React.Component {
                         onChangeText={content => this.setState({content})}
                     />
                     </View>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'column'}}>
                     {/*Exit modal */}
-                    <TouchableHighlight
-                    onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
-                    }}>
+                    <View style={{justifyContent:'space-between'}}>
+                        <Button title="POST" 
+                            onPress={this.AddPostHandler} 
+                            buttonStyle={styles.button}/>
+                    </View>
 
-                    <Text>Cancel</Text>
+                    <TouchableHighlight
+                        onPress={() => {
+                            this.setModalVisible(!this.state.modalVisible);
+                        }}>
+
+                        <Text>Cancel</Text>
 
                     </TouchableHighlight>
 
-                    <View style={{justifyContent:'space-between', paddingLeft: 12, paddingRight: 5}}>
-                        <Button title="POST" onPress={this.AddPostHandler} buttonStyle={styles.button}/>
-                    </View>
                 
                 </View>
                 
