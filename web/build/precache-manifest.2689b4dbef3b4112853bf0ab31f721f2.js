@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/3_Staff_Icon.b3bde274.png"
   },
   {
-    "revision": "60cd63067cccd983e6d3",
+    "revision": "1c2af551f86ff65136b9",
     "url": "/static/css/main.a6d051cc.chunk.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/static/media/0_GuildSword_Icon.ad1f5489.png"
   },
   {
-    "revision": "60cd63067cccd983e6d3",
-    "url": "/static/js/main.103a0ae2.chunk.js"
+    "revision": "1c2af551f86ff65136b9",
+    "url": "/static/js/main.228e35c7.chunk.js"
   },
   {
     "revision": "d12d4b5a22da48febad1570fe34cedb3",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/static/css/2.462773fc.chunk.css"
   },
   {
-    "revision": "02fba92a55ad7e1c422eefad2f363447",
+    "revision": "cd609dc9bb270d34a4c321a1634f7335",
     "url": "/index.html"
   }
 ];
