@@ -48,7 +48,6 @@ export default class Post extends React.Component {
   getPosts = async() => {
 
 		let token = await SecureStore.getItemAsync('secure_token');
-    let username = await SecureStore.getItemAsync('secure_username');
 
 		try{
 			fetch('https://guild-app.com/php/grabAllPosts.php', {
@@ -60,7 +59,7 @@ export default class Post extends React.Component {
 				},
 				body: JSON.stringify({
           token: token,
-          username: username
+          username: ''
         })
 			})
       .then(response => response.json())

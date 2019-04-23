@@ -30,8 +30,6 @@ export default class LinksScreen extends React.Component {
 
 		let token = await SecureStore.getItemAsync('secure_token');
 
-    console.log(token)
-
 		try{
 			fetch('https://guild-app.com/php/grabAllFriends.php', {
 				mode: 'cors',
@@ -126,7 +124,7 @@ export default class LinksScreen extends React.Component {
           </TouchableOpacity>
           <View>{
             this.state.posts.map((stuff, i) => (
-              <View>
+              <View style='container'>
                   <Text style={styles.text}>
                     {stuff.content}
                   </Text>

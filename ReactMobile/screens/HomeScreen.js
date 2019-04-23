@@ -94,17 +94,12 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
           style={{backgroundColor: '#f5f5f5', flex: 1}}
           ref={ref => this.scrollView = ref}>
-          
+
           <View>
             <AddPost />
 
           </View>
-          {/*
-          <View>
-            <Post />
 
-          </View>
-*/}
         </ScrollView>
 
       </View>
@@ -211,7 +206,7 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   iconContainer: {
-    marginLeft: 5, 
+    marginLeft: 5,
     width: 80,
     marginTop: 57
   },
