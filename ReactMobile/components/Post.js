@@ -117,7 +117,7 @@ export default class Post extends React.Component {
                   <Icon name='insert-comment' color={'#b20949'} size={28}/>
                 </TouchableOpacity>
               </View>
-              <View>
+              <View style={{flexDirection: 'col'}}>
                 </View>
               {
                 this.state.showHide ?
