@@ -62,14 +62,39 @@ export default class LinksScreen extends React.Component {
 
 	//this should navigate to another screen for just the friend's posts
 	//after should have a back button on that screen to navigate back to this screen
-	onClick = () =>{
+	onClick = async(name) =>{
 
-		this.setState({
-			isLoading: false,
-			friendTime: true,
-			data: this.state.data
-		});
-		console.log("We'll make this work eventually")
+    let token = await SecureStore.getItemAsync('secure_token');
+
+    try{
+			fetch('https://guild-app.com/php/grabAllPosts.php', {
+				mode: 'cors',
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+          token: token,
+          username: name,
+        })
+			})
+      .then(response => response.json())
+      .then((json) =>{
+
+        let posts = json
+
+        this.setState({
+          isLoading: false,
+          friendTime: true,
+          data: this.state.data,
+          posts: json
+        });
+      })
+		}catch(e){
+			console.log("error", e)
+		}
+
 	}
 
 	//goes from friendTime to default screen
@@ -95,12 +120,23 @@ export default class LinksScreen extends React.Component {
 
 		if(this.state.friendTime){
 			return(
-				<TouchableOpacity
-				style={styles.container}
-				onPress={this.onBackClick}>
-					<Text>fycking cunt</Text>
-				</TouchableOpacity>
-			)
+        <ScrollView>
+          <TouchableOpacity
+          style={styles.container}
+          onPress={this.onBackClick}>
+            <Text>BACK</Text>
+          </TouchableOpacity>
+          <View>{
+            this.state.posts.map((stuff, i) => (
+              <View>
+                  <Text style={styles.text}>
+                    {stuff.content}
+                  </Text>
+              </View>
+            ))
+          }</View>
+        </ScrollView>
+        )
 		}
 
 		//lists out our friends with nice little buttons
@@ -110,7 +146,7 @@ export default class LinksScreen extends React.Component {
 					<View>
 						<TouchableOpacity
 						style={styles.container}
-						onPress={this.onClick}>
+						onPress={()=>this.onClick(stuff.username)}>
 							<Text style={styles.text}>
 								{stuff.username}
 							</Text>
