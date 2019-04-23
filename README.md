@@ -6,6 +6,8 @@ An Intimate Social Media Application
 2. http://jwt.io
 ___
 
+![alt text](https://github.com/atarisafari/LargeProject/raw/master/web/scr/imgs/Guild_Logo.png)
+
 # Stages
 
 What we need to do. Stages are not exculsive, can work on different stages at the same time (just get her done).
