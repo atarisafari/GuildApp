@@ -18,6 +18,7 @@ import SignUp from "../config/calls";
 import {SecureStore} from 'expo';
 import Hyperlink from 'react-native-hyperlink'
 
+var token = "";
 interface State {
 	email: string;
 	password: string;
@@ -27,7 +28,7 @@ interface State {
 	passwordTouched: boolean;
 }
 
-class LoginScreen extends React.Component<{}, State> {
+class AuthenticationScreen extends React.Component<{}, State> {
 	passwordInputRef = React.createRef<FormTextInput>();
 
 	readonly state: State = {
@@ -83,28 +84,36 @@ class LoginScreen extends React.Component<{}, State> {
 				.then(response => response.json())
 				.then(async function(json) {
 					
+					token = json.token;
+					var error = json.error;
+					/*
+					if(error === ""){
+						console.log("token", token);
+						console.log("Login was successful");
+						await SecureStore.setItemAsync('secure_token', token);
+						
+					}
+					else {
+						console.log("error", error);
+						console.log("Login was unsuccessful");
+					}
+					*/
+
 					var token = json.token;
 	
 					await SecureStore.setItemAsync('secure_token', token);
-					
+					await SecureStore.setItemAsync('secure_username', "");
 				})
 		}
 		catch(e){
 			console.log(e);
 		}
-		
+
 		//check to see if we get a token back
 		async function checkToken() {
 			let result = await SecureStore.getItemAsync('secure_token');
 			if(result !== null){
-				if(result.error === ""){
-					console.log("Login was successful");
-					return true;
-				}
-				else{
-					alert(result.error);
-					return false;
-				}
+				return true;
 			}else{
 				return false;
 			}
@@ -114,7 +123,10 @@ class LoginScreen extends React.Component<{}, State> {
 		if(checkToken()){
 			this.props.navigation.navigate('Main');
 		}
+
 	};
+
+	
 
 	render() {
 		const {
@@ -122,7 +134,7 @@ class LoginScreen extends React.Component<{}, State> {
 			password,
 			emailTouched,
 			passwordTouched
-		} = this.state;
+		} = this.state; 
 		// Show the validation errors only when the inputs
 		// are empty AND have been blurred at least once
 		const emailError =
@@ -199,4 +211,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default LoginScreen;
+export default AuthenticationScreen;

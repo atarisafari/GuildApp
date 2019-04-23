@@ -1,4 +1,3 @@
-
 import React, { Component, useState, useEffect} from 'react';
 import {deletePost, addComment, grabAllComments} from '../utils/apiCalls';
 import Comment from './Comment';
@@ -138,7 +137,6 @@ const Post = (props) => {
                             </div>
                         )}
                     />
-                    
                     <div className={classes.coment_input__button_wrap}>
                         <TextField 
                             className={classes.comment_input}
