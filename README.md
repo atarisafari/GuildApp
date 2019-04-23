@@ -6,7 +6,7 @@ An Intimate Social Media Application
 2. http://jwt.io
 ___
 
-![alt text](https://github.com/atarisafari/LargeProject/tree/master/web/src/imgs/Guild_Logo.png)
+![alt text](https://github.com/atarisafari/LargeProject/blob/master/web/src/imgs/0_GuildSword_Icon.png)
 
 # Stages
 
