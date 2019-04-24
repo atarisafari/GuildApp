@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import '../styles/signUp.css';
 import {signUp} from '../utils/apiCalls';
 import HomeButton from '../components/buttons/homeButton';
-import Avatar from '@material-ui/core/Avatar';
+import PlaceHolder from '../components/header/profilePicPlaceholder.png';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
@@ -101,7 +101,7 @@ export default props => {
                 <Popup trigger={
                     <Badge badgeContent={<AddIcon />} color="secondary" >
                         <Grid container justify="center" alignItems="center">
-                            <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
+                            <img src={profile_pic_url || PlaceHolder} style={{  height: '130px', width : '140px' }} />
                         </Grid>
                     </Badge>
                     } position="bottom center" modal > 
@@ -113,7 +113,7 @@ export default props => {
                                 </GridListTile>
                                 {tileData.map(tile => (
                                         <GridListTile key={tile.img} style={{width:'200px', height:'200px', margin:'1px'}} cols={1} onClick={cancel}>
-                                            <img src={tile.img} alt={tile.title} style={{  width: '100%', height: 'auto', margin:'1px' }} onClick={()=>{ cancel(); profile_pic_urlHandler(tile.title) }}/>
+                                            <img src={tile.img} alt={tile.title} style={{  width: '100%', height: 'auto', margin:'1px' }} onClick={()=>{ cancel(); profile_pic_urlHandler(tile.img) }}/>
                                             <GridListTileBar title={tile.title} style={{ width: '100%', height: 'auto' }} onClick={cancel}/>
                                         </GridListTile>
                                 ))}
