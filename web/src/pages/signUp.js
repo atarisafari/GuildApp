@@ -35,10 +35,6 @@ export default props => {
             title: 'Guild Sword',
         },
         {
-            img: Sword,
-            title: 'Sword',
-        },
-        {
             img: BowArrow,
             title: 'Bow Arrow',
         },
@@ -49,6 +45,10 @@ export default props => {
         {
             img: Shield,
             title: 'Shield',
+        },
+        {
+            img: Sword,
+            title: 'Sword',
         }
     ];
 
@@ -66,6 +66,7 @@ export default props => {
     }
     const profile_pic_urlHandler = profile_pic_url=>{
         setProfile_pic_url(profile_pic_url);
+        console.log("pic: "+profile_pic_url);
         console.log('src', profile_pic_url);
     }
     const signUpHandler = async() =>{
@@ -98,35 +99,26 @@ export default props => {
             {/* <SamplePage2 />  */}
             <div id="profile_pic">
                 <Popup trigger={
-                    <IconButton>
-                        <Badge badgeContent={<AddIcon />} color="secondary" >
-                            <Grid container justify="center" alignItems="center">
-                                <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
-                            </Grid>
-                        </Badge>
-                    </IconButton>
+                    <Badge badgeContent={<AddIcon />} color="secondary" >
+                        <Grid container justify="center" alignItems="center">
+                            <img alt="" src={require('./profilePicPlaceholder.png')} style={{  height: '130px', width : '140px' }} />
+                        </Grid>
+                    </Badge>
                     } position="bottom center" modal > 
                     {cancel => (
                         <div id="cancel">
-                            <GridList cellHeight={150}>
+                            <GridList cellHeight={200}>
                                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                                     <ListSubheader component="div">Choose Profile Picture <Button id="closeButtonn" close onClick={cancel}/> </ListSubheader>
                                 </GridListTile>
                                 {tileData.map(tile => (
-                                    <a href='#' onClick={cancel}>
-                                        <GridListTile key={tile.img} style={{ maxWidth: '100%', height: 'auto' }} cols={tile.cols || 1}>
-                                        {/*<a href="#" onClick= {profile_pic_urlHandler(tile.img)}>*/}
-                                            <img src={tile.img} alt={tile.title} />
-                                            <GridListTileBar title={tile.title}/>
+                                        <GridListTile key={tile.img} style={{width:'200px', height:'200px', margin:'1px'}} cols={1} onClick={cancel}>
+                                            <img src={tile.img} alt={tile.title} style={{  width: '100%', height: 'auto', margin:'1px' }} onClick={()=>{ cancel(); profile_pic_urlHandler(tile.title) }}/>
+                                            <GridListTileBar title={tile.title} style={{ width: '100%', height: 'auto' }} onClick={cancel}/>
                                         </GridListTile>
-                                    </a>
-                                    
-
                                 ))}
-
                             </GridList>
                         </div>
-                        
                     )}
                 </Popup>
             </div>

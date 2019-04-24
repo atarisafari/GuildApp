@@ -5,6 +5,10 @@
 	border-radius: 20px;
 }
 
+img{
+	cursor: pointer;
+}
+
 #signUp{
 	margin-left: 37%;
 	margin-top: 5%;
