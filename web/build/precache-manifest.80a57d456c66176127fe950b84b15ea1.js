@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/static/media/3_Staff_Icon.b3bde274.png"
   },
   {
-    "revision": "1c2af551f86ff65136b9",
-    "url": "/static/css/main.a6d051cc.chunk.css"
+    "revision": "8de91ff736ae426480fe",
+    "url": "/static/css/main.8aacdff4.chunk.css"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -16,16 +16,16 @@ self.__precacheManifest = [
     "url": "/static/media/profilePicPlaceholder.1d88924d.png"
   },
   {
-    "revision": "fc5284c168934c582396",
-    "url": "/static/js/2.8025dda0.chunk.js"
+    "revision": "e5f7dff0b4ebe341dc96",
+    "url": "/static/js/2.7949030c.chunk.js"
   },
   {
     "revision": "ad1f5489aa9e17571df4083c4d5aa13f",
     "url": "/static/media/0_GuildSword_Icon.ad1f5489.png"
   },
   {
-    "revision": "1c2af551f86ff65136b9",
-    "url": "/static/js/main.228e35c7.chunk.js"
+    "revision": "8de91ff736ae426480fe",
+    "url": "/static/js/main.ad6ce728.chunk.js"
   },
   {
     "revision": "d12d4b5a22da48febad1570fe34cedb3",
@@ -44,11 +44,11 @@ self.__precacheManifest = [
     "url": "/static/media/Guild_Logo.c9ac72bc.png"
   },
   {
-    "revision": "fc5284c168934c582396",
+    "revision": "e5f7dff0b4ebe341dc96",
     "url": "/static/css/2.462773fc.chunk.css"
   },
   {
-    "revision": "cd609dc9bb270d34a4c321a1634f7335",
+    "revision": "ba3fe11a1654f1ff6ab7dc98b258f539",
     "url": "/index.html"
   }
 ];
