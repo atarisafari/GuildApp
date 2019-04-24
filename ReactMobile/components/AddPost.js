@@ -132,28 +132,7 @@ export default class AddPost extends React.Component {
                 transparent={false}
                 visible={this.state.modalVisible}
                 >
-                <View style={{flexDirection: 'row'}}>
                     
-                    {/*Camera and Album */}
-                    <View style={{flexDirection: 'column'}}>
-                    <TouchableOpacity style={styles.iconContainer}>
-                        <Icon name='photo-library' title="launchImageLibraryAsync" color={'#b20949'} size={35} onPress={this.useLibraryHandler}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.iconContainer}>
-                        <Icon name='add-a-photo' title="launchCameraAsync" color={'#b20949'} size={35} onPress={this.useCameraHandler}/>
-                    </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.cardImage} source={this.state.image_url} style={styles.imageSize}/>
-                    </View>
-
-                </View>
-                    {/*Image url
-                    <Text style={styles.paragraph}>
-                            {JSON.stringify(this.state.profile_pic_url)}
-                    </Text>
-                */}
                     <View style={{marginTop: 30}}>
                     <Input
                         placeholder="Add a post..."
@@ -165,23 +144,48 @@ export default class AddPost extends React.Component {
                     />
                     </View>
                 <View style={{flexDirection: 'column'}}>
-                    {/*Exit modal */}
-                    <View style={{justifyContent:'space-between'}}>
-                        <Button title="POST" 
-                            onPress={this.AddPostHandler} 
-                            buttonStyle={styles.button}/>
+                    
+                    {/*Camera and Album */}
+                    <View style={styles.photoButtons}>
+						<TouchableOpacity style={styles.iconContainer}>
+							<Icon 
+								name='photo-library' 
+								title="launchImageLibraryAsync" 
+								color={'#b20949'} 
+								size={35} 
+								onPress={this.useLibraryHandler}
+							/>
+						</TouchableOpacity>
+						
+						<TouchableOpacity style={styles.iconContainer}>
+							<Icon 
+								name='add-a-photo' 
+								title="launchCameraAsync" 
+								color={'#b20949'} 
+								size={35} 
+								onPress={this.useCameraHandler}
+							/>
+						</TouchableOpacity>
                     </View>
-
-                    <TouchableHighlight
-                        onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                        }}>
-
-                        <Text>Cancel</Text>
-
-                    </TouchableHighlight>
-
-                
+                    
+                    <View style={{justifyContent:'space-between'}}>
+                    
+						<TouchableOpacity onPress={this.AddPostHandler}>
+							<Text style={styles.button}>Post</Text>
+						</TouchableOpacity>
+                            
+						<TouchableOpacity onPress={() => {
+							this.setModalVisible(!this.state.modalVisible);
+						}}>
+                            <Text style={styles.button}>Cancel</Text>
+						</TouchableOpacity>
+                            
+                    </View>
+                    
+                    <View style={{justifyContent:'space-between'}}>
+						
+					</View>
+					
                 </View>
                 
                 </Modal>
@@ -197,9 +201,8 @@ export default class AddPost extends React.Component {
 
   const styles = StyleSheet.create({
     iconContainer: {
-      marginLeft: 5, 
-      width: 80,
-      marginTop: 57
+      margin: 15,
+	  alignItems: "center",
     },
     imageSize: {
       height: SCREEN_HEIGHT * 0.2,
@@ -209,9 +212,25 @@ export default class AddPost extends React.Component {
       marginTop: 48,
       marginLeft: 40
     },
-    button: {
-        backgroundColor: '#b20949',
-        borderRadius: 10
-     }
+	button: {
+		backgroundColor: "#428AF8",
+		borderColor: 'white',
+		borderWidth: 1,
+		borderRadius: 12,
+		color: 'white',
+		fontSize: 24,
+		fontWeight: 'bold',
+		overflow: 'hidden',
+		padding: 12,
+		textAlign:'center',
+		margin: 15,
+	},
+	photoButtons: {
+		flexDirection: 'row',
+		flex: 1,
+		justifyContent: 'space-around',
+		margin: 15,
+		padding: 20,
+	}
   });
   

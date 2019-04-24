@@ -6,7 +6,8 @@ import {
 	Text,
 	View,
 	ActivityIndicator,
-	ListItem
+	ListItem,
+	Modal
 } from 'react-native';
 import {
 	SecureStore
@@ -60,9 +61,9 @@ export default class LinksScreen extends React.Component {
 	//after should have a back button on that screen to navigate back to this screen
 	onClick = async(name) =>{
 
-    let token = await SecureStore.getItemAsync('secure_token');
+		let token = await SecureStore.getItemAsync('secure_token');
 
-    try{
+		try{
 			fetch('https://guild-app.com/php/grabAllPosts.php', {
 				mode: 'cors',
 				method: 'POST',
@@ -71,22 +72,20 @@ export default class LinksScreen extends React.Component {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-          token: token,
-          username: name,
-        })
+				token: token,
+				username: name,
+				})
 			})
-      .then(response => response.json())
-      .then((json) =>{
+			.then(response => response.json())
+			.then((json) =>{
 
-        console.log(json)
-
-        this.setState({
-          isLoading: false,
-          friendTime: true,
-          data: this.state.data,
-          posts: json
-        });
-      })
+				this.setState({
+					isLoading: false,
+					friendTime: true,
+					data: this.state.data,
+					posts: json
+				});
+			})
 		}catch(e){
 			console.log("error", e)
 		}
@@ -117,17 +116,20 @@ export default class LinksScreen extends React.Component {
 		if(this.state.friendTime){
 			return(
         <ScrollView>
-          <TouchableOpacity
-          style={styles.Back}
-          onPress={this.onBackClick}>
-            <Text>BACK</Text>
-          </TouchableOpacity>
+			<TouchableOpacity
+				onPress={this.onBackClick}
+			>
+				<Text style={styles.Back}>
+					BACK
+				</Text>
+			</TouchableOpacity>
+			
           <View>{
             this.state.posts.map((stuff, i) => (
               <View style={styles.container}>
 
                   <Text style={styles.text}>
-                    {stuff.content}
+                    {stuff.content}{"\n"}
                   </Text>
 
                   <Text>
@@ -143,11 +145,13 @@ export default class LinksScreen extends React.Component {
 		//lists out our friends with nice little buttons
 		return (
 			<ScrollView>{
+				
 				this.state.data.map((stuff, i) => (
 					<View>
 						<TouchableOpacity
-						style={styles.container}
-						onPress={()=>this.onClick(stuff.username)}>
+							style={styles.container}
+							onPress={()=>this.onClick(stuff.username)}
+						>
 							<Text style={styles.text}>
 								{stuff.username}
 							</Text>
@@ -176,17 +180,20 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 24,
-    felxDirection: "column",
-    justifyContent: "space-between"
+		felxDirection: "column",
+		justifyContent: "space-between"
 	},
   Back: {
-    flexDirection: 'column',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		padding: 30,
-		margin: 5,
-		borderColor: '#000000',
+		backgroundColor: "#428AF8",
+		borderColor: 'white',
 		borderWidth: 1,
-		backgroundColor: '#e5e9e9'
+		borderRadius: 12,
+		color: 'white',
+		fontSize: 24,
+		fontWeight: 'bold',
+		overflow: 'hidden',
+		padding: 12,
+		textAlign:'center',
+		margin: 15,
   }
 });

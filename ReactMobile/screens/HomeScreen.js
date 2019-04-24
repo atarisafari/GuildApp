@@ -14,6 +14,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Keyboard,
+  ActivityIndicator
 } from 'react-native';
 import {
 	WebBrowser,
@@ -42,7 +43,8 @@ export default class HomeScreen extends React.Component {
     this.state = {
       modalVisible: false,
       profile_pic_url: '',
-      keyboardSub: true
+      keyboardSub: true,
+	  isLoading: true,
     }
   }
 
@@ -66,6 +68,37 @@ export default class HomeScreen extends React.Component {
 			this.props.navigation.navigate('Auth');
     }
   };
+  
+  getPosts = async() =>{
+	  
+	  let token = await SecureStore.getItemAsync('secure_token');
+	  
+	  try{
+		  fetch('https://guild-app.com/php/grabAllPosts.php', {
+			  mode: 'cors',
+		  method: 'POST',
+		  headers: {
+			  'Accept': 'application/json',
+		  'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+			  token: token,
+			  username: "123",
+		  })
+		  })
+		  .then(response => response.json())
+		  .then((json) =>{
+			  
+			this.setState({
+				isLoading: false,
+				posts: json
+			});
+		  })
+	  }catch(e){
+		  console.log("error", e)
+	  }
+	  
+  }
 
   componentDidMount() {
     if(Platform.OS === 'ios') {
@@ -87,6 +120,17 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+	
+	  this.getPosts();
+	  
+	if(this.state.isLoading){
+		return (
+			<View style={styles.loading}>
+			  <ActivityIndicator size="large"/>
+			</View>
+		);
+	}
+	  
     return (
       <View style={styles.container}>
 
@@ -95,11 +139,25 @@ export default class HomeScreen extends React.Component {
           style={{backgroundColor: '#f5f5f5', flex: 1}}
           ref={ref => this.scrollView = ref}>
 
-          <View>
-            <AddPost />
+		<View>
+			<AddPost />
 
-          </View>
-
+		</View>
+			
+		<View>{
+			this.state.posts.map((stuff, i) => (
+				<View style={styles.posts}>
+					<Text style={styles.text}>
+						{stuff.content}{"\n"}
+					</Text>
+					
+					<Text>
+						Likes: {stuff.num_likes}
+					</Text>
+				</View>
+			))
+		}</View>
+			
         </ScrollView>
 
       </View>
@@ -217,5 +275,18 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 48,
     marginLeft: 40
-  }
+  },
+  loading:{
+	  paddingTop: 30,
+  },
+  posts: {
+	  flexDirection: 'column',
+	  justifyContent: 'space-between',
+	  alignItems: 'center',
+	  padding: 30,
+	  margin: 5,
+	  borderColor: '#000000',
+	  borderWidth: 1,
+	  backgroundColor: '#ffffff'
+  },
 });

@@ -2,7 +2,9 @@ import React from 'react';
 import {
 	View,
 	StyleSheet,
-	Button
+	Button,
+	Text,
+	TouchableOpacity
 } from 'react-native';
 import {
 	SecureStore
@@ -34,11 +36,9 @@ export default class SettingsScreen extends React.Component {
 	render() {
 		return (
 			<View style={styles.form}>
-				<Button 
-				style={styles.button}
-				title='Signout'
-				onPress={this.handleLogOut}
-			/>
+				<TouchableOpacity onPress={this.handleLogOut}>
+					<Text style={styles.button}>Signout</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -50,7 +50,16 @@ const styles = StyleSheet.create({
 		paddingTop: 20
 	},
 	button: {
-		width: 80,
-		margin: 10
-	}
+		backgroundColor: "#428AF8",
+		borderColor: 'white',
+		borderWidth: 1,
+		borderRadius: 12,
+		color: 'white',
+		fontSize: 24,
+		fontWeight: 'bold',
+		overflow: 'hidden',
+		padding: 12,
+		textAlign:'center',
+		margin: 15,
+	},
 })

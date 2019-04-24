@@ -36,7 +36,8 @@ class AuthenticationScreen extends React.Component<{}, State> {
 		email: "",
 		password: "",
 		emailTouched: false,
-		passwordTouched: false
+		passwordTouched: false,
+		authenticated: false
 	};
 
 	handleEmailChange = (email: string) => {
@@ -92,8 +93,9 @@ class AuthenticationScreen extends React.Component<{}, State> {
 						console.log("Login was successful");
 
 						await SecureStore.setItemAsync('secure_token', token);
+						
+						this.setState({authenticated: true });
 
-						//this.props.navigation.navigate('Main');
 					}
 					else {
 						console.log("error:", error);
@@ -106,10 +108,9 @@ class AuthenticationScreen extends React.Component<{}, State> {
 							],
 							{cancelable: false},
 						  );
-            return;
 					}
 				})
-        .then(this.props.navigation.navigate('Main'))
+				.then(this.props.navigation.navigate('Main'))
 		}
 		catch(e){
 			console.log(e);
