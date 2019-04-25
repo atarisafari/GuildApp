@@ -1,6 +1,6 @@
 ![alt text](https://github.com/atarisafari/LargeProject/blob/master/web/src/imgs/Guild_Logo.png)
 
-# Guilds
+# Guild
 An Intimate Social Media Application
 
 ### LINKS
