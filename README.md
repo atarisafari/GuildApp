@@ -8,7 +8,7 @@ Table of Contents
 1. [ Link ](#link) 
 2. [ Website Preview ](#preview)
 3. [ Gantt Chart ](#ganttChart)
-4. [ Sources ](#source)
+4. [ Entity Relationship Diagram ](#ERD)
 
 <a name="link"></a>
 ## LINKS
@@ -32,3 +32,7 @@ Previewing Images During Upload
 <a name="ganttChart"></a>
 ## Gantt Chart
 <img src="GanttChart.png">
+
+<a name="ERD"></a>
+## Entity Relationship Diagram
+<img src="ERD.png">
