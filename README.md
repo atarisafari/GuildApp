@@ -8,7 +8,8 @@ Table of Contents
 1. [ Link ](#link) 
 2. [ Website Preview ](#preview)
 3. [ Gantt Chart ](#ganttChart)
-4. [ Entity Relationship Diagram ](#ERD)
+4. [ Entity Relationship Diagram (ERD) ](#ERD)
+5. [ Use Case Diagram ](#UCD)
 
 <a name="link"></a>
 ## LINKS
@@ -36,3 +37,8 @@ Previewing Images During Upload
 <a name="ERD"></a>
 ## Entity Relationship Diagram
 <img src="ERD.png">
+
+<a name="UCD"></a>
+## Use Case Diagram
+<img src="UseCaseDiagram.png">
+
