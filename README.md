@@ -9,5 +9,5 @@ An Intimate Social Media Application
 3. https://www.guild-app.com/
 ___
 ## Website Preview
-![alt text](https://github.com/atarisafari/LargeProject/blob/master/web/src/imgs/HomeScreenPreview.png)
+
 
