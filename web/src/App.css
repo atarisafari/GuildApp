@@ -1,0 +1,49 @@
+.container-right{
+	float: right;
+	width: 35%;
+	margin-top: 20%;
+	font-size: 1.5em;
+}
+
+img{
+	margin-left: 9%;
+	margin-top: 40%;
+}
+
+
+.container-left{
+	float: left;
+	background-color: black;
+	position: absolute;
+	width: 50%;
+	height: 100%;
+}
+
+input{
+	border-radius: 20px;
+	border-color: black;
+	outline: none;
+}
+
+.username{
+	margin-left: 2%;
+}
+
+.password{
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+}
+
+.login{
+	margin-top: 10%;
+	border-radius: 20px;
+	margin-right: 10%;
+}
+
+.signUp{
+	border-radius: 20px;
+}
+
+.guild{
+	font-size: 500%;
+}

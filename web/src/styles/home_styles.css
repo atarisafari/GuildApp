@@ -1,0 +1,11 @@
+.home_collum1{
+display:inline-block;
+width:286px;
+/*border: 1px solid green;*/
+}
+
+.home_collum2{
+    float:right;
+    width:calc(100% - 286px);
+    /*border: 1px solid red;*/
+}

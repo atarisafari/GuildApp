@@ -1,61 +1,44 @@
-# LargeProject
-Social Media Application
+<img src="https://github.com/atarisafari/LargeProject/blob/master/web/src/imgs/Guild_Logo.png" width="650" height="350">
 
-**We need a name for this thing**
-___
+# Guild
+An Intimate Social Media Application
 
-# Stages
+Table of Contents
+=================
+1. [ Link ](#link) 
+2. [ Website Preview ](#preview)
+3. [ Gantt Chart ](#ganttChart)
+4. [ Entity Relationship Diagram (ERD) ](#ERD)
+5. [ Use Case Diagram ](#UCD)
 
-What we need to do. Stages are not exculsive, can work on different stages at the same time (just get her done).
+<a name="link"></a>
+## LINKS
+1. [API WRITEUP](API/README.md)
+2. [JSON Web Tokens Introduction](http://jwt.io)
 
-### Stage - Minimal Product
+<a name="preview"></a>
+## Website Preview
+Login Page
+<img src="LoginPage.png" width="1000" height="500">
 
-*must do these things*
+Signup Page
+<img src="SignupPage.png" width="1000" height="500">
 
-1. have a friend list
-2. be able to add friends
-3. be able to send plain text to all friends
+Posting Content Page
+<img src="PostPage.png" width="1000" height="500">
 
-*What we need to do*
+Previewing Images During Upload 
+<img src="UploadImage.png" width="1000" height="500">
 
-1. create basic android app
-2. create basic website
-3. create basic API
-4. Define message exchange protocall (how friends talk)
+<a name="ganttChart"></a>
+## Gantt Chart
+<img src="GanttChart.png">
 
-### Stage - Secure Product
+<a name="ERD"></a>
+## Entity Relationship Diagram
+<img src="ERD.png">
 
-*must do these things*
+<a name="UCD"></a>
+## Use Case Diagram
+<img src="UseCaseDiagram.png">
 
-1. Do key exchange (Public Keys)
-2. Send messages encrypted
-
-*What we need to do*
-
-1. create keys (https://github.com/travist/jsencrypt)
-2. have public key be exchanged when friending
-3. encrypt messages
-4. be able to decrypt messages
-
-### Stage - Make it pretty
-
-*must do these things*
-
-1. Finish the look of the android App
-2. Finish the look of the website
-
-*What we need to do*
-
-1. CSS *magic*
-
-**Should be at this point by project's end**
-
-### Stage - Multimedia support
-
-*must do these things*
-
-1. Be able to send Multimedia messages (**pictures, Gifs, videos, etc.**)
-
-*What we need to do*
-
-1. We'll get to that when we get there
