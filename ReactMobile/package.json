@@ -13,7 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@expo/vector-icons": "^10.0.1",
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "expo-image-picker": "^4.0.0",
     "material-icons": "^0.3.1",
     "react": "16.5.0",
